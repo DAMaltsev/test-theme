@@ -50,7 +50,7 @@
             <legend class="product-form__label h5" for="Option{{ option.position }}">
               {{ option.name | replace: 'Select a', '' }}:
             </legend>
-            <div class="product-form__radios circle-radios" data-component="tooltips">
+            <div class="product-form__radios flex-size circle-radios" data-component="tooltips">
               {% for value in option.values %}
                 {% if value contains 'Classic' %}
                   {% assign weight = '400 lbs' %}
@@ -62,6 +62,7 @@
                     name="options[{{ option.name | escape }}]"
                     type="radio"
                     class="circle-radio__input"
+                    
                     id="Option{{ option.position }}-{{ value | handle }}"
                     {% if option.selected_value == value %}checked{% endif %}
                     value="{{ value | escape }}">
@@ -70,20 +71,23 @@
                     for="Option{{ option.position }}-{{ value | handle }}"
                     data-tippy-content="{{ weight }}">
                     {{ value | split: '(' | first }}
+                {% if option.name == "size" or "Size" %}
+            <p class="sizeHolds">Holds: {{ weight }}</p>
+          {% endif %}
                   </label>
                 </div>
               {% endfor %}
             </div>
           </div>
         </fieldset>
-        {% comment %}
+        {% comment %} 
         {% if option.name == "size" or "Size" %}
           <div style="text-align:center" class="sizeg">
             <p style="font-weight:bold">Classic: Holds 400 lbs (180 kg)</p>       
             <p style="font-weight:bold">Family: Holds 550 lbs (250 kg)</p>
           </div>
           {% endif %}
-         {% endcomment %}
+        {% endcomment %}
       {% endfor %}
     {% endunless %}
 

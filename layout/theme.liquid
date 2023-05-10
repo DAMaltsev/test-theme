@@ -273,7 +273,32 @@ gtag('event', 'page_view', {'send_to': 'AW-986176428',
     });
   
 });
-	
+
+function syncCartQty() {
+    jQuery.getJSON('/cart.js', function(cart) {
+    if(cart.item_count > 1) {
+      document.querySelector('#cartCounter').textContent = cart.item_count - 1
+    } else {
+      document.querySelector('#cartCounter').textContent = cart.item_count
+    }
+  });
+}
+  
+jQuery( document ).ready(function() {
+  document.querySelector('.product-form__button').addEventListener('click', () => {    
+      setTimeout( ()=> {
+          syncCartQty()
+      }, 1000)
+  })
+
+  setTimeout(() => {
+    document.querySelector('#monster-upsell-cart').addEventListener('click', () => {
+        syncCartQty()
+    })
+  }, 1000)
+});
+
+  syncCartQty();
 </script>
     
 {% endif %}

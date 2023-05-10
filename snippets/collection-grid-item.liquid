@@ -14,9 +14,12 @@
             <span class="collection-grid-item__secondary-button btn">Shop {{ color_name }}</span>
          </div>
 <!--         Product Badges -->
-         {% if product.tags contains 'best-seller' %}
+
+         {% if product.tags contains 'best seller' %}
          <span class="best-seller-badges">BEST SELLER</span>
-         {% elsif product.tags contains 'new' %}
+        {% endif %}
+         <div class="badges">
+         {% if product.tags contains 'new' %}
          <span class="new-seller-badges {% if product.compare_at_price_max > product.price %}b-up {% endif %}">NEW</span>
         {% endif %}
          {% if product.compare_at_price_max > product.price %}
@@ -29,8 +32,9 @@
 {% assign discountPercent = middleResult2 | times: 100 %}
         
 
-         <span class="sale-badges"   date-min="{{ product.compare_at_price_max }}" date-max="{{ product.price }}">{{ product.compare_at_price_max | minus: product.price | times: 100.0 | divided_by: product.compare_at_price_max | money_without_currency | times: 100 | remove: '.0'}}%</span>
+         <span class="sale-badges"   date-min="{{ product.compare_at_price_max }}" date-max="{{ product.price }}">SAVE {{ product.compare_at_price_max | minus: product.price | times: 100.0 | divided_by: product.compare_at_price_max | money_without_currency | times: 100 | remove: '.0'}}%</span>
          {% endif %}
+         </div>
       </div>
       <h4 class="collection-grid-item__product-title">{{ color_name }}</h4>
       <div class="collection-grid-item__price">

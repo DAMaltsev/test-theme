@@ -1,4 +1,4 @@
-<ul class="navbar__links">
+<ul class="navbar__links testnav">
   {%- for link in linklists[section.settings.link_list].links -%}
     <li class="navbar__item navbar__item--mobile-hidden">
       <a href="{{ link.url }}" class="navbar__link">
@@ -6,9 +6,14 @@
       </a>
     </li>
   {%- endfor -%}
-  <li class="navbar__item">
+  <li class="navbar__item testi">
     <a href="/cart" class="navbar__link">
-     <img src="https://cdn.shopify.com/s/files/1/0279/9277/files/icons8-shopping-cart-48.png?v=1680813270" width="30px" /> (<span data-item-count>{{ cart.item_count }}</span>)
+ <svg id="svg-icon-cart" viewBox="0 0 32 32"> <path fill="none" stroke="currentColor" stroke-width="2px" stroke-linejoin="miter" stroke-linecap="square" stroke-miterlimit="4" d="M29.343 10.91l-3.498 7.271h-14.935l-4.484-10.909h-5.595"></path>
+  <path fill="currentColor" stroke-width="0" d="M15.179 23.104c0-1.234-0.954-2.236-2.128-2.236s-2.128 1.002-2.128 2.236c0 1.236 0.954 2.236 2.128 2.236s2.128-1 2.128-2.236zM25.714 23.104c0-1.234-0.954-2.236-2.128-2.236-1.176 0-2.13 1.002-2.13 2.236 0 1.236 0.954 2.236 2.13 2.236 1.175 0 2.128-1 2.128-2.236z"></path>
+</svg>
+      
+<!--      <img src="https://cdn.shopify.com/s/files/1/0279/9277/files/icons8-shopping-cart-48.png?v=1680813270" width="30px" /> -->
+      <span id="cartCounter" data-item-count>{{ cart.item_count }}</span>
     </a>
   </li>
 </ul>
