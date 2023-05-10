@@ -1,0 +1,179 @@
+<section class="custom-section-5" id="{{ section.id }}">
+  <div class="section-wrapper">
+    <div class="container">
+      {% if section.settings.sec_head5 != blank %}
+      <div class="sec-5-head">      
+        <h1 class="heading">{{section.settings.sec_head5}}</h1>
+      </div>
+      {% endif %}
+      <div id="product-scroll"></div>
+      <div class="sec-5-product">
+        <div class="sec-5-product-inner">
+          {% if section.settings.product_image != blank %}
+          <div class="product_image">        
+            <img src="{{section.settings.product_image | img_url: 'large' }}">
+          </div>
+          {% endif %}
+          {% if section.settings.product_price != blank %}
+          <div class="product_price">
+            <span class="price">{{section.settings.product_price}}</span>
+          </div>
+          {% endif %}
+          <div class="product_payment">
+            {% if section.settings.one_off_pera != blank %}
+            <span class="one-off">{{section.settings.one_off_pera}}</span>
+            {% endif %}
+            {% if section.settings.column_richtext != blank %}
+            <div class="interest-free">
+              {% if section.settings.button_url != blank %}
+              <a href="{{section.settings.button_url}}"  class="" target="_parent" rel="noopener noreferrer" style="color: rgb(245, 89, 39);">
+                {% endif %}
+                {{section.settings.column_richtext}}
+                {% if section.settings.button_url != blank %}
+              </a> 
+              {% endif %}
+            </div>
+            {% endif %}
+          </div>
+          {% if section.settings.downpayment != blank %}
+          <div class="downpayment">      
+            <span>{{section.settings.downpayment}}</span> 
+          </div>
+          {% endif %}
+          {% if section.settings.payment_klarna_img != blank %}
+          <div class="payment_klarna">
+            <img src="{{section.settings.payment_klarna_img | img_url: 'large' }}"> 
+          </div>
+          {% endif %}
+          <div class="payment_features">
+            {% if section.settings.list_headings != blank %}
+            {% assign listings = section.settings.list_headings | split:"||" %}
+            {% if listings.size > 0 %}
+            <ul class="checklist">
+              {% for list in listings %}
+              <li>{{list}}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+          {% endif %}
+          {% if section.settings.button_text != blank %}
+          <div class="button-area">
+            <span class="button-wrapper">
+              {% if section.settings.button_wrapper != blank %}
+              <a href="{{section.settings.button_wrapper}}" >
+                {% endif %}
+                <span class="scroll elButton"> {{section.settings.button_text}}</span>
+                {% if section.settings.button_text != blank %}
+              </a>
+              {% endif %}
+            </span>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="sec-5-image-text">
+        <div class="image-area">
+          {% if section.settings.image_area_text != blank %}
+          <img src="{{section.settings.image_area_text | img_url: 'large' }}">
+          {% endif %}
+        </div>
+        <div class="content-area">
+          {% if section.settings.content_area_text != blank %}
+          <h1>{{section.settings.content_area_text}}</h1>
+          {% endif %}
+          {% if section.settings.content_area_peragraph != blank %}
+          <p>{{section.settings.content_area_peragraph}}
+            {% endif %}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+"name": "Custom Section 5",
+"settings": [
+{
+"type": "text",
+"id": "sec_head5",
+"label": "Heading"
+},
+{
+"type": "image_picker",
+"id": "product_image",
+"label": "Product Image"
+},
+{
+"type": "text",
+"id": "product_price",
+"label": "Price"
+},
+{
+"type": "text",
+"id": "one_off_pera",
+"label": "One Of Peragraph"
+},
+{
+"type": "richtext",
+"id": "column_richtext",
+"label": " Button text"
+},
+{
+"type": "url",
+"id": "button_url",
+"label": "Button Url"
+
+},
+
+{
+"type": "text",
+"id": "downpayment",
+"label": "Downpayment"
+},
+{
+"type": "image_picker",
+"id": "payment_klarna_img",
+"label": "Payment Klarna Image"
+},
+{
+"type": "textarea",
+"id": "list_headings",
+"label": "List Headings",
+"info":"please enter check list separated by ||"
+},
+{
+"type": "text",
+"id": "button_text",
+"label": "Button Text"
+},
+{
+"type": "url",
+"id": "button_wrapper",
+"label": "Button_url"
+},
+{
+"type": "image_picker",
+"id": "image_area_text",
+"label": "Image Area"
+},
+{
+"type": "text",
+"id": "content_area_text",
+"label": "Content Area"
+},
+{
+"type": "textarea",
+"id": "content_area_peragraph",
+"label": "Peragraph Area"
+}
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

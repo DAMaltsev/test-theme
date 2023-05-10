@@ -1,0 +1,72 @@
+<section class="faq" data-section-id="{{ section.id }}">
+  <div class="container container--md">
+    <img
+      class="faq__image"
+      src="{{ section.settings.image | img_url:'240x' }}"
+      alt="{{ section.settings.image.alt }}"
+    />
+    <h2 class="faq__title h1">{{ section.settings.title }}</h2>
+    <dl class="faq__accordion-list accordion__list" data-component="accordion">
+      {% for block in section.blocks %}
+        {% if block.type == 'question' %}
+          <dt
+            data-accordion-trigger
+            {{ block.shopify_attributes }}
+            aria-expanded="false"
+            aria-controls="accordion-faq-{{ forloop.index }}"
+            class="faq__accordion-trigger accordion__trigger h4"
+          >
+            <span>{{- block.settings.title -}}</span>
+            <span class="accordion__icon-close">
+              {% include 'svg-icon-close' %}
+            </span>
+          </dt>
+          <dd
+            data-accordion-content
+            aria-hidden="true"
+            id="accordion-faq-{{ forloop.index }}"
+            class="faq__accordion-content accordion__content"
+          >
+            {{- block.settings.answer -}}
+          </dd>
+        {% endif %}
+      {% endfor %}
+    </dl>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQs",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "title",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

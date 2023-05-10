@@ -1,0 +1,69 @@
+<section class="instagram" data-section-id="{{ section.id }}" data-section-type="instagram">
+  <div class="instagram__container container container--xl">
+    <div class="instagram__header">
+      <h2 class="instagram__section-title">{{ section.settings.title }}</h2>
+      {% if section.settings.button_text != blank and section.settings.button_url != blank %}
+        <a href="{{ section.settings.button_url }}" class="text-button" target="_blank" rel="noopener nofollow">{{ section.settings.button_text }}</a>
+      {% endif %}
+    </div>
+    <div class="instagram__wrapper" data-slideshow>
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'image' -%}
+          <div class="instagram__block" {{ block.shopify_attributes }} data-index="{{ forloop.index0 }}">
+            <a class="instagram__image-link" href="{{ block.settings.url }}" target="_blank" rel="noopener nofollow">
+              {% include 'responsive-image-basic' with class: 'instagram__image ', image: block.settings.image, display_width: 460, loading: 'lazy' %}
+            </a>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Instagram",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "title",
+        "label": "Title",
+        "default": "Where will you hang yours?"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text"
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button URL"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Image",
+        "type": "image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "url",
+            "id": "url",
+            "label": "URL"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Instagram",
+        "category": "Image"
+      }
+    ]
+  }
+{% endschema %}

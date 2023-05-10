@@ -1,0 +1,229 @@
+/* HERO */
+.product-page__hero {
+  text-align: center;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-throne sup {
+  position: relative;
+  font-size: 0.6em;
+}
+
+.product-page__hero--content {
+  position: relative;
+  z-index: 1;
+}
+
+.product-page__hero h1, .product-page__hero h2 {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  color: var(--color-white);
+}
+
+.product-page__hero h1 {
+  font-size: 55px;
+  line-height: 120%;
+  font-weight: 700;
+  padding-bottom: 20px;
+}
+
+.product-page__hero h2 {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 120%;
+}
+
+.product-page__hero--background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  z-index: 0;
+}
+
+.product-page__hero--background img, .product-page__hero--background video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Sticky CTA */
+.product-page__sticky-cta {
+  display: block;
+  width: 100%;
+  height: 80px;
+  position: relative;
+}
+
+.product-page__sticky-cta--inner {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  width: 100%;  
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--color-white);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+  transition: top 250ms ease-in-out;
+}
+
+.product-page__sticky-cta--content {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-page__sticky-cta.fixed .product-page__sticky-cta--inner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.product-page__sticky-cta.hidden .product-page__sticky-cta--inner {
+  top: -80px;
+  transition: top 250ms ease-in-out;
+}
+
+.product-page__sticky-cta--title {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 120%;
+  color: var(--color-text-blue);
+}
+
+.product-page__sticky-cta .btn {
+  font-size: 20px;
+  line-height: 32px;
+  padding: 10px 40px;
+}
+
+.product-page__sticky-cta--title .compare-at-price, .product-page__sticky-cta--title .price {
+  color: var(--color-text-blue);
+  font-weight: 500;
+}
+
+.product-page__sticky-cta--title .compare-at-price {
+  color: rgba(130, 151, 191, 1);
+  text-decoration: line-through;
+}
+
+.product-page__sticky-cta--image {
+  width: 48px;
+  height: 48px;
+  margin-right: 40px;
+  position: relative;
+}
+
+.product-page__sticky-cta--image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.product-page__sticky-cta--row {
+  display: flex;
+  align-items: center;
+}
+
+.product-page__sticky-cta--row .status-pill {
+  border-radius: 50px;
+  margin-left: 40px;
+  padding: 10px 20px;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+@media only screen and (max-width: 900px) {
+  .product-page__hero h1 {
+    font-size: 36px;
+    padding-bottom: 12px;
+    width: 90%;
+    margin: 0 auto;
+  }
+  
+  .product-page__hero h2 {
+    font-size: 16px;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .product-page__sticky-cta--inner, .product-page__sticky-cta--content {
+    flex-wrap: wrap;
+    transition: bottom 250ms ease-in-out;
+  }
+
+  .product-page__sticky-cta--inner {
+    box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .product-page__sticky-cta--content {
+    padding-block: 16px;
+  }
+
+  .product-page__sticky-cta--row {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .product-page__sticky-cta--title {
+    font-size: 14px;
+    padding-bottom: 6px;
+  }
+
+  .product-page__sticky-cta .status-pill__icon {
+    width: 8px;
+    height: 8px;
+    margin-right: 6px;
+  }
+
+  .product-page__sticky-cta--image {
+    display: none;
+  }
+
+  .product-page__sticky-cta--row .status-pill {
+    margin-left: 0;
+    font-size: 8px;
+    padding: 2px 8px;
+  }
+
+  .product-page__sticky-cta--title .compare-at-price {
+    display: none;
+  }
+
+  .product-page__sticky-cta {
+    height: auto;
+  }
+
+  .product-page__sticky-cta .btn-primary {
+    width: 100%;
+    font-size: 20px;
+    padding: 6px;
+    margin-top: 10px;
+  }
+  
+  .product-page__sticky-cta--inner, .product-page__sticky-cta.fixed .product-page__sticky-cta--inner {
+    height: auto;
+    bottom: 0;
+    top: unset;
+  }
+
+  .product-page__sticky-cta.hidden .product-page__sticky-cta--inner {
+    top: unset;
+    bottom: -200px;
+    transition: bottom 250ms ease-in-out;
+  }  
+}

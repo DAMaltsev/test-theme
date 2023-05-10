@@ -1,0 +1,36 @@
+<ul class="navbar__links">
+  {%- for link in linklists[section.settings.link_list].links -%}
+    <li class="navbar__item">
+      {% if link.title == 'Gift Sets' %}
+      <a href="{{ link.url }}" class="navbar__link tr-navbar__link--badge">
+        <span class="tr-navbar__link--badge-text">Limited</span>
+      {% else %}
+         <a href="{{ link.url }}" class="navbar__link">
+      {% endif %}
+        {{ link.title }}
+
+        {% if link.url == '/collections' or link.url == '/collections#hammock-accessories' or link.url == '/collections#giftsets' %}
+          <span class="navbar__caret">
+            <svg width="9" height="6" viewBox="0 0 9 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.58579 0H1.41421C0.523309 0 0.0771434 1.07714 0.707108 1.70711L3.79289 4.79289C4.18342 5.18342 4.81658 5.18342 5.20711 4.79289L8.29289 1.70711C8.92286 1.07714 8.47669 0 7.58579 0Z" fill="currentColor"/>
+            </svg>
+          </span>
+        {% endif %}
+      </a>
+    </li>
+  {%- endfor -%}
+</ul>
+
+{% schema %}
+{
+  "name": "Left Main Navigation",
+  "class": "navbar__main",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "link_list",
+      "label": "Menu"
+    }
+  ]
+}
+{% endschema %}

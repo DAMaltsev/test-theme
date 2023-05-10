@@ -1,0 +1,584 @@
+.vista-customizer {
+  padding-top: 60px;
+  display: block;
+}
+
+.vista-customizer .status-pill {
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.vista-customizer__inner {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.vista-customizer__images {
+  flex: 1;
+  position: relative;
+  aspect-ratio: 1.3 / 1;
+}
+
+.vista-customizer__gallery {
+  flex: 1;
+  position: relative;
+}
+
+.vista-customizer__image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0ms ease-in-out;
+  transition-delay: 350ms;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.vista-customizer__image.active {
+  opacity: 1;
+  z-index: 1;
+  transition: opacity 350ms ease-in-out;
+}
+
+.vista-customizer__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vista-customizer__details {
+  width: 100%;
+  max-width: 450px;
+  margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.vista-customizer__badge.new {
+  margin-bottom: 20px;
+}
+
+.vista-customizer__badge {
+  font-weight: 700;
+  font-size: 14px;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 100px;
+  background: #D9F6F8;
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  cursor: pointer;
+  transition: background-color 250ms ease-in-out;
+}
+
+tooltip-component .vista-customizer__badge:hover {
+  background: #BFECEF;
+  transition: background-color 250ms ease-in-out;
+}
+
+.vista-customizer__shipping-badge {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.vista-customizer__shipping-badge svg {
+  display: inline-block;
+  margin-left: 4px;
+  width: 22px;
+  height: 22px;
+}
+
+.vista-customizer__product-title {
+  font-weight: 700;
+  font-size: 35px;
+  line-height: 120%;
+  margin: 0;
+}
+
+.vista-customizer__product-description {
+  padding-top: 20px;
+}
+
+.vista-customizer__selectors {
+  padding-top: 40px;
+}
+
+.vista-customizer__selector, .vista-customizer__upgrades {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 150%;
+  border-bottom: 1px solid #E9E9E9;
+  padding: 20px 0;
+}
+
+.vista-customizer__upgrades {
+  padding-top: 20px;
+  border-bottom: none;
+}
+
+.vista-customizer__upgrades .tooltip-trigger {
+  margin-left: 22px;
+  line-height: 0;
+}
+
+.vista-customizer__upgrades .upgrades__input {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.vista-customizer__upgrades .upgrades__input:last-child {
+  margin-bottom: 0;
+}
+
+.vista-customizer__upgrades .upgrades__input input {
+  margin-right: 12px;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--color-text-blue);
+  appearance: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.vista-customizer__upgrades .upgrades__input input:after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: var(--color-text-blue);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 150ms cubic-bezier(0.9, 0.11, 0.15, 0.9);
+  border-radius: 3px;
+}
+
+.vista-customizer__upgrades .upgrades__input input:checked:after {
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 150ms cubic-bezier(0.9, 0.11, 0.15, 0.9);
+}
+
+.vista-customizer__upgrades .upgrades__input .upgrade-price {
+  padding-left: 8px;
+  color: rgba(14, 45, 104, 0.5);
+}
+
+.vista-customizer__upgrades legend {
+  padding-bottom: 20px;
+}
+
+.vista-customizer__klarna {
+  max-width: 300px;
+  padding-top: 12px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.vista-customizer__selector-wrapper:first-child .vista-customizer__selector {
+  padding-top: 0;
+}
+
+.vista-customizer__step {
+  display: inline-block;
+  padding-right: 10px;
+}
+
+.vista-customizer .compare-at {
+  font-weight: 500;
+  text-decoration: line-through;
+}
+
+.vista-customizer .btn {
+  width: 100%;
+  padding-block: 20px;
+  margin-top: 20px;
+}
+
+.vista-customizer__options {
+  display: flex;
+  padding-top: 10px;
+}
+
+.vista-customizer__options-header {
+  display: flex;
+  justify-content: space-between;
+}
+.vista-customizer__options-header > div {
+  display: flex;
+  flex: 1;
+}
+
+.vista-customizer__options-header .selected-option {
+  display: inline-block;
+  padding-left: 10px;
+  color: rgba(14, 45, 104, 0.5);
+  font-weight: 500;
+}
+
+.vista-customizer__options input {
+  clip: rect(0,0,0,0);
+  overflow: hidden;
+  position: absolute;
+  height: 1px;
+  width: 1px;
+}
+
+.vista-customizer__option img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.vista-customizer__options input:checked + .vista-customizer__option {
+  border: 3px solid var(--color-text-blue);
+  transition: border-color 150ms ease-in-out;
+}
+
+.vista-customizer__option {
+  width: 32px;
+  height: 32px;
+  margin-right: 12px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  background: #eee;
+  cursor: pointer;
+  transition: border-color 150ms ease-in-out;
+  overflow: hidden;
+}
+
+[data-product-variants] {
+  display: none;
+}
+
+.vista-customizer__images.inline {
+  display: none;
+}
+
+.vista-customizer__image-pagination {
+  display: none;
+}
+
+/* BUNDLE OPTIONS */
+
+.vista-customizer__bundle-options {
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.vista-customizer__bundle-options input {
+  visibility: hidden;
+  position: absolute;
+}
+
+.vista-customizer__bundle-option {
+  border: 2px solid transparent;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 130%;
+  color: var(--color-text-blue);
+  width: calc(50% - 10px);
+  cursor: pointer;
+  transition: border-color 200ms ease-in-out;
+}
+
+.vista-customizer__bundle-option.active {
+  border: 2px solid var(--color-text-blue);
+  transition: border-color 200ms ease-in-out;
+}
+
+.bundle-option__details {
+  flex: 1;
+}
+
+.bundle-option__tag {
+  font-weight: 700;
+  font-size: 9px;
+  line-height: 150%;
+  padding: 0 5px;
+  background: #EDF222;
+  border-radius: 3px;
+  display: inline-flex;
+  margin-bottom: 4px;
+}
+
+.bundle-option__image {
+  height: 55px;
+  width: 55px;
+  margin-right: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.bundle-option__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vista-customizer__selector-wrapper {
+  max-height: 0;
+  height: auto;
+  opacity: 0;
+}
+
+.vista-customizer__selector-wrapper fieldset {
+  display: block;
+}
+
+.vista-customizer__fullscreen {
+  position: fixed;
+  background: white;
+  width: 100%;
+  height: 100dvh;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 300ms ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vista-customizer__fullscreen.active {
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+  transition: all 300ms ease-in-out;
+}
+
+.vista-customizer__fullscreen-image {
+  position: relative;
+  z-index: 1;
+  display: block;
+  transform-origin: 50% 50%;
+  transition: transform 300ms ease-in-out;
+  cursor: zoom-in;
+}
+
+.vista-customizer__fullscreen-image.zoomed {
+  transform: scale(2.5);
+  transition: transform 300ms ease-in-out;
+  cursor: zoom-out;
+}
+
+.vista-customizer__fullscreen img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.vista-customizer__fullscreen-close {
+  position: fixed;
+  right: 20px;
+  top: 16px;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.vista-customizer__fullscreen-close svg path {
+  stroke: black;
+}
+
+.vista-customizer__fullscreen-icon {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  width: 53px;
+  height: 53px;
+  z-index: 5;
+  border-radius: 0px;
+  outline: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+.vista-customizer__images-wrapper {
+  display: none;
+}
+
+@media only screen and (max-width: 900px) {
+
+  .vista-customizer__inner {
+    flex-wrap: wrap;
+  }
+
+  .vista-customizer__images-wrapper {
+    display: block;
+  }
+
+  .vista-customizer__options-header > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .vista-customizer__images-wrapper {
+    width: 100%;
+    position: relative;
+  }
+
+  .vista-customizer__fullscreen:has(.vista-customizer__fullscreen-image.zoomed) {
+    display: block;
+  }
+
+  .vista-customizer__fullscreen-image.zoomed {
+    transform: scale(1);
+    width: 250%;
+    height: 150%;
+    max-width: 250%;
+    max-height: 150%;
+    transition: transform 300ms ease-in-out;
+    cursor: zoom-out;
+  }
+
+  .vista-customizer__fullscreen {
+    overflow: scroll;
+  }
+
+  .vista-customizer__fullscreen-icon {
+    position: absolute;
+    top: 30px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .vista-customizer__fullscreen-icon svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .vista-customizer__options-header .selected-option {
+    padding: 0;
+  }
+
+  .vista-customizer__gallery {
+    display: none;
+  }
+  
+  .vista-customizer {
+    padding-block: 60px;
+  }
+
+  .vista-customizer__images.inline {
+    display: block;
+    aspect-ratio: 0.85/1;
+    flex: unset;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .vista-customizer__images.inline::-webkit-scrollbar {
+    display: none;
+  }
+
+  .vista-customizer__images.inline .vista-customizer__image {
+    display: inline-block;
+    scroll-snap-align: start;
+    aspect-ratio: 0.85/1;
+    position: relative;
+    scroll-snap-align: start;
+    opacity: 1;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .vista-customizer__images.inline .vista-customizer__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .vista-customizer__image-pagination {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .vista-customizer__image-pagination-item {
+    width: 8px;
+    height: 8px;
+    background-color: rgba(14, 45, 104, 0.5);
+    border-radius: 8px;
+    margin: 0 5px;
+    transition: background-color 200ms ease-in-out;
+  }
+
+  .vista-customizer__image-pagination-item.active {
+    background-color: var(--color-text-blue);
+    transition: background-color 200ms ease-in-out;
+  }
+  
+  .vista-customizer__details {
+    margin-left: 0;
+  }
+
+  .vista-customizer__product-title {
+    font-size: 24px;
+  }
+
+  .vista-customizer .status-pill {
+    margin-top: 10px;
+  }
+
+  .vista-customizer__selectors {
+    padding-top: 30px;
+  }
+
+  .vista-customizer__options {
+    flex-wrap: wrap;
+    max-width: 250px;
+  }
+
+  .vista-customizer__option {
+    margin-bottom: 12px;
+  }
+
+  .vista-customizer__step {
+    display: none;
+  }
+
+  .vista-customizer__images {
+    display: none;
+  }
+
+  .vista-customizer__bundle-options {
+    flex-wrap: wrap;
+  }
+  
+  .vista-customizer__bundle-option {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}

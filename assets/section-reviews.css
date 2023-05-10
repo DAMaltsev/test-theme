@@ -1,0 +1,61 @@
+.reviews-section__inner {
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 100px;
+}
+
+.reviews-section .okeReviews-reviewsWidget {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  order: 0;
+}
+
+.reviews-section .okeReviews .okeReviews-reviewsWidget-header {
+  width: 50%;
+  order: 1;
+  padding: 0;
+}
+
+.reviews-section .okeReviews-reviewsAggregate-side {
+  padding: 0;
+}
+
+.reviews-section .okeReviews-reviewsWidget-reviews {
+  order: 2;
+}
+
+.reviews-section .okeReviews .okeReviews-reviewsAggregate-ratingDistribution,
+.reviews-section .okeReviews .okeReviews-reviewsAggregate-primary,
+.reviews-section .okeReviews .okeReviews-reviews-controls {
+  display: none !important;
+}
+
+.reviews-section .okeReviews .okeReviews-reviews-main {
+  padding-top: 60px;
+}
+
+.reviews-section .okeReviews.okeReviews--theme .okeReviews-reviews-footer::before {
+  display: none;
+}
+
+.reviews-section .okeReviews.okeReviews--theme .okeReviews-reviews-showMore {
+  background: transparent;
+  box-shadow: none;
+  color: var(--color-text-blue);
+  display: inline-flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 160%;
+  letter-spacing: 0;
+  transition: all 250ms ease-in-out;
+}
+
+.reviews-section .okeReviews .okeReviews-reviews-showMore:after {
+  border-top-color: #43C6F7;
+  margin-left: 20px;
+  border-left-width: 10px;
+  border-right-width: 10px;
+  border-top-width: 8px;
+}

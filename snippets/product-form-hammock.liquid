@@ -1,0 +1,140 @@
+{% form 'product', product, class: 'product-form', data-product-form: '', data-product-handle: product.handle, data-form-context: 'inline' %}
+  <div class="product-form__item no-js">
+    <label class="screenreader" for="inline-variant">
+      Variant
+    </label>
+    <select class="product-form__select" name="id" id="inline-variant">
+      {% for variant in product.variants %}
+        <option
+        {% if variant == current_variant %}selected="selected"{% endif %}
+        {% unless variant.available %}disabled="disabled"{% endunless %}
+        data-title="{{ variant.title }}"
+        value="{{ variant.id }}">
+          {{ variant.title }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  {% if product.has_only_default_variant %}
+    <input type="hidden" id="defaultOption" name="options[]" value="Default title">
+  {% endif %}
+
+  {% if hammock_collection.products %}
+  <div class="product-form__item product-form__item-group js-enabled">
+    <div class="product-form__label h5" for="Option{{ option.position }}">
+      Color:
+    </div>
+    <div class="product-form__swatches" data-component="tooltips">
+      {% for swatch in hammock_collection.products %}
+        {%- unless swatch.title contains 'Straps' or swatch.title contains 'Gift' -%}
+          {%- include 'color-name' with name: swatch.title -%}
+          {% if color_name != 'Shark Tank Special' %} 
+          <div class="swatch">
+            <a class="swatch__label {% if swatch.title == product.title %}swatch__label--checked{% endif %}" href="{{ swatch.url }}" data-tippy-content="{{ color_name }}">
+              <img class="swatch__image" src="{{ color_name | handleize | prepend: 'swatch-' | append: '.png' | asset_img_url:'72x' }}" alt="{{ color_name }}" />
+            </a>
+          </div>
+            {% endif %}
+        {%- endunless -%}
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="product-form__content">
+    {% unless product.has_only_default_variant %}
+      {% for option in product.options_with_values %}
+        <fieldset class="product-form__item">
+          <div class="product-form__item-group js-enabled">
+            <legend class="product-form__label h5" for="Option{{ option.position }}">
+              {{ option.name | replace: 'Select a', '' }}:
+            </legend>
+            <div class="product-form__radios circle-radios" data-component="tooltips">
+              {% for value in option.values %}
+                {% if value contains 'Classic' %}
+                  {% assign weight = '400 lbs' %}
+                {% elsif value contains 'Family' %}
+                  {% assign weight = '550 lbs' %}
+                {% endif %}
+                <div class="circle-radio">
+                  <input
+                    name="options[{{ option.name | escape }}]"
+                    type="radio"
+                    class="circle-radio__input"
+                    id="Option{{ option.position }}-{{ value | handle }}"
+                    {% if option.selected_value == value %}checked{% endif %}
+                    value="{{ value | escape }}">
+                  <label
+                    class="circle-radio__label h5 {{ value | split: '(' | first }}"
+                    for="Option{{ option.position }}-{{ value | handle }}"
+                    data-tippy-content="{{ weight }}">
+                    {{ value | split: '(' | first }}
+                  </label>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </fieldset>
+        {% comment %}
+        {% if option.name == "size" or "Size" %}
+          <div style="text-align:center" class="sizeg">
+            <p style="font-weight:bold">Classic: Holds 400 lbs (180 kg)</p>       
+            <p style="font-weight:bold">Family: Holds 550 lbs (250 kg)</p>
+          </div>
+          {% endif %}
+         {% endcomment %}
+      {% endfor %}
+    {% endunless %}
+
+
+
+
+    {% include 'product-backorder-message' %}
+  {% if current_variant.available %}
+	{% if template == 'product.hammock' or template == 'hammock' %}
+        {% if product.metafields.custom_fields.show_counter == 1 %}
+    		    {% include 'shipment-countdown' %}
+
+    	{% endif %}
+	{% endif %}
+    {% endif %}
+
+    <div class="product-form__item product-form__item--button">
+      <button
+        class="product-form__button btn btn--large btn--full"
+        type="submit"
+        {% unless current_variant.available %}disabled="disabled"{% endunless %}>
+        {% if current_variant.available %}
+            Add To Cart | {{ current_variant.price | money_without_trailing_zeros}}
+        {% else %}
+          Out of Stock
+        {% endif %}
+      </button>
+    </div>
+
+    <div class="product-form__item product-form__item--klarna">
+      <klarna-placement
+        data-key="credit-promotion-small"
+        data-locale="en-US"
+        data-purchase-amount="{{ current_variant.price }}"
+      ></klarna-placement>
+    </div>
+  </div>
+
+{% endform %}
+
+<script>
+  const sizeInputAll =  document.querySelectorAll('[data-component="tooltips"] input[name="options[Select a Size]"]');
+  const formSelect = document.querySelector('.product-form__select');
+
+  sizeInputAll.forEach(item => {
+    item.addEventListener('change', () => {
+      formSelect.querySelectorAll('option').forEach(item => {
+        item.removeAttribute("selected");
+      })
+      document.querySelector(`[data-title="${item.value}"]`).setAttribute('selected', 'selected')
+      console.log(item.value)
+    })
+  })
+</script>

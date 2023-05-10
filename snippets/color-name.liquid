@@ -1,0 +1,4 @@
+{%- assign color_name = name -%}
+{%- unless color_name contains 'Design' -%}
+  {%- assign color_name = name | replace: 'Rope Hammock', '' | replace: 'Hammock', '' | replace: 'Hanging Chair', '' -%}
+{%- endunless -%}

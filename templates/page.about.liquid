@@ -1,0 +1,17 @@
+{% comment %} For testing purposes only {% endcomment %}
+{% section 'video-about' %}
+
+{% include 'animated-wave' %}
+
+<div class="about-page">
+  <header class="container container--sm">
+    <h1 class="about-page__header h1">{{ page.title }}</h1>
+    <div class="about-page__description h4 rte">{{ page.content }}</div>
+  </header>
+
+  {% section 'about-blocks' %}
+</div>
+
+{% section 'about-footer' %}
+{% section 'card-slideshow-team' %}
+{% section 'featured-products' %}

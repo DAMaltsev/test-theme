@@ -1,0 +1,258 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer__main">
+      <div class="footer__main-left">
+        {%- assign formId = 'footer-subscribe' -%}
+        {% form 'customer', id: formId, class: 'footer__subscribe' %}
+          <h2 class="h2 subscribe__heading">
+            {{ section.settings.subscribe_title }}
+          </h2>
+          <p class="subscribe__paragraph">
+            {{ section.settings.subscribe_paragraph }}
+          </p>
+          <div class="subscribe__form">
+            {% unless form.posted_successfully? %}
+              <div class="subscribe__input-group {% if form.errors %}subscribe__email--error{% endif %}">
+                <input type="hidden" name="contact[tags]" value="{{ section.settings.subscribe_tags }}">
+                <label for="{{ formId }}-email" class="screenreader">{{ 'contact.email' | t }}</label>
+                <input type="email"
+                  name="contact[email]"
+                  id="{{ formId }}-email"
+                  class="subscribe__input"
+                  value="{% if customer %}{{ customer.email }}{% endif %}"
+                  placeholder="{{ 'subscribe.email' | t }}"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  autocomplete="email"
+                  {% if form.errors %} aria-invalid="true" aria-describedby="{{ formId }}-email-error"{% endif %}>
+                <button type="submit" class="subscribe__submit text--button" name="commit" id="Subscribe">
+                  {{ 'subscribe.submit' | t }}
+                </button>
+              </div>
+            {% endunless %}
+            {% if form.posted_successfully? %}
+              <p class="subscribe__success-message" tabindex="-1" data-form-status="success">
+                {{ section.settings.subscribe_success }}
+              </p>
+            {% elsif form.errors %}
+              <p id="{{ formId }}-email-error" class="subscribe__error-message">{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</p>
+            {% endif %}
+          </div>
+        {% endform %}
+        <div class="footer__logos">
+          {% if section.settings.footer_logo_1 != blank and section.settings.footer_logo_1_link != blank %}
+            <a class="footer__logo-link footer__logo-link--{{ section.settings.footer_logo_1_size }}" href="{{ section.settings.footer_logo_1_link }}" target="_blank">
+              <img class="footer__logo lazyload" src="{{ section.settings.footer_logo_1 | img_url: '50x' }}"data-sizes="auto" loading="lazy"data-src="{{ section.settings.footer_logo_1 | img_url: '200x' }}" alt="{{ section.settings.footer_logo_1.alt }}" />
+            </a>
+          {% endif %}
+          {% if section.settings.footer_logo_2 != blank and section.settings.footer_logo_2_link != blank %}
+            <a class="footer__logo-link footer__logo-link--{{ section.settings.footer_logo_2_size }}" href="{{ section.settings.footer_logo_2_link }}" target="_blank">
+              <img class="footer__logo lazyload" src="{{ section.settings.footer_logo_2 | img_url: '50x' }}"data-sizes="auto" loading="lazy"data-src="{{ section.settings.footer_logo_2 | img_url: '200x' }}" alt="{{ section.settings.footer_logo_2.alt }}" />
+            </a>
+          {% endif %}
+          {% if section.settings.footer_logo_3 != blank and section.settings.footer_logo_3_link != blank %}
+            <a class="footer__logo-link footer__logo-link--{{ section.settings.footer_logo_3_size }}" href="{{ section.settings.footer_logo_3_link }}" target="_blank">
+              <img class="footer__logo lazyload" src="{{ section.settings.footer_logo_3 | img_url: '50x' }}"data-sizes="auto" loading="lazy"data-src="{{ section.settings.footer_logo_3 | img_url: '200x' }}" alt="{{ section.settings.footer_logo_3.alt }}" />
+            </a>
+          {% endif %}
+        </div>
+      </div>
+      <nav class="footer__navs" aria-label="Footer">
+        {% for block in section.blocks %}
+          {% if block.type == 'menu' %}
+            <div class="footer__nav">
+              <h2 class="footer__nav-title h5">{{ block.settings.title }}</h2>
+              <ul class="footer__nav-list">
+                {%- for link in linklists[block.settings.link_list].links -%}
+                  <li class="footer__nav-item">
+                    <a class="footer__nav-link text--sm"  href="{{ link.url }}">
+                      {{- link.title -}}
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+              {% if forloop.last %}
+                {% include 'social-icons' %}
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </nav>
+    </div>
+    <div class="footer__aside">
+      <ul class="footer__legal-list">
+        {%- for link in linklists[section.settings.legal_link_list].links -%}
+          <li class="footer__legal-item">
+            <a class="footer__legal-link text--sm"  href="{{ link.url }}">
+              {{- link.title -}}
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+      <p class="footer__copyright text--sm">
+        {{ section.settings.copyright }}
+      </p>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Subscription Form"
+    },
+    {
+      "type": "textarea",
+      "id": "subscribe_title",
+      "label": "Subscription Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "subscribe_paragraph",
+      "label": "Subscription Paragraph"
+    },
+    {
+      "type": "text",
+      "id": "subscribe_tags",
+      "label": "Subscription Tags",
+      "default": "newsletter",
+      "info": "Comma-separated list of tags"
+    },
+    {
+      "type": "textarea",
+      "id": "subscribe_success",
+      "label": "Subscribe Success Message"
+    },
+    {
+      "type": "header",
+      "content": "Footer logos"
+    },
+    {
+      "type": "image_picker",
+      "id": "footer_logo_1",
+      "label": "Logo 1"
+    },
+    {
+      "type": "select",
+      "id": "footer_logo_1_size",
+      "label": "Logo size",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "url",
+      "id": "footer_logo_1_link",
+      "label": "Logo 1 URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "footer_logo_2",
+      "label": "Logo 2"
+    },
+    {
+      "type": "select",
+      "id": "footer_logo_2_size",
+      "label": "Logo size",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "url",
+      "id": "footer_logo_2_link",
+      "label": "Logo 2 URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "footer_logo_3",
+      "label": "Logo 3"
+    },
+    {
+      "type": "select",
+      "id": "footer_logo_3_size",
+      "label": "Logo size",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "url",
+      "id": "footer_logo_3_link",
+      "label": "Logo 3 URL"
+    },
+    {
+      "type": "header",
+      "content": "Footer"
+    },
+    {
+      "type": "textarea",
+      "id": "copyright",
+      "label": "Copyright"
+    },
+    {
+      "type": "link_list",
+      "id": "legal_link_list",
+      "label": "Legal Footer Menu"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Menu",
+      "type": "menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Menu Title"
+        },
+        {
+          "type": "link_list",
+          "id": "link_list",
+          "label": "Menu"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

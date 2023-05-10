@@ -1,0 +1,136 @@
+{{ 'section-image-text.css' | asset_url | stylesheet_tag }}
+
+<section class="image-text-new {{section.settings.layout}} {% if section.settings.paddingTop %}padding-top{%endif%} {% if section.settings.paddingBottom%}padding-bottom{%endif%}" style="background: {{ section.settings.background }}">
+  <div class="image-text-new__container {% if section.settings.flip %}flip{% endif %}">
+    <div class="image-text-new__image-wrapper">
+      {% if section.settings.videoUrl == '' %}
+        {% render 'responsive-image' with image: section.settings.image, classes:'image-text-new__image lazyload test' %}
+      {% else %}
+        <video playsinline autoplay muted loop>
+          <source src="{{ section.settings.videoUrl }}" type="video/mp4">
+        </video>
+      {% endif %}
+    </div>
+    <div class="image-text-new__text-wrapper">
+      <div class="image-text-new__text-contents">
+        <h2 class="image-text-new__title">{{ section.settings.title }}</h2>
+        <p class="image-text-new__subtitle">{{ section.settings.subtitle }}</p>
+        <div class="image-text-new__paragraphs">
+          <div class="image-text-new__paragraph">
+            <img src="{{ section.settings.iconOne | img_url: '300x300' }}" alt="" class="image-text-new__icon">
+            <h4>{{section.settings.headingOne}}</h4>
+            <p>{{section.settings.paragraphOne}}</p>
+          </div>
+          <div class="image-text-new__paragraph">
+            <img src="{{ section.settings.iconTwo | img_url: '300x300' }}" alt="" class="image-text-new__icon">
+            <h4>{{section.settings.headingTwo}}</h4>
+            <p>{{section.settings.paragraphTwo}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image with Text (New)",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "videoUrl",
+      "label": "Video URL",
+      "info": "Optional, will take precedence over image if both exist"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Body"
+    },
+    {
+      "type": "image_picker",
+      "id": "iconOne",
+      "label": "Icon One"
+    },
+    {
+      "type": "text",
+      "id": "headingOne",
+      "label": "Heading One"
+    },
+    {
+      "type": "richtext",
+      "id": "paragraphOne",
+      "label": "Paragraph One"
+    },
+     {
+      "type": "image_picker",
+      "id": "iconTwo",
+      "label": "Icon Two"
+    },
+    {
+      "type": "text",
+      "id": "headingTwo",
+      "label": "Heading Two"
+    },
+    {
+      "type": "richtext",
+      "id": "paragraphTwo",
+      "label": "Paragraph Two"
+    },
+    {
+      "type": "radio",
+      "id": "background",
+      "label": "Background Color",
+      "options": [
+        { "value": "#FFFFFF", "label": "White" },
+        { "value": "#FCF8EC", "label": "Off White" }
+      ],
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "radio",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "half", "label": "Half" },
+        { "value": "third", "label": "1/3 x 2/3" }
+      ],
+      "default": "half"
+    },
+    {
+      "type": "checkbox",
+      "id": "paddingTop",
+      "label": "Padding Top",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "paddingBottom",
+      "label": "Padding Bottom",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "flip",
+      "label": "Flip (Image on Right)",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with Text (New)",
+      "category": "Image with Text"
+    }
+  ]
+}
+{% endschema %}

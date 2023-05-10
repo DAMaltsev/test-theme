@@ -1,0 +1,67 @@
+{% include 'image-text-accordions' %}
+
+{% schema %}
+{
+  "name": "Image Text Accordions",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "expand_first_accordion",
+      "label": "Expand first accordion",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "accordion",
+      "name": "Accordion",
+      "settings": [
+        {
+          "type":      "image_picker",
+          "id":        "icon",
+          "label":     "Icon"
+        },
+        {
+          "type":      "text",
+          "id":        "title",
+          "label":     "Title"
+        },
+        {
+          "type":      "textarea",
+          "id":        "text",
+          "label":     "Text"
+        },
+        {
+          "type":      "image_picker",
+          "id":        "image",
+          "label":     "Related image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Text Accordions",
+      "category": "Image with Text"
+    }
+  ]
+}
+{% endschema %}

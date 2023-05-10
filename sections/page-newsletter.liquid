@@ -1,0 +1,226 @@
+<section class="page-newsletter-section" id="{{section.id}}">
+  <div class="section-wrapper">
+    <div class="container">
+      <div class="news-part-box">
+      <div class="news-left-part">
+        {% if section.settings.heading != blank %}
+        <div class="heading-area">
+          <h1 class="heading">
+            {{section.settings.heading}}
+          </h1>
+        </div>
+        {% endif %}
+        {% if section.settings.left_button_text != blank %}
+        <div class="button-area">
+          <span class="button-wrapper">
+            {% if section.settings.left_button_url != blank %}
+            <a href="#scroll-pricebox" class="scroll elButton">
+              {% endif %}
+              {{section.settings.left_button_text}}
+
+              {% if section.settings.left_button_url != blank %}
+            </a>
+            {% endif %}
+          </span>
+        </div>
+        {% endif %}
+     
+      <div class="images-area">
+        {% if section.settings.left_image_1 != blank %}
+        <div class="box_image">
+          <img src="{{section.settings.left_image_1 | img_url:'original'}}" class="box-img">
+        </div>
+        {% endif %}
+
+        {% if section.settings.left_image_2 != blank %}
+        <div class="box_image">
+          <img src="{{section.settings.left_image_2 | img_url:'original'}}" class="box-img">
+        </div>
+        {% endif %}
+
+        {% if section.settings.left_image_3 != blank %}
+        <div class="box_image">
+          <img src="{{section.settings.left_image_3 | img_url:'original'}}" class="box-img">
+        </div>
+        {% endif %}
+      </div>
+      <div class="featured-on-area">
+        {% if section.settings.featured_text != blank %}
+        <div class="title">{{section.settings.featured_text}}</div>
+        {% endif %}
+        <div class="featured-images">
+          <ul>
+            {% if section.settings.featured_image_1 != blank %}
+            <li>
+              <img src="{{section.settings.featured_image_1 | img_url:'original'}}">
+            </li>
+            {% endif %}
+
+            {% if section.settings.featured_image_2 != blank %}
+            <li>
+              <img src="{{section.settings.featured_image_2 | img_url:'original'}}">
+            </li>
+            {% endif %}
+            {% if section.settings.featured_image_3 != blank %}
+            <li>
+              <img src="{{section.settings.featured_image_3 | img_url:'original'}}">
+            </li>
+            {% endif %}
+            {% if section.settings.featured_image_4 != blank %}
+            <li>
+              <img src="{{section.settings.featured_image_4 | img_url:'original'}}">
+            </li>
+            {% endif %}
+            {% if section.settings.featured_image_5 != blank %}
+            <li>
+              <img src="{{section.settings.featured_image_5 | img_url:'original'}}">
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+      </div>
+
+      <div class="news-right-part">
+        <div class="video-wrapper">
+          {%- if section.settings.video_url == blank -%}
+          <iframe src="//www.youtube.com/embed/_9VUPq3SxOc?rel=0&showinfo=0&vq=720" width="850" height="480" frameborder="0" allowfullscreen></iframe>
+          {%- else -%}
+          {%- if section.settings.video_url.type == "youtube" -%}
+          <iframe src="//www.youtube.com/embed/{{ section.settings.video_url.id }}?rel=0&showinfo=0&vq=720" width="850" height="480" frameborder="0" allowfullscreen></iframe>
+          {%- endif -%}
+          {%- if section.settings.video_url.type == "vimeo" -%}
+          <iframe src="//player.vimeo.com/video/{{ section.settings.video_url.id }}?color={{ settings.color_button | remove: "#" }}&byline=0&portrait=0&badge=0" width="850" height="480" frameborder="0" allowfullscreen></iframe>
+          {%- endif -%}
+          {%- endif -%}
+        </div>
+        {% if section.settings.right_tag_line != blank %}
+        <div class="news-title">
+          {{section.settings.right_tag_line}}
+        </div>
+        {% endif %}
+
+        <div class="news-form">
+          <div class="klaviyo-form-TwGVu6"></div>
+          <p><small>It takes just 10 seconds to possibly save hundreds of $$$!</small></p>
+        </div>
+
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+"name": "Page Newsletter",
+"settings": [
+{
+"type":"header",
+"content":"Left Part Page"
+},
+{
+"type":"header",
+"content":"Heading"
+},
+{
+"type": "textarea",
+"id": "heading",
+"label": "Content"
+},
+{
+"type":"header",
+"content":"Button"
+},
+{
+"type": "text",
+"id": "left_button_text",
+"label": "Button Text"
+},
+{
+"type": "url",
+"id": "left_button_url",
+"label": "Button Url"
+},
+{
+"type":"header",
+"content":"Images"
+},
+{
+"type": "image_picker",
+"id": "left_image_1",
+"label": "Image 1"
+},
+{
+"type": "image_picker",
+"id": "left_image_2",
+"label": "Image 2"
+},
+{
+"type": "image_picker",
+"id": "left_image_3",
+"label": "Image 3"
+},
+{
+"type":"header",
+"content":"Featured Block"
+},
+{
+"type": "text",
+"id": "featured_text",
+"label": "Title"
+},
+{
+"type": "image_picker",
+"id": "featured_image_1",
+"label": "Icon 1"
+},
+{
+"type": "image_picker",
+"id": "featured_image_2",
+"label": "Icon 2"
+},
+{
+"type": "image_picker",
+"id": "featured_image_3",
+"label": "Icon 3"
+},
+{
+"type": "image_picker",
+"id": "featured_image_4",
+"label": "Icon 4"
+},
+{
+"type": "image_picker",
+"id": "featured_image_5",
+"label": "Icon 5"
+},
+{
+"type": "image_picker",
+"id": "featured_image_6",
+"label": "Icon 6"
+},
+{
+"type":"header",
+"content":"Right Part Page"
+},
+{
+"type": "video_url",
+"id": "video_url",
+"label": "Video link",
+"accept": ["youtube", "vimeo"]
+},
+{
+"type": "textarea",
+"id": "right_tag_line",
+"label": "Tag line"
+}
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

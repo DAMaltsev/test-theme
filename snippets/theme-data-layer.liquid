@@ -1,0 +1,98 @@
+{%- comment -%}
+  Data layer for GA/GTM.
+  Note: This snippet must be placed above content_for_header in theme.liquid.
+{%- endcomment -%}
+<script>
+  var themeDataLayer = {
+    'template': {{ template | json }},
+    'templateName': {{ template.name | json }},
+    'templateSuffix': {{ template.suffix | json }},
+    'searchTerm': {{ search.terms | json }},
+    'searchResults': {{ search.results_count | json }},
+    'pageNumber': {{ current_page | json }},
+    'currency': {{ currency.iso_code | json }},
+    'collectionName': {{ collection.title | json }},
+    'sortBy': {{ collection.sort_by | json }},
+    'tags': {{ current_tags | json }},
+    'product': {},
+    'customer': {},
+    'collection': {},
+    'cart': {}
+  };
+
+  {%- if content_for_header contains '/admin/bar' -%}
+    themeDataLayer.visitorType = 'admin';
+  {%- elsif content_for_header contains '/preview_bar' -%}
+    themeDataLayer.visitorType = 'preview';
+  {%- elsif content_for_header contains '/preview_bar' -%}
+    themeDataLayer.visitorType = 'logged-in';
+  {%- else -%}
+    themeDataLayer.visitorType = 'anonymous';
+  {%- endif -%}
+
+  {%- if collection and template != 'product' -%}
+    themeDataLayer.collection = {
+      'title': {{ collection.title | json }},
+      'id': {{ collection.id | json }},
+      'handle': {{ collection.handle | json }},
+      'url': {{ collection.url | json }},
+      'productCount': {{ collection.products_count | json }},
+      'products': []
+    };
+  {%- endif -%}
+
+  {%- if product -%}
+    themeDataLayer.product = {
+      'title': {{ product.title | json }},
+      'id': {{ product.id | json }},
+      'handle': {{ product.url | json }},
+      'url': {{ product.url | json }},
+      'type': {{ product.type | json }},
+      'tags': {{ product.tags | json }},
+      'price': Number({{ product.price | json }} / 100).toFixed(2),
+      'compareAtPrice': Number({{ product.compare_at_price | json }} / 100).toFixed(2),
+      'compareAtPriceMax': Number({{ product.compare_at_price_max | json }} / 100).toFixed(2),
+      'imageURL': "https:{{ product.featured_image | img_url: 'master' }}",
+      'imageThumbURL': "https:{{ product.featured_image | img_url: 'grande' }}",
+      'vendor': {{ product.vendor | json }},
+      'inStock': {{ product.available | json }},
+      'hasNoVariants': {{ product.has_only_default_variant | json }},
+      'numVariants': {{ product.variants.size | json }},
+      'collections': {{ product.collections| map:'title' | json }},
+      'variants': []
+    };
+  {%- endif -%}
+
+  {%- if customer -%}
+    themeDataLayer.customer = {
+      'id': {{ customer.id | json }},
+      'firstName': {{ customer.first_name | json }},
+      'surname': {{ customer.last_name | json }},
+      'email': {{ customer.email | json }},
+      'ordersCount': {{ customer.orders_count | json }},
+      'totalSpent': Number({{ customer.total_spent | json }} / 100).toFixed(2),
+      'acceptsMarketing': {{ customer.accepts_marketing | json }},
+      'tags': {{ customer.tags | json }}
+    };
+  {%- endif -%}
+
+  {%- if cart -%}
+    themeDataLayer.cart = {
+      'total': Number({{ cart.total_price | json }} / 100).toFixed(2),
+      'count': {{ cart.item_count | json }},
+      'currency': {{ cart.currency.iso_code | json }},
+      'products': [],
+    };
+  {%- endif -%}
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ 'theme': themeDataLayer });
+</script>
+
+<!-- Google Tag Manager -->
+<script type="lazyloadscript">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W4CX452');</script>
+<!-- End Google Tag Manager -->

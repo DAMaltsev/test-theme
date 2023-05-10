@@ -1,0 +1,64 @@
+{{ 'section-video.css' | asset_url | stylesheet_tag }}
+
+<video-section
+    class="video-section"
+    data-playing="false"
+>
+    <div class="video-section__video-container">
+      <video crossorigin="anonymous" preload="metadata" autoplay playsinline class="video-section__video" poster="{{ section.settings.image | img_url: '1800x' }}" muted>
+        <source src="{{ section.settings.video }}" />
+        <track
+        label="English"
+        kind="subtitles"
+        srclang="en"
+        src="{{section.settings.captions}}"
+        default />
+      </video>
+    </div>
+
+    <div class="video-section__cursor">
+      Play
+    </div>
+
+</video-section>
+
+{% schema %}
+{
+  "name": "Video",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay?",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "full",
+      "label": "Full Width?"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Placeholder Image"
+    },
+    {
+      "type": "text",
+      "id": "video",
+      "label": "MP4 Link"
+    },
+    {
+      "type": "text",
+      "id": "captions",
+      "label": "Captions Link",
+      "info": "Upload a .vtt file to your media library and paste the link here."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video",
+      "category": "Video"
+    }
+  ]
+}
+{% endschema %}

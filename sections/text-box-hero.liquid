@@ -1,0 +1,59 @@
+
+<section class="text-box-hero">
+  {% render 'responsive-image' with image: section.settings.image, classes:'text-box-hero__image lazyload' %}
+  <!-- <img class="text-box-hero__image lazyload" src="{{ section.settings.image | img_url: '100x' }}" data-sizes="auto" data-src="{{ section.settings.image | img_url: '2000x' }}" alt="{{ section.settings.image.alt }}" loading="lazy" /> -->
+  <div class="text-box-hero__content">
+    <div class="text-box-hero__content-inner">
+      <h2 class="text-box-hero__title text--script h3">{{ section.settings.title }}</h2>
+      <h3 class="text-box-hero__subtitle h1">{{ section.settings.subtitle }}</h3>
+      <p class="text-box-hero__text">{{ section.settings.text }}</p>
+      {% if section.settings.button_text != blank and section.settings.button_url != blank %}
+        <a href="{{ section.settings.button_url }}" class="btn">{{ section.settings.button_text }}</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero with Text Box",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero with Text Box",
+      "category": "Image with Text"
+    }
+  ]
+}
+{% endschema %}

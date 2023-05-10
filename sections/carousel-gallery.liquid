@@ -1,0 +1,56 @@
+{{ 'section-carousel-gallery.css' | asset_url | stylesheet_tag }}
+
+<carousel-gallery class="carousel-gallery carousel" style="background-color: {{ section.settings.background }};">
+    {% for block in section.blocks %}
+      <div class="carousel-cell carousel-gallery__item">
+        <img src="{{ block.settings.image | img_url: '2000x' }}" alt="{{ block.settings.caption }}">
+        {% unless block.settings.caption == '' %}
+          <div class="carousel-gallery__caption">
+            <span>{{ block.settings.caption }}</span>
+          </div>
+        {% endunless %}
+      </div>
+    {% endfor %}
+</carousel-gallery>
+
+{% schema %}
+{
+  "name": "Carousel Gallery",
+  "settings": [
+    {
+      "type": "radio",
+      "id": "background",
+      "label": "Background Color",
+      "options": [
+        { "value": "#FFFFFF", "label": "White" },
+        { "value": "#FCF8EC", "label": "Off White" }
+      ],
+      "default": "#FFFFFF"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Gallery Item",
+      "type": "gallery-item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption (Optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Carousel Gallery",
+      "category": "Carousel Gallery"
+    }
+  ]
+}
+{% endschema %}

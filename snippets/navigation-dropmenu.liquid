@@ -1,0 +1,120 @@
+{% assign chair_swatches = '' %}
+
+<nav class="navbar-dropmenu__nav">
+  <div class="container">
+    <a class="navbar-dropmenu__back h3" href="#">
+      <svg width="11" height="19" viewBox="0 0 11 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0.435547 8.42773C0.189453 8.63281 0.107422 8.87891 0.107422 9.125C0.107422 9.41211 0.189453 9.6582 0.435547 9.82227L8.39258 17.7793C8.55664 17.9844 8.80273 18.0664 9.08984 18.0664C9.33594 18.0664 9.58203 17.9844 9.78711 17.7793L10.6895 16.877C10.8535 16.7129 10.9766 16.4668 10.9766 16.1797C10.9766 15.9336 10.8945 15.6875 10.7305 15.4824L4.37305 9.125L10.7305 2.76758C10.8945 2.60352 10.9766 2.35742 10.9766 2.07031C10.9766 1.82422 10.8535 1.57812 10.6895 1.37305L9.78711 0.470703C9.58203 0.306641 9.33594 0.183594 9.08984 0.183594C8.80273 0.183594 8.55664 0.306641 8.39258 0.470703L0.435547 8.42773Z" fill="currentColor"/>
+      </svg>
+      {{ name }}
+    </a>
+    <div class="navbar-dropmenu__items">
+      {%- for link in links -%}
+        {% if link.type == 'product_link' and link.object.handle == 'hammock-gift-card' %}
+          <div class="navbar-dropmenu__separator"></div>
+        {% endif %}
+
+        <div class="navbar-dropmenu__item">
+          {%- assign url = link.url -%}
+          {%- if link.type == 'collection_link' -%}
+            {%- assign collection = link.object -%}
+            {%- assign product = collection.products[0] -%}
+            {%- assign description = collection.metafields.custom_fields.short_description -%}
+            {%- assign callout = collection.metafields.custom_fields.callout -%}
+
+            {%- if collection.handle == 'classic-double-hammock' -%}
+              {%- assign url = '/collections#signature-hammocks' -%}
+            {%- elsif collection.handle == 'cotton-rope-hammocks' -%}
+              {%- assign url = '/collections#cotton-rope-hammocks' -%}
+            {%- elsif collection.handle == 'hanging-chair-hammock' -%}
+              {%- assign url = '/collections#hanging-chair-hammocks' -%}
+            {%- endif -%}
+          {%- elsif link.type == 'product_link' -%}
+            {%- assign product = link.object -%}
+            {%- assign description = product.metafields.custom_fields.short_description -%}
+            {%- assign callout = product.metafields.custom_fields.callout -%}
+          {%- endif -%}
+
+          {% assign image = product.featured_image %}
+
+          <a href="{{ url }}" class="navbar-dropmenu__link">
+            {%- if callout -%}
+              <p class="navbar-dropmenu__callout navbar-dropmenu__callout--{{ callout | handleize }}">
+                <span>{{ callout }}</span>
+              </p>
+            {%- endif -%}
+
+            <p class="navbar-dropmenu__title">{{ link.title }}</p>
+
+            <figure class="navbar-dropmenu__image">
+              {% render 'responsive-image' with image: image, classes:'lazyload', defaultRes:'50x', sizes: '50,100,150,200,300,400,600' %}
+            </figure>
+
+ {%- if collection.handle == 'classic-double-hammock' -%}
+              <p class="subtitle_c h4">BEST FOR THE BACKYARD</p>
+            {%- elsif collection.handle == 'cotton-rope-hammocks' -%}
+    <p class="subtitle_c h4">BEST FOR THE GREAT INDOORS</p>
+            {%- endif -%}
+            {%- if link.title contains 'Chair' -%}
+             <p class="subtitle_c h4">BEST FOR SOME "ME TIME"</p>
+            {%- endif -%}
+        
+            {%- if description -%}
+              <p class="navbar-dropmenu__description">{{ description }}</p>
+            {%- endif -%}
+
+            {% if link.type == 'collection_link' %}
+              {%- assign color_count = 0 -%}
+              {%- capture swatches -%}
+                <div class="navbar-dropmenu__swatches">
+                  {%- for product in collection.products -%}
+                    {%- unless product.title contains 'Straps' or product.title contains 'Gift' -%}
+                      {%- assign color_count = color_count | plus: 1 -%}
+                      {% if forloop.index < 6 %}
+                        
+                        {%- include 'color-name' with name: product.title -%}
+                  {% if color_name != 'Shark Tank Special' %} 
+                        <img data-aa="{{ color_name  }}" class="navbar-dropmenu__swatch lazyload" src="" data-sizes="auto"data-src="{{ color_name | handleize | prepend: 'swatch-' | append: '.png' | asset_img_url:'72x' }}" alt="{{ color_name }}" loading="lazy"/>
+                      {% endif %}
+                        
+                        {%- endif -%}
+                    {%- endunless -%}
+                  {%- endfor -%}
+                  {% if collection.products.size > 5 %}
+                    <p class="navbar-dropmenu__more-swatches">+{{ color_count | minus: 5 }}</p>
+                  {% endif %}
+                </div>
+              {%- endcapture -%}
+              {{ swatches }}
+              {%- if collection.handle == 'hanging-chair-hammock' -%}
+                {%- assign chair_swatches = swatches -%}
+              {%- endif -%}
+            {% elsif link.type == 'product_link' %}
+              {%- if product.handle == 'the-hammock-throne' -%}
+                {{ chair_swatches }}
+              {%- elsif product.handle == 'hammock-gift-card' -%}
+                <div class="navbar-dropmenu__icons">
+                  <div class="navbar-dropmenu__icon">
+                    <svg width="37" height="27" viewBox="0 -1 37 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M19 21C11 21 7.55556 12.3998 6 10.3333C8.11111 11.5641 11.9814 13.2051 19 13.2051C25.3519 13.2051 28.5186 11.5641 31.3333 10.3333C30 12.3998 27 21 19 21Z" stroke="#0E2D68" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M31.3333 10.3333C31.3333 7.55742 32.4808 3.75343 34.7759 5.39841C36.4972 6.63215 33.9152 9.40801 31.3333 10.3333Z" stroke="#0E2D68" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M6 10.3333C6 7.55742 4.85245 3.75343 2.55735 5.39841C0.836026 6.63215 3.41801 9.40801 6 10.3333Z" stroke="#0E2D68" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p class="h4">For every size</p>
+                  </div>
+                  <div class="navbar-dropmenu__icon">
+                    <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M11.4036 26C2.18614 19.844 -0.566323 13.4737 1.80971 11.1956C4.9778 8.15824 10.2044 10.9664 11.2963 13.9654C12.3881 16.9645 7.91429 17.5668 8.17537 13.5068C8.43644 9.44685 12.5972 7.19378 15.2548 8.26607C20.4395 10.358 17.7893 20.2345 11.4036 26Z" stroke="#0E2D68" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M21.251 1L20 4.24755M25.6484 10L22.7484 9.51988L25.6484 10ZM26 4.46266L22.2192 6.61893L26 4.46266Z" stroke="#0E2D68" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p class="h4">For everyone!</p>
+                  </div>
+                </div>
+              {%- endif -%}
+            {% endif %}
+          </a>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</nav>

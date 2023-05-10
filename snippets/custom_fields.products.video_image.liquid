@@ -1,0 +1,13 @@
+{% comment %}
+  DO NOT MODIFY THIS FILE DIRECTLY. THIS FILE WILL BE OVERWRITTEN.
+  YOU CAN MODIFY THE LIQUID CODE FOR THIS CUSTOM FIELD HERE:
+  https://customfields.bonify.io/dashboard/yellow-leaf-hammocks-2.myshopify.com/products/configure/165386/edit
+{% endcomment %}
+{% if product.metafields.custom_fields["video_image"] != blank %}
+  <div class="custom-field custom-field__video-image custom-field__type--image">
+    <h3 class="custom-field--title">Video Image</h3>
+    <div class="custom-field--value">  
+      {% include 'cf-image' with image: product.metafields.custom_fields["video_image"], print: 'url' %}
+    </div>
+  </div>
+{% endif %}

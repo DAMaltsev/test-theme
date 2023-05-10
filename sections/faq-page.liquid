@@ -1,0 +1,52 @@
+<section data-section-id="{{ section.id }}">
+  <dl class="faq__accordion-list accordion__list" data-component="accordion" data-multi>
+    {% for block in section.blocks %}
+      {% if block.type == 'question' %}
+        <dt
+          data-accordion-trigger
+          {{ block.shopify_attributes }}
+          aria-expanded="false"
+          aria-controls="accordion-faq-{{ forloop.index }}"
+          class="faq__accordion-trigger accordion__trigger h4"
+        >
+          <span>{{- block.settings.title -}}</span>
+          <span class="accordion__icon-close">
+            {% include 'svg-icon-close' %}
+          </span>
+        </dt>
+        <dd
+          data-accordion-content
+          aria-hidden="true"
+          id="accordion-faq-{{ forloop.index }}"
+          class="faq__accordion-content accordion__content"
+        >
+          {{- block.settings.answer -}}
+        </dd>
+      {% endif %}
+    {% endfor %}
+  </dl>
+</section>
+
+{% schema %}
+{
+  "name": "FAQs",
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "title",
+          "label": "Question"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

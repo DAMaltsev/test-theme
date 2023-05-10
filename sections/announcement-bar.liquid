@@ -1,0 +1,71 @@
+
+       <script>
+      function hideElement() {
+        var element = document.getElementById("custom-header-announcement");
+        element.style.display = "none";
+        sessionStorage.setItem("custom-header-announcement", "true");
+      }
+      
+      window.addEventListener("DOMContentLoaded", function() {
+        var element = document.getElementById("custom-header-announcement");
+        if (sessionStorage.getItem("custom-header-announcement")) {
+          element.style.display = "none";
+        }
+      });
+    </script>
+<div onclick="hideElement()"  id="custom-header-announcement">
+  <div style="background-color:{{ section.settings.background_color }}; color:{{ section.settings.color }}" class="announcement-container">
+    <div class="mobile-only">{{ section.settings.text_mobile }}</div>
+    <div class="desktop-only">{{ section.settings.text_desktop }}</div>
+    {% if section.settings.show_popup %}<a class="announcement_cta" href='{{ section.settings.popup_url }}'>Click to view</a>{% endif %}
+    <span id="close-btn">&#10005;</span>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Header announcement Bar",
+    "settings": [
+          {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "Color"
+    },
+    {
+      "type": "richtext",
+      "id": "text_desktop",
+      "label": "Announcement text (Desktop)",
+      "info": "WARNING: Do not include any links within the announcement bar if there is already a parent link set below!"
+    },
+      {
+      "type": "richtext",
+      "id": "text_mobile",
+      "label": "Announcement text (Mobile)",
+      "info": "WARNING: Do not include any links within the announcement bar if there is already a parent link set below!"
+    },
+       {
+      "type": "checkbox",
+      "id": "show_popup",
+      "label": "Show Popup",
+      "default": false
+    },
+      {
+      "type": "text",
+      "id": "popup_url",
+      "label": "URL"
+    }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

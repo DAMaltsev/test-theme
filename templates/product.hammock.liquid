@@ -1,0 +1,21 @@
+{% comment %}
+Logic
+{% endcomment %}
+{% include 'product-hammock-logic' %}
+{% include 'collection-metafields' with collection: hammock_collection %}
+
+{% comment %}
+Templates
+{% endcomment %}
+{% include 'product-template-hammock' %}
+{% include 'product-image-text' %}
+{% include 'video-pdp' %}
+{% section 'as-seen-on' %}
+{% include 'image-text-accordions-metafields' %}
+{% include 'product-quiz' %}
+{% include 'okendo-reviews-widget' %}
+{% include 'hero-pdp' %}
+{% section 'faq' %}
+{% section 'hero-pdp-faq' %}
+{% section 'featured-products' %}
+{% include 'klaviyo-product-tracking' %}

@@ -1,0 +1,282 @@
+{{ 'section-details-accordion.css' | asset_url | stylesheet_tag }}
+
+<details-accordion class="details-accordion">
+  <div class="details-accordion__inner">
+    <div class="details-accordion__items">
+      <div class="details-accordion__item" role="button" data-label="dimensions">
+        <div class="details-accordion__header">
+          <span>Dimensions</span>
+          <div class="details-accordion__plus">
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+        <div class="details-accordion__item-body">
+          <div class="details-accordion__item-body--inner">
+            {% for block in section.blocks %}
+              {% if block.type == 'dimensions-item' %}
+                <div class="details-accordion__dimensions-item">
+                  <span>{{block.settings.label}}</span>
+                  <span>{{block.settings.value}}</span>
+                </div>
+              {% endif %}
+            {% endfor %}
+            <div class="details-accordion__inline-image">
+              <img src="{{ section.settings.dimensionsImage | img_url: '1200x' }}" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="details-accordion__item" role="button" data-label="included">
+        <div class="details-accordion__header">
+          <span>What's Included</span>
+          <div class="details-accordion__plus">
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+        <div class="details-accordion__item-body">
+          <div class="details-accordion__item-body--inner">
+            {% for block in section.blocks %}
+              {% if block.type == 'included-item' %}
+                <div class="details-accordion__included-item">
+                  <div class="included-item__icon">
+                    <img src="{{ block.settings.icon | img_url: '1200x' }}" alt="">
+                  </div>
+                  <div class="included-item__content">
+                    <span class="included-item__heading">{{block.settings.heading}}</span>
+                    <span class="included-item__body">{{block.settings.body}}</span>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+            <div class="details-accordion__inline-image">
+              <img src="{{ section.settings.includedImage | img_url: '1200x' }}" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="details-accordion__item" role="button" data-label="materials">
+        <div class="details-accordion__header">
+          <span>Materials</span>
+          <div class="details-accordion__plus">
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+        <div class="details-accordion__item-body">
+          <div class="details-accordion__item-body--inner">
+            {% for block in section.blocks %}
+              {% if block.type == 'materials-item' %}
+                <div class="details-accordion__materials-item">
+                  <div class="materials-item__icon">
+                    <img src="{{ block.settings.icon | img_url: '1200x' }}" alt="">
+                  </div>
+                  <div class="materials-item__content">
+                    <span class="materials-item__heading">{{block.settings.heading}}</span>
+                    <span class="materials-item__body">{{block.settings.body}}</span>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+            <div class="details-accordion__inline-image">
+              <img src="{{ section.settings.materialsImage | img_url: '1200x' }}" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="details-accordion__item" role="button" data-label="assembly">
+        <div class="details-accordion__header">
+          <span>Assembly</span>
+          <div class="details-accordion__plus">
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+        <div class="details-accordion__item-body">
+          <div class="details-accordion__item-body--inner">
+            {% for block in section.blocks %}
+              {% if block.type == 'assembly-item' %}
+                <div class="details-accordion__assembly-item">
+                  <span class="assembly-item__heading">{{block.settings.heading}}</span>
+                  <span class="assembly-item__body">{{block.settings.body}}</span>
+                </div>
+              {% endif %}
+            {% endfor %}
+            <div class="details-accordion__inline-image">
+              <img src="{{ section.settings.assemblyImage | img_url: '1200x' }}" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="details-accordion__images">
+      <div class="details-accordion__image dimensions active">
+        {% if section.settings.dimensionsVideo == '' %}
+          <img src="{{ section.settings.dimensionsImage | img_url: '1200x' }}" alt="">
+        {% else %}
+          <video playsinline autoplay muted loop>
+            <source src="{{ section.settings.dimensionsVideo }}" type="video/mp4">
+          </video>
+        {% endif %}
+      </div>
+      <div class="details-accordion__image included">
+        {% if section.settings.includedVideo == '' %}
+          <img src="{{ section.settings.includedImage | img_url: '1200x' }}" alt="">
+        {% else %}
+          <video playsinline autoplay muted loop>
+            <source src="{{ section.settings.includedVideo }}" type="video/mp4">
+          </video>
+        {% endif %}
+      </div>
+      <div class="details-accordion__image materials">
+        {% if section.settings.materialsVideo == '' %}
+          <img src="{{ section.settings.materialsImage | img_url: '1200x' }}" alt="">
+        {% else %}
+          <video playsinline autoplay muted loop>
+            <source src="{{ section.settings.materialsVideo }}" type="video/mp4">
+          </video>
+        {% endif %}
+      </div>
+      <div class="details-accordion__image assembly">
+        {% if section.settings.assemblyVideo == '' %}
+          <img src="{{ section.settings.assemblyImage | img_url: '1200x' }}" alt="">
+        {% else %}
+          <video playsinline autoplay muted loop>
+            <source src="{{ section.settings.assemblyVideo }}" type="video/mp4">
+          </video>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</details-accordion>
+
+{% schema %}
+{
+  "name": "Details Accordion",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "dimensionsImage",
+      "label": "Dimensions Image"
+    },
+    {
+      "type": "text",
+      "id": "dimensionsVideo",
+      "label": "Dimensions Video URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "includedImage",
+      "label": "What's Included Image"
+    },
+    {
+      "type": "text",
+      "id": "includedVideo",
+      "label": "What's Included Video URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "materialsImage",
+      "label": "Materials Image"
+    },
+    {
+      "type": "text",
+      "id": "materialsVideo",
+      "label": "Materials Video URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "assemblyImage",
+      "label": "Assembly Image"
+    },
+    {
+      "type": "text",
+      "id": "assemblyVideo",
+      "label": "Assembly Video URL"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Dimensions Item",
+      "type": "dimensions-item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value"
+        }
+      ]
+    },
+    {
+      "name": "What's Included Item",
+      "type": "included-item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Body"
+        }
+      ]
+    },
+    {
+      "name": "Materials Item",
+      "type": "materials-item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Body"
+        }
+      ]
+    },
+    {
+      "name": "Assembly Item",
+      "type": "assembly-item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Body"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Details Accordion",
+      "category": "Details Accordion"
+    }
+  ]
+}
+{% endschema %}

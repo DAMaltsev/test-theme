@@ -1,0 +1,92 @@
+{% include 'card-slideshow' %}
+
+{% schema %}
+  {
+    "name": "Reviews Slideshow",
+    "settings": [
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color"
+      },
+      {
+        "type": "textarea",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "subtitle",
+        "label": "Subtitle"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text"
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button URL"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Review",
+        "type": "review",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "reviewer",
+            "label": "Reviewer name"
+          },
+          {
+            "type": "textarea",
+            "id": "review_excerpt",
+            "label": "Review excerpt",
+            "info": "Up to 36 characters."
+          },
+          {
+            "type": "select",
+            "id": "star_rating",
+            "label": "Star rating",
+            "options": [
+              {
+                "value": "1",
+                "label": "1 star"
+              },
+              {
+                "value": "2",
+                "label": "2 stars"
+              },
+              {
+                "value": "3",
+                "label": "3 stars"
+              },
+              {
+                "value": "4",
+                "label": "4 stars"
+              },
+              {
+                "value": "5",
+                "label": "5 stars"
+              }
+            ],
+            "default": "5"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Reviews Slideshow",
+        "category": "Slideshow"
+      }
+    ]
+  }
+{% endschema %}

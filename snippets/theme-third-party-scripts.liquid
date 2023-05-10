@@ -1,0 +1,125 @@
+{%- comment -%}
+  Third-party app scripts and tracking scripts.
+  Note: These have been migrated from previous theme. New tags should be installed via GTM whenever possible.
+{%- endcomment -%}
+
+{%- comment -%} Google Ads {%- endcomment -%}
+
+
+
+
+<!-- Global site tag (gtag.js) - AdWords: 986176428 - Google Revision 5 -->
+<!--
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-986176428"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-986176428');
+</script>
+<script>
+  gtag('event', 'page_view', {
+    'send_to': 'AW-986176428',
+    {% assign shopify_store_country  = 'US' %}
+    {% if template contains 'cart' %}
+        'ecomm_prodid': [{% for item in cart.items %}'{{ item.variant.sku }}'{% unless forloop.last %}, {% endunless %}{% endfor %}],
+        'ecomm_pagetype': 'cart',
+        'ecomm_totalvalue': {{ cart.total_price | money_without_currency  | remove: ','  }}
+    });
+    {% elsif template contains 'collection' %}
+        'ecomm_pagetype': 'category',
+        'ecomm_category': '{{ collection.handle }}'
+    });
+    {% elsif template contains 'index' %}
+        'ecomm_pagetype': 'home'
+    });
+    {% elsif template contains 'product' %}
+        'ecomm_prodid': '{{ product.variants.first.sku }}',
+        'ecomm_pagetype': 'product',
+        'ecomm_totalvalue': '{{ product.selected_or_first_available_variant.price | money_without_currency  | remove: ','  }}'
+    });
+    {% elsif template contains 'search' %}
+        'ecomm_pagetype': 'searchresults'
+    });
+    {% endif %}
+</script>
+-->
+
+
+
+
+{%- comment -%} Livechat {%- endcomment -%}
+<script type="lazyloadscript">
+  var __lc = {};
+  __lc.license = 1128321;
+  __lc.skill = 0;
+  __lc.params = [
+    { name: 'Cart', value: '{{ cart.item_count }} items, {{ cart.total_price | money }} total' }
+  ];
+
+  (function() {
+    var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.defer = true;
+    lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
+  })();
+</script>
+
+{%- comment -%} Trackify (from trackify.liquid) {%- endcomment -%}
+<script>
+trackifyliquidloaded = 1;
+function appendurl(url) {
+  var script = document.createElement('script');
+  script.setAttribute('type', 'text/javascript');
+  script.setAttribute('src', url);
+  document.head.appendChild(script);
+}
+function getCookie(cname) {
+  var name = cname + '=';
+  var ca = document.cookie.split(';');
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0)==' ') c = c.substring(1);
+    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+  }
+  return '';
+}
+shop_permanent_domain = '{{shop.permanent_domain}}';
+function getUrlParameter(name) {
+  name = name.replace(/[\[]/, '\[').replace(/[\]]/, '\]');
+  var regex = new RegExp('[\?&]' + name + '=([^&#]*)');
+  var results = regex.exec(location.search);
+  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
+  a_aid = getUrlParameter('a_aid');
+</script>
+{% assign templatename = template | replace: '.', ' ' | truncatewords: 1, '' | handle %}
+<script>
+if (typeof __st === 'undefined') {
+__st = [];
+{% if templatename == 'product' %}
+__st['rid'] = {{product.id}};
+{% endif %} 
+}
+</script>
+<script type='text/javascript' data-src='https://app.redretarget.com/sapp/assets/js/common.js'></script>
+{% if templatename != 'product' and templatename != 'cart' and templatename != 'collection' and templatename != 'thank_you' %}
+<script>
+  var source = 'https://app.redretarget.com/sapp/MY_Shopify/home/{{shop.permanent_domain}}/'+a_aid;
+  appendurl(source);
+</script>
+{% endif %}
+{% if templatename == 'product' %}
+<script>
+  var source = 'https://app.redretarget.com/sapp/MY_Shopify/product/{{shop.permanent_domain}}/'+a_aid+'/?pd_id={{product.id}}';
+  appendurl(source);
+</script>
+{% endif %}
+{% if templatename == 'cart' %}
+<script type='text/javascript' src='https://app.redretarget.com/sapp/assets/js/cart.js'></script>
+{% endif %}
+
+{%- comment -%} Gleam {%- endcomment -%}
+<script data-src="https://js.gleam.io/oi-99lh19o.js" defer></script>
+
+
+<script src="{{ 'lazysizes.min.js' | asset_url }}" async=""></script>

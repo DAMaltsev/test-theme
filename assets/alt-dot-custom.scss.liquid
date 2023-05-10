@@ -1,0 +1,71 @@
+// Styles that require the use of liquid variables go here. Try to keep other styles in the build pipeline due to the benefits the build process provides.
+@font-face {
+  font-family: "Galano Grotesque";
+  src: url('{{ "GalanoGrotesque.woff2" | asset_url }}') format("woff2"),
+    url('{{ "GalanoGrotesque.woff" | asset_url }}') format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Galano Grotesque";
+  src: url('{{ "GalanoGrotesque-SemiBold.woff2" | asset_url }}') format("woff2"),
+    url('{{ "GalanoGrotesque-SemiBold.woff" | asset_url }}') format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Galano Grotesque";
+  src: url('{{ "GalanoGrotesque-Bold.woff2" | asset_url }}') format("woff2"),
+    url('{{ "GalanoGrotesque-Bold.woff" | asset_url }}') format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gotcha";
+  src: url('{{ "Gotcha.woff2" | asset_url }}') format("woff2"),
+    url('{{ "Gotcha.woff" | asset_url }}') format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+select {
+  background-image: url("{{ "icon-caret-down.svg" | asset_url }}");
+}
+
+.tns-controls {
+  button[data-controls="prev"] {
+    background-image: url("{{ "icon-chevron-left.svg" | asset_url }}");
+  }
+  button[data-controls="next"] {
+    background-image: url("{{ "icon-chevron-right.svg" | asset_url }}");
+  }
+}
+
+.slideshow-controls--orange .tns-controls {
+  button[data-controls="prev"] {
+    background-image: url("{{ "icon-chevron-left-orange.svg" | asset_url }}");
+  }
+  button[data-controls="next"] {
+    background-image: url("{{ "icon-chevron-right-orange.svg" | asset_url }}");
+  }
+}
+
+.password {
+  background-image: url("{{ "password-bg.jpeg" | asset_url }}");
+}
+
+.product-slideshow .tns-controls {
+  button[data-controls="prev"] {
+    cursor: url('{{ "icon-slideshow-chevron-left.svg" | asset_url }}'), auto;
+  }
+  button[data-controls="next"] {
+    cursor: url('{{ "icon-slideshow-chevron-right.svg" | asset_url }}'), auto;
+  }
+}

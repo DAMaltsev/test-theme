@@ -1,0 +1,39 @@
+{% comment %}
+  DO NOT MODIFY THIS FILE DIRECTLY. THIS FILE WILL BE OVERWRITTEN.
+  YOU CAN MODIFY THE LIQUID CODE FOR THIS CUSTOM FIELD HERE:
+  https://customfields.bonify.io/dashboard/yellow-leaf-hammocks-2.myshopify.com/products/configure/165408/edit
+{% endcomment %}
+{% if product.metafields.custom_fields["product_image_text_blocks"] != blank %}
+  <div class="custom-field custom-field__product-image-text-blocks custom-field__type--field-collection">
+    <h3 class="custom-field--title">Product Image Text Blocks</h3>
+    <div class="custom-field--value">
+      {% assign separator = "|###|" %}
+      {% assign image_array = product.metafields.custom_fields["image"] | split: separator %}
+      {% assign desktop_image_alignment_array = product.metafields.custom_fields["desktop_image_alignment"] | split: separator %}
+      {% assign block_title_array = product.metafields.custom_fields["block_title"] | split: separator %}
+      {% assign block_subtitle_array = product.metafields.custom_fields["block_subtitle"] | split: separator %}
+      {% assign block_text_array = product.metafields.custom_fields["block_text"] | split: separator %}
+      {% assign fc_keys = product.metafields.custom_fields["product_image_text_blocks"] | split: "," %}
+      {% for i in fc_keys %}
+        {% assign index = i | plus: 0 %}
+        <div class="fc-item fc-item-- fc-index--{{ index }}">
+          <div class="fc-field field__image">
+            {{ image_array[index] }}
+          </div>
+          <div class="fc-field field__desktop-image-alignment">
+            {{ desktop_image_alignment_array[index] }}
+          </div>
+          <div class="fc-field field__block-title">
+            {{ block_title_array[index] }}
+          </div>
+          <div class="fc-field field__block-subtitle">
+            {{ block_subtitle_array[index] }}
+          </div>
+          <div class="fc-field field__block-text">
+            {{ block_text_array[index] }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

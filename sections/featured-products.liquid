@@ -1,0 +1,39 @@
+<div class="featured-product-grid container container--xl">
+  <ul class="featured-product-grid__list">
+    {% for block in section.blocks %}
+      {% if block.type == 'collection' %}
+        {% assign collection = collections[block.settings.collection] %}
+        <li class="featured-product-grid__item">
+          {% include 'grouped-product-item', heading: 'h2' %}
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+
+{% schema %}
+  {
+    "name": "Featured Products",
+    "settings": [
+    ],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Product Collection",
+        "settings": [
+          {
+            "type": "collection",
+            "id": "collection",
+            "label": "Collection"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Products",
+        "category": "Product"
+      }
+    ]
+  }
+{% endschema %}

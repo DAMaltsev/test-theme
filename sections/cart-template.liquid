@@ -1,0 +1,229 @@
+{% if section.settings.cart_upsell_enable %}
+  {% if section.settings.upsell_product %}
+    {% assign upsell = true %}
+    {% assign upsell_product = all_products[section.settings.upsell_product] %}
+  {% endif %}
+{% endif %}
+
+
+<div class="container container--md page page--padding-bottom">
+  <header class="cart-header">
+    <h1 class="h2 cart-header__title">
+      {{ 'cart.title' | t }}
+    </h1>
+  </header>
+
+  {% if cart.item_count > 0 %}
+    <form action="/cart" method="post" novalidate class="cart">
+      <table class="cart">
+        <thead class="cart__header" aria-hidden="true">
+          <tr>
+            <th class="cart__product text--sm">
+              {{ 'cart.line_item.product' | t }}
+            </th>
+            <th class="cart__unit-price text--sm">
+              {{ 'cart.line_item.unit_price' | t }}
+            </th>
+            <th class="cart__quantity text--sm">
+              {{ 'cart.line_item.quantity' | t }}
+            </th>
+            <th class="cart__subtotal text--sm">
+              {{ 'cart.line_item.subtotal' | t }}
+            </th>
+          </tr>
+        </thead>
+        <tbody class="cart__items">
+          {% for item in cart.items %}
+            {% assign product = item.product %}
+            {% include 'product-hammock-logic' %}
+            {% if item.product.id == upsell_product.id %}
+              {% assign upsell = false %}
+            {% endif %}
+            <tr class="cart__row">
+              <td class="cart__product-wrapper">
+                <div class="cart__product-flex">
+                  <div class="cart__image-wrapper">
+                    <img class="cart__image" src="{{ item | img_url: '50x' }}" alt="{{ item.title | escape }}">
+                  </div>
+                  <div class="cart__product">
+                    <a class="cart__link" href="{{ item.url }}">
+                      <p class="cart__product-title">{{ item.product.title }}</p>
+                    </a>
+					<div class="cart__meta-text text--sm">
+                      {{ product.metafields.custom_fields.mystery_card_message }}
+                    </div>
+                    {% unless item.variant.title contains 'Default' %}
+                      <div class="cart__meta-text text--sm">
+                        {% for option in item.product.options %}
+                          {{ option | remove: "Select a " }}: {{ item.variant.options[forloop.index0] }}<br/>
+                        {% endfor %}
+                      </div>
+                    {% endunless %}
+
+                    {%- assign property_size = item.properties | size -%}
+                    {% if property_size > 0 %}
+                      <div class="cart__meta-text text--sm">
+                        {% for p in item.properties %}
+                          {% unless p.last == blank %}
+                            {{ p.first }}:
+                            {% if p.last contains '/uploads/' %}
+                              <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+                            {% else %}
+                              {{ p.last }}
+                            {% endif %}
+                          {% endunless %}
+                        {% endfor %}
+                      </div>
+                    {% endif %}
+
+                    {% comment %} Remove from cart button {% endcomment %}
+                    <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="cart__remove" aria-label="Remove {{ item.product.title }}">Remove</a>
+
+                  </div>
+                </div>
+              </td>
+              <td class="cart__unit-price">
+                {{ item.price | money }}
+              </td>
+              <td class="cart__quantity">
+                <input
+                  class="cart__quantity-input"
+                  type="number"
+                  name="updates[]"
+                  id="updates_{{ item.id }}"
+                  value="{{ item.quantity }}"
+                  min="0">
+              </td>
+              <td class="cart__subtotal">
+                {% if item.original_line_price != item.line_price %}
+                  <div class="cart-item__original-price"><s><span class='ufe-cart-item-total-price' data-key='{{item.key}}' data-props='{{item.properties | json}}'>{{ item.original_line_price | money }}</span></s></div>
+                {% endif %}
+
+                <div>
+                  {{ item.line_price | money }}
+                </div>
+
+                {% for discount in item.discounts %}
+                  <div class="cart-item__discount">{{ discount.title }}</div>
+                {% endfor %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <div class="cart-footer">
+        {% if hammock_collection and upsell %}
+        <div class="cart-footer__upsell upsell">
+          <div class="upsell__image-wrapper">
+            <img class="upsell__image" src="{{ upsell_product.featured_image | img_url:'200x' }}">
+          </div>
+          <div class="upsell__text">
+            <h2 class="upsell__subtitle h5">{{ section.settings.upsell_text }}</h2>
+            <p class="upsell__title">{{ upsell_product.title }}</p>
+            {% if upsell_product.first_available_variant.price > 0 %}
+            <p class="upsell__info">
+              {{ upsell_product.first_available_variant.price | money }}
+            </p>
+            {% endif %}
+            <input onclick="document.getElementById('upsell-form').submit(); return false;" class="btn btn--teal upsell__button" type="submit" value="Add to cart" />
+          </div>
+        </div>
+        {% endif %}
+        {% if settings.enable_notes %}
+        <div class="cart-footer__order-notes">
+          <label class="h4" for="CartNote">{{ settings.cart_notes_title }}</label>
+          <textarea class="cart-footer__order-notes-input" name="note" id="CartNote" placeholder="{{ settings.cart_notes_placeholder }}">{{ cart.note }}</textarea>
+        </div>
+        {% endif %}
+        <div class="cart-footer__main">
+          <div class="cart-footer__total">
+            <h2 class="cart-footer__total-label">
+              {{ 'cart.total' | t }}
+            </h2>
+            <span class="cart-footer__total-value">
+              <span class="ufe-cart-total-price">{{ cart.total_price | money }}</span>
+            </span>
+          </div>
+          <div class="cart-footer__main-buttons">
+            <input type="submit" name="update"
+              class="btn-link cart-footer__button cart-footer__button--update"
+              value="{{ 'cart.update' | t }}">
+            <input type="submit" name="checkout"
+              class="btn cart-footer__button"
+              value="{{ 'cart.checkout' | t }}">
+          </div>
+        </div>
+      </div>
+    </form>
+    {% if hammock_collection and upsell %}
+      <form id="upsell-form" action="/cart/add">
+        <input type="hidden" name="id"  value="{{ upsell_product.first_available_variant.id }}" />
+      </form>
+    {% endif %}
+  {% else %}
+    <div class="cart__empty">
+      <p>Your cart is currently empty.</p>
+      <a class="cart__empty-button btn" href="/collections">
+        Continue Shopping
+      </a>
+    </div>
+  {% endif %}
+    <div class="cart-notice">
+    <img src="https://cdn.shopify.com/s/files/1/0279/9277/files/icon-cart-notice.svg?v=1628520268" class="cart-notice-img">
+    <div>
+            <input type="checkbox" class="hidden" name="more" id="more">
+
+      <p class="cart-notice-text">
+        We are so excited to help you relax this year! Please note that all international orders 
+        are shipped directly from our weaving warehouse in Thailand via DHL and customs duties/fees
+        are not included in the price of your hammock. Customers are responsible for any duties/fees
+        (DHL will reach out directly with more information when your package arrives in country).
+      </p>
+      <p class="cart-notice-text collapse">
+        Yellow Leaf Hammocks has no control over international customs fees and cannot absorb duties/fees
+        or the costs of returned shipping for refused packages. Any returned packages due to customs
+        payment refusal will be subject to an additional fee for shipping costs.
+      </p>
+      <label for="more" class="cart-notice-more">
+        <span>More</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="29" viewBox="0 0 17 29" fill="none">
+		  <path d="M2 27L15 14.5L2 2" stroke="#152D64 " stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </label>
+    </div>
+  </div>
+</div>
+<script>
+  (function(){
+      var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+	    if (timezone.includes('America')) {
+	      document.querySelector('.cart-notice').style.display = 'none'
+  		}
+  })()
+</script>
+
+
+{% schema %}
+  {
+    "name": "Cart page",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "cart_upsell_enable",
+        "label": "Enable Cart Upsell",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "upsell_text",
+        "label": "Upsell Text"
+      },
+      {
+        "type": "product",
+        "id": "upsell_product",
+        "label": "Upsell Product"
+      }
+    ]
+  }
+{% endschema %}

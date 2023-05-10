@@ -1,0 +1,40 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#45c5f7">
+
+{% assign showCanonical = 1 %}
+{% assign bannedUrls = "/get-free-straps,/get-your-free-straps,/search,/relaxation-challenge,/hammock-straps-free-add-on,/mystery-signature-hammock-classic,/mystery-signature-hammock-family-size,/mystery-cotton-rope-hammock,/mystery-signature-hanging-chair" | split:"," %}
+{% for bannedUrl in bannedUrls %}
+	{% if request.path contains bannedUrl %}
+		{% assign showCanonical = 0%}
+		<meta name="robots" content="noindex, nofollow">
+	{% endif %}
+{% endfor %}
+
+{% if showCanonical == 1%}
+<link rel="canonical" href="{{ canonical_url }}">
+{% endif %}
+
+<link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png">
+
+{% capture seo_title %}
+  {{ page_title }}
+  {% if current_tags %}
+    {% assign meta_tags = current_tags | join: ', ' %} &ndash; Tagged {{ meta_tags }}
+  {% endif %}
+  {% if current_page != 1 %}
+    &ndash; {{ current_page }}
+  {% endif %}
+  {% unless page_title contains shop.name %}
+    &ndash; {{ shop.name }}
+  {% endunless %}
+{% endcapture %}
+
+{% if template == 'list-collections' %}
+  <title>Hammocks for Sale &ndash; Yellow Leaf Hammocks</title>
+  <meta name="description" content="Shop Beautifully Crafted Handmade Hammocks Online at Yellow Leaf Hammocks. Supporting Artisans Around The World Since 2011. FREE Shipping on Every Order!">
+{% else %}
+  <title>{{ seo_title }}</title>
+  <meta name="description" content="{{ page_description | escape }}">
+{% endif %}

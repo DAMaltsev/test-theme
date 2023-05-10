@@ -1,0 +1,29 @@
+<section class="custom-section-4" id="{{section.id}}">
+  <div class="section-wrapper">
+    <div class="container">
+      {% if section.settings.sec_heading4 != blank %}
+      <div class="sec-4-head">
+        <h1 class="heading">{{section.settings.sec_heading4}}</h1>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+"name": "Custom Section 4",
+"settings": [
+{
+"type": "text",
+"id": "sec_heading4",
+"label": "Heading"
+}
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

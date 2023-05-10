@@ -1,0 +1,106 @@
+<section class="press"{% if section.settings.background_color != blank %} style="background-color: {{ section.settings.background_color }}"{% endif %}>
+  <div class="container container--xl">
+    <div class="press__featured">
+      <div class="press__featured-text">
+        {% render 'responsive-image' with image: section.settings.logo, classes:'press__featured-logo lazyload', sizes:"50,100,200,300", defaultRes:'50x' %}
+        <!-- <img class="press__featured-logo lazyload" data-sizes="auto" src="{{ section.settings.logo | img_url: '50x' }}" data-src="{{ section.settings.logo | img_url: '256x' }}" alt="{{ section.settings.logo.alt }}" /> -->
+        <h2 class="press__featured-quote h1">{{ section.settings.quote }}</h2>
+        <h3 class="press__featured-name text--script">{{ section.settings.name }}</h3>
+      </div>
+      <div class="press__featured-video">
+        {% assign image = section.settings.image | img_url: '1500x' %}
+        {% include 'video', with video_link: section.settings.video, controls: section.settings.controls, image: image %}
+      </div>
+    </div>
+    {% if section.blocks.size > 0 %}
+      <div class="press__logos">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'press_logo' -%}
+            <div class="press__logo-wrapper">
+              {% render 'responsive-image' with image: block.settings.logo, classes:'press__logo lazyload', sizes:"50,100,200,300", defaultRes:'50x' %}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Press",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color"
+    },
+    {
+      "type": "header",
+      "content": "Featured quote"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote"
+    },
+    {
+      "type": "textarea",
+      "id": "name",
+      "label": "Name"
+    },
+    {
+      "type": "header",
+      "content": "Featured video"
+    },
+    {
+      "type": "checkbox",
+      "id": "controls",
+      "label": "Show Controls?"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Placeholder Image"
+    },
+    {
+      "type": "text",
+      "id": "video",
+      "label": "MP4 Link"
+    },
+    {
+      "type": "header",
+      "content": "Logos"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Logo",
+      "type": "press_logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Press",
+      "category": "Image with Text"
+    }
+  ]
+}
+{% endschema %}

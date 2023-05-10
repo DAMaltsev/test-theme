@@ -1,0 +1,57 @@
+<section class="custom-section-7" id="{{section.id}}">
+  <div class="section-wrapper">
+    <div class="container">
+      {% if section.settings.sec_top_area != blank or section.settings.tagline_pera != blank %}
+      <div class="sec-top-area">
+        {% if section.settings.sec_top_area != blank %}
+        <h1 class="heading">{{section.settings.sec_top_area}}</h1>
+        {% endif %}
+        {% if section.settings.tagline_pera != blank %}
+        <p class="tagline">{{section.settings.tagline_pera}}</p>
+        {% endif %}
+      </div>
+      {% endif %}       
+      <div class="sec-content-area"> 
+        <div class="video-wraper">          
+           {%- if section.settings.video_url == blank -%}
+          <iframe src="//www.youtube.com/embed/_9VUPq3SxOc?rel=0&showinfo=0&vq=720" width="850" height="480" frameborder="0" allowfullscreen></iframe>
+          {%- elsif section.settings.video_url.type == "youtube"  -%}
+          <iframe src="//www.youtube.com/embed/{{ section.settings.video_url.id }}?rel=0&showinfo=0&vq=720" width="850" height="480" frameborder="0" allowfullscreen></iframe>
+          {%- elsif section.settings.video_url.type == "vimeo" -%}
+          <iframe src="//player.vimeo.com/video/{{ section.settings.video_url.id }}?color={{ settings.color_button | remove: "#" }}&byline=0&portrait=0&badge=0" width="850" height="480" frameborder="0" allowfullscreen></iframe>
+          {%- endif -%}
+        </div>
+      </div>       
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+"name": "Custom Section 7",
+"settings": [
+{
+"type": "text",
+"id": "sec_top_area",
+"label": "Top Heading"
+},
+{
+"type": "text",
+"id": "tagline_pera",
+"label": "Tagline Peragraph"
+},
+{
+"type": "video_url",
+"id": "video_url",
+"label": "Video link",
+"accept": ["youtube", "vimeo"]
+}
+
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

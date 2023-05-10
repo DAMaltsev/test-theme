@@ -1,0 +1,47 @@
+<div class="about-footer">
+  <div class="container container--md">
+    <div class="about-footer__content">
+      <h2 class="about-footer__title text--script h3">{{ section.settings.title }}</h2>
+      <h3 class="about-footer__subtitle h1">{{ section.settings.subtitle }}</h3>
+      {% if section.settings.button_text != blank and section.settings.button_url != blank %}
+        <a href="{{ section.settings.button_url }}" class="btn">{{ section.settings.button_text }}</a>
+      {% endif %}
+    </div>
+  </div>
+  <div class="about-footer__image-wrapper">
+    <img class="about-footer__image lazyload" src="" data-sizes="auto" data-src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.image.alt }}" loading="lazy" />
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About Footer",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ]
+}
+{% endschema %}

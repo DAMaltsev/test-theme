@@ -1,0 +1,54 @@
+<div class="oprah-section">
+  <div class="page-width container">
+    <div class="oprah-container ">
+      
+      <div class="oprah-content">
+        <h2>{{ section.settings.heading }}</h2>
+    
+      {{ section.settings.text }}
+      </div>
+      <div class="oprah-video">
+     
+        {{ section.settings.video }}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Oprah Section",
+    "settings": [
+      {
+"type":"header",
+"content":"Oprah Section"
+      },
+      {
+"type":"text",
+        "id":"heading",
+        "label":"Type your heading"
+      },
+         {
+"type":"textarea",
+        "id":"text",
+        "label":"Type your peragraph"
+      },
+      {
+        "type":"html",
+        "id":"video",
+        "label":"Your Video"
+      }
+    ],
+     "presets": [
+    {
+      "name": "Oprah Section"
+    }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

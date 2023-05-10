@@ -1,0 +1,15 @@
+{% assign current_variant = product.selected_or_first_available_variant %}
+
+
+<section class="product" data-section-id="{{ section.id }}" data-section-type="product" data-product-handle="{{ product.handle }}" data-context="inline">
+  <div class="product__slideshow">
+    {% include 'product-slideshow' %}
+  </div>
+  <div class="product__content">
+    <div class="product__content-container">
+      {% include 'product-info-hammock' %}
+      {% include 'product-form-hammock' %}
+    </div>
+  </div>
+</section>
+

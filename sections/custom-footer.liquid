@@ -1,0 +1,75 @@
+<footer>
+  <div class="Footer__Wrapper">
+    <div class="container">
+      <div class="Footer__Inner">
+        {% if section.settings.footer_pera != blank %}
+        <p>{{section.settings.footer_pera}}</p>
+        {% endif %}
+        <ul>
+          {% if section.settings.url_text != blank %}
+          <li>
+            {% if section.settings.url != blank %}
+            <a href="{{section.settings.url}}">
+              {% endif %}
+              {{section.settings.url_text}}
+              {% if section.settings.url != blank %}
+            </a>
+            {% endif %}
+          </li>
+          {% endif %}
+          {% if section.settings.url_text2 != blank %}
+          <li>
+            {% if section.settings.url2 != blank %}
+            <a href="{{section.settings.url2}}">
+              {% endif %}
+              {{section.settings.url_text2}}
+              {% if section.settings.url2 != blank%}
+            </a>
+            {% endif %}
+          </li> 
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+{% schema %}
+{
+"name": "Footer",
+"settings": [
+{
+"type": "text",
+"id": "footer_pera",
+"label": "Footer Peragraph"
+},
+
+{
+"type": "text",
+"id": "url_text",
+"label": "Url Text"
+},
+{
+"type": "url",
+"id": "url",
+"label": "Button url"
+},
+
+{
+"type": "text",
+"id": "url_text2",
+"label": "Url Text(2)"
+},
+{
+"type": "url",
+"id": "url2",
+"label": "Button url(2)"
+}
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

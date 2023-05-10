@@ -1,0 +1,59 @@
+<section class="image-text">
+  <div class="image-text__container container container--lg">
+    <div class="image-text__image-wrapper">
+      {% render 'responsive-image' with image: section.settings.image, classes:'image-text__image lazyload test' %}
+    </div>
+    <div class="image-text__text-wrapper">
+      <h2 class="image-text__title text--script h3">{{ section.settings.title }}</h2>
+      <h3 class="image-text__subtitle h2">{{ section.settings.subtitle }}</h3>
+      <p class="image-text__text">{{ section.settings.text }}</p>
+      {% if section.settings.button_text != blank and section.settings.button_url != blank %}
+        <a href="{{ section.settings.button_url }}" class="btn btn--teal">{{ section.settings.button_text }}</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image with Text",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with Text",
+      "category": "Image with Text"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,64 @@
+{%- include 'collection-metafields' -%}
+{%- assign image_markup = '' -%}
+{%- assign swatch_markup = '' -%}
+{%- assign color_count = 0 -%}
+
+{%- for product in collection.products -%}
+  {%- unless product.title contains 'Straps' or product.title contains 'Gift' -%}
+    {%- assign color_count = color_count | plus: 1 -%}
+    {% if forloop.index < 6 %}
+      {%- include 'color-name' with name: product.title -%}
+
+      {%- capture image_markup -%}
+        {{- image_markup -}}
+        <div
+          class="grouped-product__image-wrapper {% unless forloop.first %}grouped-product__image-wrapper--hidden{% endunless %}"
+          {% unless forloop.first %}loading="lazy"{% endunless %}
+          data-product-id="{{ product.id }}">
+          {% render 'responsive-image' with image: product.featured_image, classes:'grouped-product__image lazyload', sizes:"100,200,300,400,500,600,700", defaultRes:'100x' %}
+        </div>
+      {%- endcapture -%}
+      {%- capture swatch_markup -%}
+        {{- swatch_markup -}}
+        {% unless product.url == '/products/shark-tank-special' %}
+        <div class="swatch">
+          <input
+            name="swatch-{{ collection.handle }}"
+            type="radio"
+            class="swatch__input"
+            id="swatch-{{ product.id }}"
+            {% if forloop.first %}checked{% endif %}
+            value="{{ product.id }}"
+            data-href="{{ product.url }}">
+          <label class="swatch__label" for="swatch-{{ product.id }}" data-tippy-content="{{ color_name }}">
+            <img class="swatch__image lazyload" src="" data-sizes="auto"data-src="{{ color_name | handleize | prepend: 'swatch-' | append: '.png' | asset_img_url:'72x' }}" alt="{{ color_name }}" loading="lazy"/>
+          </label>
+        </div>
+        {% endunless  %}
+      {%- endcapture -%}
+    {%- endif -%}
+  {%- endunless -%}
+{%- endfor -%}
+
+
+<div class="grouped-product" data-component="grouped-product">
+  <{{ heading }} class="grouped-product__accent h5">
+    {{ best_for }}
+  </{{ heading }}>
+  <p class="grouped-product__title h3">{{ title }}</p>
+  <div class="grouped-product__images">
+    {{ image_markup }}
+  </div>
+  <div class="grouped-product__swatches" data-component="tooltips">
+    {{ swatch_markup }}
+
+    <p class="grouped-product__more text--small">
+      {% if collection.products.size > 5 %}
+        + {{ color_count | minus: 5 }} more colors
+      {% endif %}
+    </p>
+  </div>
+  <a class="grouped-product__button btn btn--teal" href="{{ collection.products[0].url }}" data-link>
+    Shop {{ title | replace: 'Hammock', ' ' }} | {{ collection.products[0].price | money_without_trailing_zeros }}
+  </a>
+</div>

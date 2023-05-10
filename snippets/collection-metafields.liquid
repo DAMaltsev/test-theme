@@ -1,0 +1,75 @@
+{% comment %} Reset for loop {% endcomment %}
+{% assign title = nil %}
+{% assign description = nil %}
+{% assign best_for = nil %}
+{% assign feature_1 = nil %}
+{% assign feature_2 = nil %}
+{% assign feature_3 = nil %}
+{% assign feature_1_icon = nil %}
+{% assign feature_2_icon = nil %}
+{% assign feature_3_icon = nil %}
+{% assign okendo_group_id = nil %}
+
+{% comment %} Title (Defaults to Admin title if blank) {% endcomment %}
+{% if collection.metafields.custom_fields["title"] != blank %}
+  {% assign title = collection.metafields.custom_fields["title"] %}
+{% else %}
+  {% assign title = collection.title %}
+{% endif %}
+
+{% comment %} Description (Defaults to Admin title if blank) {% endcomment %}
+{% if collection.metafields.custom_fields["description"] != blank %}
+  {% assign description = collection.metafields.custom_fields["description"] %}
+{% else %}
+  {% assign description = collection.description %}
+{% endif %}
+
+{% comment %} Best for {% endcomment %}
+{% if collection.metafields.custom_fields["best_for"] != blank %}
+  {% assign best_for = collection.metafields.custom_fields["best_for"] %}
+{% endif %}
+
+{% comment %} Feature 1 {% endcomment %}
+{% if collection.metafields.custom_fields["feature_1"] != blank %}
+  {% assign feature_1 = collection.metafields.custom_fields["feature_1"] %}
+{% endif %}
+
+{% comment %} Feature 2 {% endcomment %}
+{% if collection.metafields.custom_fields["feature_2"] != blank %}
+  {% assign feature_2 = collection.metafields.custom_fields["feature_2"] %}
+{% endif %}
+
+{% comment %} Feature 3 {% endcomment %}
+{% if collection.metafields.custom_fields["feature_3"] != blank %}
+  {% assign feature_3 = collection.metafields.custom_fields["feature_3"] %}
+{% endif %}
+
+{% comment %} Feature 1 icons {% endcomment %}
+{% if feature_1 == 'Hang me outside' %}
+  {% assign feature_1_icon = 'svg-collection-feature-1-1' %}
+{% elsif feature_1 == 'Hang me inside' %}
+  {% assign feature_1_icon = 'svg-collection-feature-1-2' %}
+{% elsif feature_1 == 'Outside & Indoors' %}
+  {% assign feature_1_icon = 'svg-collection-feature-1-3' %}
+{% endif %}
+
+{% comment %} Feature 2 icons {% endcomment %}
+{% if feature_2 == 'Weathersafe' %}
+  {% assign feature_2_icon = 'svg-collection-feature-2-1' %}
+{% elsif feature_2 == 'Natural cotton' %}
+  {% assign feature_2_icon = 'svg-collection-feature-2-2' %}
+{% endif %}
+
+{% comment %} Feature 2 icons {% endcomment %}
+{% if feature_3 == 'Room for 1-3' %}
+  {% assign feature_3_icon = 'svg-collection-feature-3-1' %}
+{% elsif feature_3 == 'Room for two' %}
+  {% assign feature_3_icon = 'svg-collection-feature-3-2' %}
+{% elsif feature_3 == 'Room for one' %}
+  {% assign feature_3_icon = 'svg-collection-feature-3-3' %}
+{% endif %}
+
+{% comment %} Okendo Group ID {% endcomment %}
+{% if collection.metafields.custom_fields["okendo_group_id"] != blank %}
+  {% assign okendo_group_id = collection.metafields.custom_fields["okendo_group_id"] %}
+{% endif %}

@@ -1,0 +1,83 @@
+<section class="image-columns">
+  {% include 'animated-wave' %}
+  <div class="image-columns__container container container--xl">
+    <h2 class="image-columns__title h5">{{ section.settings.title }}</h2>
+    <p class="image-columns__subtitle h2">{{ section.settings.subtitle }}</p>
+      <ul class="image-columns__list">
+        {% for block in section.blocks %}
+          <li class="image-columns__item">
+            {% render 'responsive-image' with image: block.settings.image, classes:'image-columns__item-image lazyload', sizes:"50,100,200,300,400", defaultRes:'50x' %}
+            <!-- <img
+              class="image-columns__item-image lazyload"
+                 data-sizes="auto"
+                 src="{{ block.settings.image | img_url:'100x' }}"
+              data-src="{{ block.settings.image | img_url:'304x' }}"
+              alt="{{ block.settings.image.alt }}"
+                  loading="lazy"
+            /> -->
+            
+            
+            <h3 class="image-columns__item-title h5">{{ block.settings.title }}</h3>
+            <p class="image-columns__item-text">
+              {{- block.settings.text -}}
+            </p>
+          </li>
+        {% endfor %}
+      </ul>
+  </div>
+</section>
+
+
+<div id=“om-zxywkup0xsad9qozzpvb-holder”></div>
+<script type=“text/javascript” src=“https://a.omappapi.com/app/js/api.min.js” data-campaign=“zxywkup0xsad9qozzpvb” data-user=“73760” async></script>
+
+<div id=“om-cxcmrijbjtzrw0zagsun-holder”></div>
+<script type=“text/javascript” src=“https://a.omappapi.com/app/js/api.min.js” data-campaign=“cxcmrijbjtzrw0zagsun” data-user=“73760” async></script>
+
+{% schema %}
+{
+  "name": "Image Columns",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        {
+          "type":      "image_picker",
+          "id":        "image",
+          "label":     "Image"
+        },
+        {
+          "type":      "text",
+          "id":        "title",
+          "label":     "Title"
+        },
+        {
+          "type":      "textarea",
+          "id":        "text",
+          "label":     "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Columns",
+      "category": "Image with Text"
+    }
+  ]
+}
+{% endschema %}

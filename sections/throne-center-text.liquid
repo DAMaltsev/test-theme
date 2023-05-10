@@ -1,0 +1,97 @@
+{{ 'section-throne-center-text.css' | asset_url | stylesheet_tag }}
+
+<throne-center-text class="throne-center-text">
+  <div class="throne-center-text__inner">
+    <h2>{{ section.settings.heading | replace: '™', "<sup>™</sup>"}}</h2>
+    <p>{{section.settings.subheading}}</p>
+    <div class="throne-center-text__button" role="button" data-scroll-to-customizer>
+      <span>Start Customizing</span>
+      <div class="throne-center-text__arrow">
+        {% render 'down-arrow' %}
+      </div>
+    </div>
+  </div>
+  <div class="throne-center-text__images left" data-images data-position="left">
+    <div class="throne-center-text__image" data-image>
+      <img src="{{ section.settings.leftImage | img_url: '1000x' }}" alt="{{ section.settings.leftImage.alt | escape }}">
+    </div>
+    <video class="throne-center-text__video" playsinline muted loop>
+      <source src="{{ section.settings.leftVideo }}" type="video/mp4">
+    </video>
+  </div>
+  <div class="throne-center-text__images right" data-images data-position="right">
+    <div class="throne-center-text__image" data-image>
+      <img src="{{ section.settings.rightImage | img_url: '1000x' }}" alt="{{ section.settings.rightImage.alt | escape }}">
+    </div>
+    <video class="throne-center-text__video" playsinline muted loop>
+      <source src="{{ section.settings.rightVideo }}" type="video/mp4">
+    </video>
+  </div>
+</throne-center-text>
+
+{% schema %}
+{
+"name": "Throne Center Text",
+"settings": [
+  {
+    "type": "text",
+    "id": "heading",
+    "label": "Heading"
+  },
+  {
+    "type": "text",
+    "id": "subheading",
+    "label": "Subheading"
+  },
+  {
+    "type": "image_picker",
+    "id": "leftImage",
+    "label": "Left Image"
+  },
+  {
+    "type": "text",
+    "id": "leftVideo",
+    "label": "Left Hover Video URL"
+  },
+  {
+    "type": "image_picker",
+    "id": "rightImage",
+    "label": "Right Image"
+  },
+  {
+    "type": "text",
+    "id": "rightVideo",
+    "label": "Right Hover Video URL"
+  }
+],
+"blocks": [
+  {
+    "type": "throne-image",
+    "name": "Throne Image",
+    "settings": [
+      {
+        "type":      "image_picker",
+        "id":        "image",
+        "label":     "Image"
+      },
+      {
+        "type": "radio",
+        "id": "side",
+        "label": "Side of Page",
+        "options": [
+          { "value": "left", "label": "Left" },
+          { "value": "right", "label": "Right" }
+        ],
+        "default": "left"
+      }
+    ]
+  }
+],
+"presets": [
+    {
+      "name": "Throne Center Text",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

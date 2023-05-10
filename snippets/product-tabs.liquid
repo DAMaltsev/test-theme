@@ -1,0 +1,36 @@
+{% assign separator = "|###|" %}
+{% assign tab_title_array = product.metafields.custom_fields["tab_title"] | split: separator %}
+{% assign tab_content_array = product.metafields.custom_fields["tab_content"] | split: separator %}
+{% assign fc_keys = product.metafields.custom_fields["product_tabs"] | split: "," %}
+<div class="product-tabs" data-component="tabs">
+  <div role="tablist" class="product-tabs__tabs">
+    {% for i in fc_keys %}
+      {% assign index = i | plus: 0 %}
+      <button role="tab"
+        {% if forloop.first %}
+          aria-selected="true"
+        {% else %}
+          aria-selected="false"
+          tabindex="-1"
+        {% endif %}
+        class="product-tabs__tab h4"
+        aria-controls="{{ tab_title_array[index] | handle }}-tab"
+        id="{{ tab_title_array[index] | handle }}">
+        {{ tab_title_array[index] }}
+      </button>
+    {% endfor %}
+  </div>
+  {% for i in fc_keys %}
+    {% assign index = i | plus: 0 %}
+    <div
+      class="product-tabs__tab-content rte"
+      {% unless forloop.first %}
+        aria-hidden="true"
+      {% endunless %}
+      role="tabpanel"
+      id="{{ tab_title_array[index] | handle }}-tab"
+      aria-labelledby="{{ tab_title_array[index] | handle }}">
+      {{ tab_content_array[index] }}
+    </div>
+  {% endfor %}
+</div>

@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="{{ shop.locale }}">
+  <head>
+     
+  <script type="text/javascript">
+!function(){var geq=window.geq=window.geq||[];if(geq.initialize) return;if (geq.invoked){if (window.console && console.error) {console.error("GE snippet included twice.");}return;}geq.invoked = true;geq.methods = ["page", "suppress", "trackOrder", "identify", "addToCart", "callBack", "event"];geq.factory = function(method){return function(){var args = Array.prototype.slice.call(arguments);args.unshift(method);geq.push(args);return geq;};};for (var i = 0; i < geq.methods.length; i++) {var key = geq.methods[i];geq[key] = geq.factory(key);}geq.load = function(key){var script = document.createElement("script");script.type = "text/javascript";script.async = true;if (location.href.includes("vge=true")) {script.src = "https://s3-us-west-2.amazonaws.com/jsstore/a/" + key + "/ge.js?v=" + Math.random();} else {script.src = "https://s3-us-west-2.amazonaws.com/jsstore/a/" + key + "/ge.js";}var first = document.getElementsByTagName("script")[0];first.parentNode.insertBefore(script, first);};geq.SNIPPET_VERSION = "1.6.1"; geq.load("ZRKHN2M");}();
+</script>
+
+<script>geq.page()</script>
+    
+    <script data-src="https://www.googletagmanager.com/gtag/js?id=AW-986176428" defer="defer"></script>
+    <script type="lazyloadscript">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-986176428', {'allow_enhanced_conversions':true});
+    </script>
+    <!-- <script async type='text/javascript' src='https://www.lightboxcdn.com/vendor/63e619b5-d997-4618-93ad-60105b0bfb9a/___lightbox_speed.js'></script> -->
+    <script type="text/javascript" data-src="//j.northbeam.io/ota-sp/a04de3cf-5f97-47a5-8411-dbb4c7c6c19f.js" defer="defer"></script>
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <link rel="preload" href="https://cdn.juo.io/c/0NHVfjCTCy.js" as="script">
+    <script type="lazyloadscript">(function(j,u,o){var g=j.getElementsByTagName(u)[0],s=j.createElement(u);s.async=true;s.src='https://cdn.juo.io/c/'+o+'.js';g.parentNode.insertBefore(s,g);})(document,'script','0NHVfjCTCy')</script>
+    <meta name="google-site-verification" content="BrOeXn9Gvz38YU2Gm0C_Ax5rIe0YpnyLmwJaWfzKXMU" />
+    <meta name="facebook-domain-verification" content="kzvey4iqwi5dpw0yzbpkp46yg3beog" />  
+    {% include 'theme-meta-tags' %}
+    {% render 'prefetch' %}
+    {% include 'theme-data-layer' %}
+    {% include 'theme-css' %}
+    {% include 'theme-js' %}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    <script type="lazyloadscript">
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "4vh3fs9syl");
+    </script>
+    <script>
+     window.addEventListener('scroll', function() {
+       let header = document.querySelector('.navbar');
+       header.classList.toggle('sticky', window.scrollY > 0);
+     });
+      window.addEventListener('scroll', function() {
+       let header = document.querySelector('#hangers-dropmenu');
+       header.classList.toggle('stickys', window.scrollY > 0);
+     });
+       window.addEventListener('scroll', function() {
+       let header = document.querySelector('#hammocks-dropmenu');
+       header.classList.toggle('sticky', window.scrollY > 0);
+     });
+      window.addEventListener('scroll', function() {
+       let header = document.querySelector('#gorgias-chat-container');
+       header.classList.toggle('scrolled', window.scrollY > 1500);
+     });
+    </script>
+    {% comment %} Animejs Animations {% endcomment %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    {% comment %} Vimeo Player {% endcomment %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vimeo-player/2.13.0/player.min.js" integrity="sha512-gChplnQw7jkk2Axylkdz4PMZCJd5wolmvv3sUZH4m/JrPs1ac5Db7Tms+l1JmZBto6DX8cpE74KTMwS1aOc4bg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="{{ 'full-width-gallery.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'sticky-bar.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'carousel-gallery.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'irregular-gallery.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'faq.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'feature-carousel.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'throne-customizer.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'throne-center-text.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'vista-customizer.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'details-accordion.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'thumbnail-gallery.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'tooltip.js' | asset_url }}" defer="defer"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<script src="{{ 'video-section.js' | asset_url }}" defer="defer"></script>		<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+	<script src="{{ 'accent-header.js' | asset_url }}" defer="defer"></script>
+    {% capture cfh %}{{ content_for_header }}{% endcapture %}
+    {% render 'content_for_header' %}
+    {% include 'theme-third-party-scripts' %}
+    {% include 'gem-app-header-scripts' %}
+    {% include 'ufe-offer' %}
+    <script data-src="https://www.dwin1.com/19038.js" type="text/javascript" defer="defer"></script>
+    <script data-src="https://www.dwin1.com/19038.js" type="text/javascript" defer="defer"></script>
+ 
+  
+  
+<!--Gem_Page_Header_Script-->
+{% include 'gem-app-header-scripts' %}
+<!--End_Gem_Page_Header_Script-->
+
+ 
+
+    <script src="https://cdn.juo.io/c/RQx9uuINOE.js" async></script>
+      {% comment %} Klarna script {% endcomment %}
+
+  {% include "trackify_x" %}
+</head> 
+  <body class="template-{{ template | replace: '.', '-' }}">
+
+    <a class="skip-link" href="#main">
+      Skip to Main Content
+    </a>
+
+    {% include 'header' %}
+    <main id="main">
+      {{ content_for_layout }}
+    </main> 
+    {% if template == 'index' %}
+    {% section 'instagram' %}
+    {% section 'hero-index' %}
+    {% else if template == 'product.throne' or template == 'product.vista' %} 
+    {% else %}
+    {% section 'instagram' %}
+    {% endif %}
+
+
+    {% section 'footer' %}
+    {% if template contains 'product' %}
+    {{ shop.metafields.okendo.ReviewsWidgetStyleTag | replace: 'rel=\"stylesheet\"', 'rel="preload" as="style"' }}
+    {{ shop.metafields.okendo.StyleCustomizations | replace: 'rel=\"stylesheet\"', 'rel="preload" as="style"' }}
+    {% endif %}
+    {% if product %}
+    {% include 'backorder-dialog' %}
+    {% endif %}
+    {% include 'json-ld' %}
+    <span class="screenreader" id="screenreader-announce" aria-live="polite"></span>
+    {% comment %}
+    <!-- This line added automatically by JSON-LD for SEO. -->{% include 'jsonld-for-seo' %}
+    {% endcomment %}
+    <script type="text/javascript" data-src="https://a.omappapi.com/app/js/api.min.js" data-account="82930" data-user="73760" async></script>
+    {% include 'gem-app-footer-scripts' %}
+    <script id="gorgias-chat-widget-install" type="lazyloadscript">!function(_){_.GORGIAS_CHAT_APP_ID="1606",_.GORGIAS_CHAT_BASE_URL="us-east1-898b.production.gorgias.chat",_.GORGIAS_API_BASE_URL="config.gorgias.chat";var e=new XMLHttpRequest;e.open("GET","https://config.gorgias.chat/applications/1606",!0),e.onload=function(t){if(4===e.readyState)if(200===e.status){var n=JSON.parse(e.responseText);if(!n.application||!n.bundleVersion)throw new Error("Missing fields in the response body - https://config.gorgias.chat/applications/1606");if(_.GORGIAS_CHAT_APP=n.application,_.GORGIAS_CHAT_BUNDLE_VERSION=n.bundleVersion,n&&n.texts&&(_.GORGIAS_CHAT_TEXTS=n.texts),n&&n.sspTexts&&(_.GORGIAS_CHAT_SELF_SERVICE_PORTAL_TEXTS=n.sspTexts),!document.getElementById("gorgias-chat-container")){var o=document.createElement("div");o.id="gorgias-chat-container",document.body.appendChild(o);var r=document.createElement("script");r.setAttribute("defer",!0),r.src="https://client-builds.production.gorgias.chat/{bundleVersion}/static/js/main.js".replace("{bundleVersion}",n.bundleVersion),document.body.appendChild(r)}}else console.error("Failed request GET - https://config.gorgias.chat/applications/1606")},e.onerror=function(_){console.error(_)},e.send()}(window||{});</script>
+    <script id="gorgias-chat-shopify-install">!function(_){_.SHOPIFY_PERMANENT_DOMAIN="{{shop.permanent_domain}}",_.SHOPIFY_CUSTOMER_ID="{{customer.id}}",_.SHOPIFY_CUSTOMER_EMAIL="{{customer.email}}"}(window||{});</script>
+    <script type="lazyloadscript">
+      window._qevents = window._qevents || [];
+      (function() {
+        var elem = document.createElement('script');
+        elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+        elem.async = true;
+        elem.type = "text/javascript";
+        var scpt = document.getElementsByTagName('script')[0];
+        scpt.parentNode.insertBefore(elem, scpt);
+      })();
+      window._qevents.push({
+        qacct:"p-y8NV2N__R0s5H",
+        uid:"__INSERT_EMAIL_HERE__"
+      });
+    </script>
+
+    <noscript>
+      <div style="display:none;">
+        <img src="//pixel.quantserve.com/pixel/p-y8NV2N__R0s5H.gif" border="0" height="1" width="1" alt="Quantcast"/>
+      </div>
+    </noscript>
+
+    {% if template contains 'product' %}
+    <script type="text/javascript">
+      var json_product = {{ product | json }};
+    </script>
+    <script>
+      var ecomm_prodid=[];
+      for(var i=0;i<json_product.variants.length;i++)
+        ecomm_prodid.push('shopify_US_{{product.id}}_'+json_product.variants[i].id);
+    </script>
+    <script type="text/javascript">
+      var google_tag_params = {
+        ecomm_prodid: ecomm_prodid,
+        ecomm_pagetype: 'product',
+        ecomm_totalvalue: parseFloat('{{ product.price | money_without_currency | remove: ","}}')
+                                     };
+    </script>
+    {% elsif template contains 'collection' %}
+    <script type="text/javascript">
+      var google_tag_params = {
+        ecomm_pagetype: 'category'
+      };
+    </script>
+    {% elsif template contains 'cart' %}
+    <script type="text/javascript">
+      var id = new Array();
+      {% for item in cart.items %}
+      id.push('shopify_US_{{item.product.id}}_{{item.variant.id}}');
+              {% endfor %}
+              var google_tag_params = {
+              ecomm_prodid: id,
+              ecomm_pagetype: 'cart',
+              ecomm_totalvalue: parseFloat('{{ cart.total_price | money_without_currency | remove: ","}}')
+              };
+    </script>
+    {% elsif template contains 'search' %}
+    <script type="text/javascript">
+      var google_tag_params = {
+        ecomm_pagetype: 'searchresults'
+      };
+    </script>
+    {% elsif template contains 'index' %}
+    <script type="text/javascript">
+      var google_tag_params = {
+        ecomm_pagetype: 'home'
+      };
+    </script>
+    {% else %}
+    <script type="text/javascript">
+      var google_tag_params = {
+        ecomm_pagetype: 'other'
+      };
+    </script>
+    
+    {% endif %}
+
+
+</script>
+<script type="lazyloadscript">
+gtag('event', 'page_view', {'send_to': 'AW-986176428',
+    'ecomm_prodid':window.google_tag_params.ecomm_prodid,
+    'ecomm_pagetype': window.google_tag_params.ecomm_pagetype,
+    'ecomm_totalvalue':window.google_tag_params.ecomm_totalvalue
+   });
+</script>
+    <style> @media (max-width: 576px) {#gorgias-web-messenger-container {display: none}} </style>
+
+ {% if template contains 'product' %}
+  
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<script>
+  $('.aso-carousel').slick({
+  dots: false,
+  arrows:false,
+  slidesToShow: 6,
+    autoplay: true,
+  autoplaySpeed: 2000,
+  slidesToScroll: 1,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 1,
+       
+        dots: false
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1
+      }
+    }
+  ]
+});
+
+   $(function() {
+    var header = $(".product-form__button");
+  
+    $(window).scroll(function() {    
+        var scroll = $(window).scrollTop();
+        if (scroll >= 800) {
+            header.addClass("scrolled");
+        } else {
+            header.removeClass("scrolled");
+        }
+    });
+  
+});
+	
+</script>
+    
+{% endif %}
+
+
+
+
+
+    
+    {% render 'content_for_footer' %}
+  <!--Gem_Page_Footer_Script-->
+{% include 'gem-app-footer-scripts' %}
+<!--End_Gem_Page_Footer_Script-->
+<!--Gorgias Chat Widget Start--><script id="gorgias-chat-widget-install-v2" src="https://config.gorgias.chat/gorgias-chat-bundle-loader.js?applicationId=1606"></script>
+<script id="gorgias-chat-shopify-install">!function(_){_.SHOPIFY_PERMANENT_DOMAIN="{{shop.permanent_domain}}",_.SHOPIFY_CUSTOMER_ID="{{customer.id}}",_.SHOPIFY_CUSTOMER_EMAIL="{{customer.email}}"}(window||{});</script><!--Gorgias Chat Widget End-->
+
+ {% include 'monster-mo-script' %}
+  </body>
+</html>

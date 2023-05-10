@@ -1,0 +1,21 @@
+.status-pill {
+  padding: 12px 20px;
+  background: var(--color-pale-blue);
+  color: var(--color-text-blue);
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 160%;
+  display: flex;
+  align-items: center;
+}
+
+.status-pill strong {
+  font-weight: 700;
+}
+
+.status-pill__icon {
+  margin-right: 12px;
+  width: 20px;
+  height: 20px;
+}

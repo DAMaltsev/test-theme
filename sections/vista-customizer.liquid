@@ -1,0 +1,421 @@
+{{ 'section-vista-customizer.css' | asset_url | stylesheet_tag }}
+
+{% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
+
+{% for variant in product.variants %}
+  {% if variant.title contains 'The Vista' %}
+    {% assign current_variant = variant %}
+    {% assign throne_only_variant = variant %}
+  {% endif %}
+{% endfor %}
+
+<vista-customizer class="vista-customizer" data-hide-sticky-bar>
+  <div class="vista-customizer__fullscreen" data-fullscreen>
+    <button class="vista-customizer__fullscreen-close" data-fullscreen-close>
+      {% render 'svg-icon-close' %}
+    </button>
+    <img
+      data-fullscreen-image
+      class="vista-customizer__fullscreen-image"
+      src="{{ section.settings.whiteMid | img_url: '2000x' }}" 
+      data-sizes="auto" 
+      data-src="{{ section.settings.whiteMid | img_url: '2000x' }}" 
+      alt="{{ section.settings.whiteMid.alt }}" />
+  </div>
+  <div class="vista-customizer__inner">
+    <div class="vista-customizer__gallery">
+      <button class="vista-customizer__fullscreen-icon" data-fullscreen-open>
+        {% render 'zoom-icon' %}
+      </button>
+      {% render 'thumbnail-gallery', images: product.images %}
+    </div>
+    
+    <div class="vista-customizer__details">
+      {% if section.settings.newTag %}
+        <div>
+          <div class="vista-customizer__badge new">New!</div>
+        </div>
+      {% endif %}
+      <h2 class="vista-customizer__product-title">{{product.title | replace: '™', "<sup>™</sup>"}}</h2>
+      <div class="vista-customizer__reviews">
+        {% include 'okendo-reviews-product-rating-summary' %}
+      </div>
+      <p class="vista-customizer__product-description">{{product.description}}</p>
+
+      <div class="vista-customizer__images-wrapper">
+        <button class="vista-customizer__fullscreen-icon" data-fullscreen-open>
+          {% render 'zoom-icon' %}
+        </button>
+        <div class="vista-customizer__images inline">
+          {% for image in product.images %}
+            <div class="vista-customizer__image {% if forloop.first %}active{% endif %}" data-variant-id="{{image.variants[0].id}}" data-index="{{forloop.index0}}">
+              <img 
+                src="{{ image | img_url: '2000x' }}" 
+                data-sizes="auto" 
+                data-src="{{ image | img_url: '2000x' }}" 
+                alt="{{ image.alt }}" />
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="vista-customizer__image-pagination">
+          {% for image in product.images %}
+            <div class="vista-customizer__image-pagination-item {% if image.id == product.images.first.id %}active{% endif %}" data-index="{{forloop.index0}}"></div>
+          {% endfor %}
+      </div>
+
+      <div class="vista-customizer__selectors">
+        <fieldset class="vista-customizer__selector" data-name="bundle-option" data-value="stand-plus-hammock">
+          <div class="vista-customizer__options-header">
+            <div>
+              <legend>Choose your Product</legend>
+              <span class="selected-option product-option {{option.name | handle}}" data-selected-option-display>Stand + Hammock Bundle</span>
+            </div>
+            {% for block in section.blocks %}
+              {% if block.type == 'tooltip' and block.settings.section == 'bundle-option' %}
+                <tooltip-component>
+                  <div class="tooltip-trigger" data-trigger>
+                    {% render 'info-icon' %}
+                  </div>
+                  <div class="tooltip right" data-tooltip>
+                    <div class="tooltip-header">
+                      <span class="tooltip-title">{{block.settings.tooltipHeading}}</span>
+                      <div class="tooltip-image">
+                        {% if block.settings.tooltipVideo == '' %}
+                          <img src="{{block.settings.tooltipImage | img_url: '200x'}}" />
+                        {% else %}
+                          <video playsinline autoplay muted loop>
+                            <source src="{{ section.settings.tooltipVideo }}" type="video/mp4">
+                          </video>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <div class="tooltip-body">
+                      <p>{{block.settings.tooltipContent}}</p>
+                    </div>
+                  </div>
+                </tooltip-component>
+              {% endif %}
+            {% endfor %}
+          </div>
+          <div class="vista-customizer__bundle-options">
+            <div class="vista-customizer__bundle-option active" data-throne-only-option data-label="The Vista" data-variant-id="{{throne_only_variant.id}}" data-variant-price="{{throne_only_variant.price}}" data-gallery-image-selector>
+              <input type="radio" name="stand-only" value="stand-only" id="stand-only" />
+              <div class="bundle-option__image">
+                <img src="{{throne_only_variant.featured_image | img_url: '200x' }}" />
+              </div>
+              <div class="bundle-option__details">
+                <span class="bundle-option__title">The Vista™</span>
+              </div>
+            </div>
+            <div class="vista-customizer__bundle-option" data-bundle-option data-label="The Vista™ + Hammock Chair Bundle">
+              <input type="radio" name="stand-plus-hammock" value="stand-plus-hammock" id="stand-plus-hammock" checked />
+              <div class="bundle-option__image">
+                <img src="{{section.settings.bundleImage | img_url: '200x' }}" />
+              </div>
+              <div class="bundle-option__details">
+                <div class="bundle-option__tag">Best Value! Save $100</div>
+                <span class="bundle-option__title">The Vista™ + Hammock Chair Bundle</span>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        {% for option in product.options_with_values %}
+          <div class="vista-customizer__selector-wrapper hidden" data-hammock-chair-selectors>
+            <fieldset class="vista-customizer__selector" data-name="{{option.name | handle}}" data-value="{{option.selected_value}}">
+              <div>
+                <div class="vista-customizer__options-header">
+                  <div>
+                    <legend>Choose your {{option.name}}</legend>
+                    <span class="selected-option {{option.name | handle}}" data-selected-option-display>{{option.selected_value}}</span>
+                  </div>
+                  {% for block in section.blocks %}
+                    {% if block.type == 'tooltip' and block.settings.section == 'hammock-chair' %}
+                      <tooltip-component>
+                        <div class="tooltip-trigger" data-trigger>
+                          {% render 'info-icon' %}
+                        </div>
+                        <div class="tooltip right" data-tooltip>
+                          <div class="tooltip-header">
+                            <span class="tooltip-title">{{block.settings.tooltipHeading}}</span>
+                            <div class="tooltip-image">
+                              {% if block.settings.tooltipVideo == '' %}
+                                <img src="{{block.settings.tooltipImage | img_url: '200x'}}" />
+                              {% else %}
+                                <video playsinline autoplay muted loop>
+                                  <source src="{{ section.settings.tooltipVideo }}" type="video/mp4">
+                                </video>
+                              {% endif %}
+                            </div>
+                          </div>
+                          <div class="tooltip-body">
+                            <p>{{block.settings.tooltipContent}}</p>
+                          </div>
+                        </div>
+                      </tooltip-component>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+                <div class="vista-customizer__options {{option.name | handle}}">
+                {% for value in option.values %}
+                  {% unless value contains 'The Vista™ Only' %}
+                    {% assign swatchName = value | handle %}
+                    
+                    {% for block in section.blocks %}
+                      
+                      {% if swatchName  contains  block.settings.swatchName%}
+                        {% assign swatchImage = block.settings.swatchImage %}
+                        
+                      {% endif %}
+                      <p  data-block="{{ block.settings.swatchName }}"></p>
+                    {% endfor %}
+
+ <p data-image="{{ swatchImage }}" data-test-name="{{ swatchName }}" ></p>
+                  
+                    {% for variant in product.variants %}
+                      {% if variant.title contains value %}
+                        {% assign variantId = variant.id %}
+
+                      {% endif %}
+                    {% endfor %}
+
+                    <input type="radio" name="{{option.name}}" value="{{value}}" id="{{value | handle }}" {% if value == option.selected_value %}checked{% endif %}/>
+                    <div 
+                      test1="{{ swatchImage }}"
+                    test2="{{ block.settings.swatchName }}"
+                      title="{{value}}" 
+                      class="vista-customizer__option" 
+                      data-value="{{value}}" 
+                      data-name="{{option.name | handle}}" 
+                      data-slug="{{value | handle}}"
+                      data-variant-id="{{variantId}}"
+                      data-gallery-image-selector
+                    >
+                      {% if swatchImage %}
+                        <img src="{{swatchImage | img_url: '200x' }}" alt="{{value}}" />  
+                      {% endif %}
+                    </div>
+                  {% endunless %}
+                {% endfor %}
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        {% endfor %}
+      </div>
+      {%- form 'product', product, id: 'form', class: 'installment caption-large' -%}
+      <div class="vista-customizer__upgrades">
+        <fieldset>
+          <legend>Upgrades</legend>
+          {% for block in section.blocks %}
+            {% if block.type == 'upgrade' %}
+            <div class="upgrades__input">
+              <input type="hidden" data-upgrade-quantity />
+              
+              <input type="checkbox" value="{{block.settings.product.first_available_variant.id}}" data-upgrade data-price="{{block.settings.product.price}}" data-old="{{block.settings.product.compare_at_price}}"  />
+              <label>{{block.settings.product.title}} <span class="upgrade-price">+ {{block.settings.product.price | money_without_trailing_zeros}}</span></label>
+              <tooltip-component>
+                <div class="tooltip-trigger" data-trigger>
+                  {% render 'info-icon' %}
+                </div>
+                <div class="tooltip right" data-tooltip>
+                  <div class="tooltip-header">
+                    <span class="tooltip-title">{{block.settings.tooltipHeading}}</span>
+                    <div class="tooltip-image">
+                      {% if block.settings.tooltipVideo == '' %}
+                        <img src="{{block.settings.tooltipImage | img_url: '200x'}}" />
+                      {% else %}
+                        <video playsinline autoplay muted loop>
+                          <source src="{{ section.settings.tooltipVideo }}" type="video/mp4">
+                        </video>
+                      {% endif %}
+                    </div>
+                  </div>
+                  <div class="tooltip-body">
+                    <p>{{block.settings.tooltipContent}}</p>
+                  </div>
+                </div>
+              </tooltip-component>
+            </div>
+            {% endif %}
+          {% endfor %}
+        </fieldset>
+      </div>
+    {% comment %}{% endcomment %}
+        <select name="id" id="ProductSelect-Throne" data-product-variants>
+          {% for variant in product.variants %}
+            <option value="{{ variant.id }}"
+              data-price="{{ variant.price }}"
+              data-compare="{{ variant.compare_at_price }}"
+              data-title="{{ variant.title }}"
+              data-available-quantity="{{ variant.inventory_quantity }}"
+              {%- if variant.id == current_variant.id %} selected="selected" {%- endif -%}
+              {% if variant.inventory_quantity == 0 %} disabled {% endif %}
+            >{{ variant.title }}</option>
+          {% endfor %}
+        </select>
+    
+       {% comment %}{% endcomment %} <input type="hidden" data-product-hidden-input data-price="{{current_variant.price}}" name="id" value=""> 
+
+        {{ form | payment_terms }}
+        <button class="btn" type="submit">{{section.settings.buyButtonText}} | <span class="compare-at" data-compare-price-display>{{current_variant.compare_at_price |money_without_trailing_zeros}}</span> <span data-price-display>{{current_variant.price|money_without_trailing_zeros}}</span></button>
+        <div class="vista-customizer__klarna">
+          <klarna-placement
+            data-key="credit-promotion-small"
+            data-locale="en-US"
+            data-purchase-amount="{{ current_variant.price }}"
+          ></klarna-placement>
+        </div>
+      {%- endform -%}
+
+
+
+      
+      {% for block in section.blocks %}
+        {% if block.type == 'tooltip' and block.settings.section == 'shipping' %}
+          <tooltip-component data-trigger=".vista-customizer__shipping-badge">
+            <div class="vista-customizer__shipping-badge" data-trigger>
+              <div class="vista-customizer__badge">{{ block.settings.tooltipHeading }} {% render 'question-icon' %}</div>
+            </div>
+            <div class="tooltip" data-tooltip>
+              {{block.settings.tooltipContent}}
+            </div>
+          </tooltip-component>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  {% comment %} <div class="product-reviews">
+    <div class="container container--lg">
+      <div data-oke-reviews-widget data-oke-reviews-product-id="shopify-{{ product.id }}">{{ product.metafields.okendo.ProductReviewsWidgetSnippet }}</div>
+    </div>
+  </div> {% endcomment %}
+</vista-customizer>
+
+
+{% schema %}
+  
+{
+"name": "Vista Customizer",
+"settings": [
+  {
+    "type": "text",
+    "id": "buyButtonText",
+    "label": "Buy Now Button Text"
+  },
+  {
+  "type": "checkbox",
+  "id": "announcement_bar",
+  "label": "Enable Annoucement Bar"
+  },
+  {
+    "type": "richtext",
+    "id": "announcement",
+    "label": "Content"
+  },
+  {
+    "type": "checkbox",
+    "id": "newTag",
+    "label": "New Tag?"
+  },
+  {
+    "type": "image_picker",
+    "id": "bundleImage",
+    "label": "Bundle Thumbnail Image"
+  }
+],
+"blocks": [
+  {
+    "type": "upgrade",
+    "name": "Upgrade",
+    "settings": [
+      {
+        "type": "product",
+        "id": "product",
+        "label": "Product"
+      },
+      {
+        "type": "text",
+        "id": "tooltipHeading",
+        "label": "Tooltip Heading"
+      },
+      {
+        "type": "image_picker",
+        "id": "tooltipImage",
+        "label": "Tooltip Image"
+      },
+      {
+        "type": "text",
+        "id": "tooltipVideo",
+        "label": "Tooltip Video URL"
+      },
+      {
+        "type": "richtext",
+        "id": "tooltipContent",
+        "label": "Tooltip Content"
+      }
+    ]
+  },
+  {
+    "type": "swatch",
+    "name": "Swatch",
+    "settings": [
+      {
+        "type": "text",
+        "id": "swatchName",
+        "label": "Swatch Name"
+      },
+      {
+        "type": "image_picker",
+        "id": "swatchImage",
+        "label": "Swatch Image"
+      }
+    ]
+  },
+  {
+    "type": "tooltip",
+    "name": "Tooltip",
+    "settings": [
+      {
+        "type": "radio",
+        "id": "section",
+        "label": "Tooltip Section",
+        "options": [
+          { "value": "bundle-option", "label": "Bundle Option" },
+          { "value": "hammock-chair", "label": "Hammock Chair" },
+          { "value": "shipping", "label": "Shipping" }
+        ],
+        "default": "shipping"
+      },
+      {
+        "type": "text",
+        "id": "tooltipHeading",
+        "label": "Tooltip Heading"
+      },
+      {
+        "type": "image_picker",
+        "id": "tooltipImage",
+        "label": "Tooltip Image"
+      },
+      {
+        "type": "text",
+        "id": "tooltipVideo",
+        "label": "Tooltip Video URL"
+      },
+      {
+        "type": "richtext",
+        "id": "tooltipContent",
+        "label": "Tooltip Content"
+      }
+    ]
+  }
+],
+"presets": [
+    {
+      "name": "Vista Customizer",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

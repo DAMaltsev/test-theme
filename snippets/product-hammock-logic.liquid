@@ -1,0 +1,15 @@
+{%- comment -%}
+  Get the special hammock collection the product is in. Returns the 'hammock_collection' variable.
+{%- endcomment -%}
+
+{%- assign possible_collections = settings.hammock_collections | split: ',' -%}
+{%- assign hammock_collection = nil -%}
+
+{%- for collection in product.collections -%}
+  {%- for possible_collection in possible_collections -%}
+    {%- if possible_collection == collection.handle -%}
+      {%- assign hammock_collection = collection -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endfor -%}

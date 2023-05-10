@@ -1,0 +1,75 @@
+<section data-section-id="{{ section.id }}" data-section-type="hero"
+  class="hero
+  hero--{{ section.settings.hero_size }}
+  hero--ver-{{ section.settings.text_vertical_alignment }}
+  hero--mobile-ver-{{ section.settings.mobile_text_vertical_alignment }}
+  {% unless section.settings.full_bleed %}hero--boxed{% endunless %}">
+  {% if section.settings.desktop_video != blank %}
+    {%- comment -%}Has video{%- endcomment -%}
+    {% render 'responsive-image' with image: section.settings.mobile_image, classes:'hero__image hero__image--mobile lazyload' %}
+    <!-- <img class="hero__image hero__image--mobile lazyload" src="" data-sizes="auto"data-src="{{ section.settings.mobile_image | img_url: '800x' }}" alt="{{ section.settings.mobile_image.alt }}" loading="lazy"/> -->
+    <video class="hero__image hero__image--desktop" autoplay playsinline="" muted="" loop="" poster="{{ section.settings.desktop_image | img_url: '2000x' }}">
+      <source data-src="{{ section.settings.desktop_video }}" type="video/mp4">
+    </video>
+    <button class="btn hero__video-button" aria-label="Play Video" data-toggle-video>
+      <span class="hero__video-button-group hero__video-button-group--play">
+        <svg class="hero__play-icon" height="512" viewBox="0 0 494.942 494.942" width="512" xmlns="http://www.w3.org/2000/svg">
+          <path d="m35.353 0 424.236 247.471-424.236 247.471z" fill="currentColor"/>
+        </svg>
+        <span class="hero__video-button-text">Play Video</span>
+      </span>
+      <span class="hero__video-button-group hero__video-button-group--pause">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 298.667 298.667">
+          <rect x="192" y="0" width="85.333" height="298.667" fill="currentColor"/>
+          <rect x="21.333" y="0" width="85.333" height="298.667" fill="currentColor"/>
+         </svg>
+        <span class="hero__video-button-text">Pause Video</span>
+      </span>
+    </button>
+  {% elsif section.settings.mobile_image == blank %}
+    {%- comment -%}Has desktop only{%- endcomment -%}
+    {% render 'responsive-image' with image: section.settings.desktop_image, classes:'hero__image lazyload' %}
+    <!-- <img class="hero__image lazyload" src="{{ section.settings.desktop_image | img_url: '100x' }}" data-sizes="auto" data-src="{{ section.settings.desktop_image | img_url: '2000x' }}" alt="{{ section.settings.desktop_image.alt }}" loading="lazy" /> -->
+  {% else %}
+    {%- comment -%}Has desktop and mobile{%- endcomment -%}
+    <picture>
+      <source srcset="{{ section.settings.mobile_image | img_url: '800x' }}"
+        media="(max-width: 48em)">
+        {% render 'responsive-image' with image: section.settings.desktop_image, classes:'hero__image lazyload' %}
+      <!-- <img class="hero__image lazyload"  src="{{ section.settings.desktop_image | img_url: '100x' }}" data-sizes="auto"data-src="{{ section.settings.desktop_image | img_url: '2000x' }}" alt="{{ section.settings.desktop_image.alt }}" loading="lazy" /> -->
+    </picture>
+  {% endif %}
+  <div class="container container--xl">
+    <div class="hero__content
+      hero__content--{{ section.settings.text_color }}
+      hero__content--hor-{{ section.settings.text_horizontal_alignment }}
+      {% if section.settings.container_size %}hero__content--small{% endif %}">
+      {% if section.settings.button_text == blank and section.settings.button_link != blank %}
+        <a class="hero__link" href="{{ section.settings.button_link }}">
+      {% endif %}
+      {% if section.settings.accent_text != blank  %}
+        <p class="hero__accent-text h5" {% if section.settings.description_color %}style="color: {{ section.settings.description_color }}{% endif %}">
+          {{ section.settings.accent_text | newline_to_br }}
+        </p>
+      {% endif %}
+      {% if section.settings.title != blank  %}
+        <h2 class="hero__title {{ section.settings.text_size }}">
+          {{ section.settings.title | newline_to_br }}
+        </h2>
+      {% endif %}
+      {% if section.settings.button_text == blank and section.settings.button_link != blank %}
+        </a>
+      {% endif %}
+      {% if section.settings.description != blank %}
+        <p class="hero__description text--script" {% if section.settings.description_color %}style="color: {{ section.settings.description_color }}{% endif %}">
+          {{ section.settings.description }}
+        </p>
+      {% endif %}
+      {% if section.settings.button_text != blank %}
+        <a href="{{ section.settings.button_link }}" class="hero__button btn btn--large btn--{{ section.settings.button_style }}">
+          {{ section.settings.button_text }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>

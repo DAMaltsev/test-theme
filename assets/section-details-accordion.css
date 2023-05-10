@@ -1,0 +1,232 @@
+.details-accordion {
+  display: block;
+  padding-block: 50px;
+}
+
+.details-accordion__inner {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.details-accordion__items {
+  width: 100%;
+  max-width: 430px;
+  margin-right: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.details-accordion__images {
+  flex: 1;
+}
+
+.details-accordion__item {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--color-text-blue);
+  cursor: pointer;
+  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
+}
+
+.details-accordion__header {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 120%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-text-blue);
+}
+
+.details-accordion__header span {
+  display: inline-block;
+  padding-right: 32px;
+  flex: 1;
+}
+
+.details-accordion__plus {
+  width: 22px;
+  height: 22px;
+  position: relative;
+}
+
+.details-accordion__plus div {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-text-blue);
+  border-radius: 1px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.details-accordion__plus div:last-of-type {
+  transform: translateY(-50%) rotate(90deg);
+  transition: transform 300ms cubic-bezier(0.9, 0.11, 0.15, 0.9);
+}
+
+.details-accordion__item.active .details-accordion__plus div:last-of-type {
+  transform: translateY(-50%) rotate(0deg);
+  transition: transform 300ms cubic-bezier(0.9, 0.11, 0.15, 0.9);
+}
+
+.details-accordion__images {
+  position: relative;
+  aspect-ratio: 1.65 / 1;
+  overflow: hidden;
+  width: 100%;
+}
+
+.details-accordion__image {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0ms ease-in-out;
+  transition-delay: 500ms;
+  z-index: 0;
+  background: white;
+}
+
+.details-accordion__image.active {
+  opacity: 1;
+  z-index: 1;
+  transition: opacity 500ms ease-in-out;
+}
+
+.details-accordion__image img, .details-accordion__image video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.details-accordion__item-body--inner {
+  padding-top: 24px;
+}
+
+.details-accordion__dimensions-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(14, 45, 104, 0.2);
+}
+
+.details-accordion__dimensions-item span:last-child {
+  color: rgba(14, 45, 104, 0.6);
+}
+
+.details-accordion__dimensions-item:has(+ .details-accordion__inline-image) {
+  border-bottom: none;
+}
+
+.details-accordion__included-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  width: 90%;
+}
+
+.included-item__icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 20px;
+}
+
+.included-item__content {
+  flex: 1;
+}
+
+.included-item__heading {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+.included-item__body {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+  padding-top: 10px;
+}
+
+.details-accordion__materials-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  width: 90%;
+}
+
+.materials-item__icon {
+  width: 36px;
+  height: 36px;
+  margin-right: 20px;
+}
+
+.materials-item__content {
+  flex: 1;
+}
+
+.materials-item__heading {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+.materials-item__body {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+  padding-top: 10px;
+}
+
+.assembly-item__heading {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 150%;
+  display: block;
+}
+
+.assembly-item__body {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+  padding-top: 10px;
+  display: block;
+}
+
+.details-accordion__item-body {
+  overflow: hidden;
+  max-height: 0;
+}
+
+.details-accordion__items .details-accordion__inline-image {
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .details-accordion__items {
+    margin-right: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+  .details-accordion__images {
+    display: none;
+  }
+
+  .details-accordion__items .details-accordion__inline-image {
+    display: block;
+    margin-top: 20px;
+  }
+}

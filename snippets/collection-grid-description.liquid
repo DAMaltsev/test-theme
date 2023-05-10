@@ -1,0 +1,10 @@
+<li class="collection-grid-item collection-grid-item--description">
+  <h3 class="collection-grid-item__description-title h5">{{ best_for }}</h3>
+  <div class="collection-grid-item__description-text">
+    {% assign description_list = description | newline_to_br | strip | split: '<br />' %}
+    {% for description_item in description_list %}
+      <p>{{- description_item -}}</p>
+    {% endfor %}
+  </div>
+  <a href="{{ shop.url }}{{ collection.products[0].url }}" class="text-button">Explore {{ title | replace: 'Hammock', '' }}</a>
+</li>

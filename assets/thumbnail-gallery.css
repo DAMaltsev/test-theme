@@ -1,0 +1,104 @@
+thumbnail-gallery {
+  display: block;
+  width: 100%;
+  position: relative;
+}
+
+.thumbnail-gallery__image {
+  width: 100%;
+  border-radius: 10px;
+  aspect-ratio: 1.4 / 1;
+  max-height: 80dvh;
+  text-align: center;
+}
+
+.thumbnail-gallery__image img {
+  border-radius: 10px;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.thumbnail-gallery-nav {
+  margin-top: 20px;
+}
+
+.thumbnail-gallery__thumb {
+  width: 5vw;
+  height: 5vw;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 0 10px;
+  position: relative;
+  display: inline-block;
+}
+
+.thumbnail-gallery__thumb:first-of-type {
+  margin-left: 0;
+}
+
+.thumbnail-gallery__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumbnail-gallery__featured {
+  position: relative;
+  width: 100%;
+  height: auto;
+  height: auto;
+}
+
+.thumbnail-gallery__controls {
+  top: 0;
+  left: 0;
+  display: inline-block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.thumbnail-gallery__controls button[data-controls="prev"] {
+  appearance: none;
+  border-radius: 0px;
+  outline: none;
+  border: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: transparent;
+  cursor: url(//cdn.shopify.com/s/files/1/0279/9277/t/109/assets/icon-slideshow-chevron-left.svg?v=1406489…),auto;
+}
+
+.thumbnail-gallery__controls button[data-controls="next"] {
+  appearance: none;
+  border-radius: 0px;
+  outline: none;
+  border: none;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: transparent;
+  cursor: url(//cdn.shopify.com/s/files/1/0279/9277/t/109/assets/icon-slideshow-chevron-right.svg?v=8427499…),auto;
+}
+
+@media only screen and (max-width: 900px) {
+  .thumbnail-gallery__controls {
+    display: none;
+  }
+}
+
+/* .tns-controls {
+  button[data-controls="prev"] {
+    background-image: url("{{ "icon-chevron-left.svg" | asset_url }}");
+  }
+  button[data-controls="next"] {
+    background-image: url("{{ "icon-chevron-right.svg" | asset_url }}");
+  }
+} */

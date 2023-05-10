@@ -1,0 +1,66 @@
+{% comment %}
+	GEMPAGE BUILDER (https://apps.shopify.com/gempage)
+
+	You SHOULD NOT modify source code in this page because
+	It is automatically generated from GEMPAGE BUILDER
+	Try to edit page with the live editor.
+{% endcomment %}
+<!doctype html>
+<html lang="{{ shop.locale }}">
+<head>
+
+<!-- Juo.io -->
+        <script>(function(j,u,o){var g=j.getElementsByTagName(u)[0],s=j.createElement(u);s.async=true;s.src='https://cdn.juo.io/c/'+o+'.js';g.parentNode.insertBefore(s,g);})(document,'script','0NHVfjCTCy')</script>
+
+  
+  <script src="https://www.googleoptimize.com/optimize.js?id=OPT-NSSH2MD"></script>
+<meta name="google-site-verification" content="BrOeXn9Gvz38YU2Gm0C_Ax5rIe0YpnyLmwJaWfzKXMU" />
+  
+  {% include 'theme-meta-tags' %}
+  {% include 'theme-data-layer' %}
+  {% include 'theme-css' %}
+  {% include 'theme-js' %}
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "4vh3fs9syl");
+</script>
+  {{ content_for_header }}
+  {% include 'theme-third-party-scripts' %}
+  {{ shop.metafields.okendo.ReviewsWidgetStyleTag }}
+  {{ shop.metafields.okendo.StyleCustomizations }}
+  
+  
+<!--Gem_Page_Header_Script-->
+{% include 'gem-app-header-scripts' %}
+<!--End_Gem_Page_Header_Script-->
+</head> 
+<body>
+<div class="gem-container">
+	{{ content_for_layout }}
+</div><!-- end .gem-container -->
+<!--Gem_Page_Footer_Script-->
+{% include 'gem-app-footer-scripts' %}
+<!--End_Gem_Page_Footer_Script-->
+</body>
+<!-- Gorgias Chat is hidden on Mobile -->
+  <style> @media (max-width: 576px) {#gorgias-web-messenger-container {display: none}} </style>
+<!-- Remove Gorgias Branding -->
+<script type="text/javascript">
+    var gorgiasChatInterval = window.setInterval(function () {
+     var iframe = document.querySelector('#gorgias-web-messenger-container');
+     if (iframe) {
+     var head = iframe.contentWindow.document.querySelector('head')
+     if (head.children.length) {
+     window.clearInterval(gorgiasChatInterval); // this line breaks out of the loop - make sure it's not deleted.
+     var styles = document.createElement('style');
+     styles.textContent = '.logo-wrapper{display: none}'
+     head.appendChild(styles)
+     }
+     }
+    }, 100);
+	</script>
+
+</html>

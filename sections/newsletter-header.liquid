@@ -1,0 +1,60 @@
+<header class="newsletter">
+  {% if section.settings.announcement_bar and section.settings.announcement != blank %}
+  <div class="announcement-bar">
+    <div class="container">
+      <p>{{section.settings.announcement}}</p>
+    </div>
+  </div>
+  {% endif %}
+  <div class="Header__Wrapper">
+    <div class="container">
+      <div class="Header__Inner">
+        <div class="logo_area">
+          {% if section.settings.url != blank %}
+          <a href="{{section.settings.url}}">
+            {% endif %}
+              {% if section.settings.logo != blank %}
+              <img src="{{section.settings.logo | img_url:'original'}}" class="logo-img">
+              {% endif %}
+            {% if section.settings.url != blank %}
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+"name": "Header",
+"settings": [
+{
+"type": "checkbox",
+"id": "announcement_bar",
+"label": "Enable Annoucement Bar"
+},
+{
+"type": "textarea",
+"id": "announcement",
+"label": "Content"
+},
+{
+"type": "image_picker",
+"id": "logo",
+"label": "Logo"
+},
+{
+"type": "url",
+"id": "url",
+"label": "Action Url"
+}
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

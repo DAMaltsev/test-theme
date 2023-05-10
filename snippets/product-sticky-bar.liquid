@@ -1,0 +1,67 @@
+<div class="sticky-bar">
+  <div class="product-title">{{ product.title }}</div>
+{% form 'product', product, class: 'product-form', data-product-form: '', data-product-handle: product.handle, data-form-context: 'inline' %}
+  <div class="product-form__item no-js">
+    <label class="screenreader" for="inline-variant">
+      Variant
+    </label>
+    <select class="product-form__select" name="id" id="inline-variant">
+      {% for variant in product.variants %}
+        <option
+        {% if variant == current_variant %}selected="selected"{% endif %}
+        {% unless variant.available %}disabled="disabled"{% endunless %}
+        value="{{ variant.id }}">
+          {{ variant.title }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  {% if product.has_only_default_variant %}
+    <input type="hidden" id="defaultOption" name="options[]" value="Default title">
+  {% endif %}
+
+  <div class="product-form__content">
+    {% unless product.has_only_default_variant %}
+      {% for option in product.options_with_values %}
+        <div class="product-form__item product-form__item-group">
+          <label class="product-form__label h5" for="Option{{ option.position }}">
+            {{ option.name }}
+          </label>
+          <select
+            class="product-form__select"
+            id="Option{{ option.position }}"
+            name="options[{{ option.name | escape }}]">
+            {% for value in option.values %}
+            <option
+              value="{{ value | escape }}"
+              {% if option.selected_value == value %}selected="selected"{% endif %}>
+              {{ value }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+      {% endfor %}
+    {% endunless %}
+
+
+
+    <div class="product-form__item product-form__item--button">
+      <button
+        class="product-form__button btn btn--large btn--full"
+        type="submit"
+        {% unless current_variant.available %}disabled="disabled"{% endunless %}>
+        {% if current_variant.available %}
+          Add To Cart | {{ current_variant.price | money_without_trailing_zeros}}
+        {% else %}
+          Out of Stock
+        {% endif %}
+      </button>
+    </div>
+
+   
+  </div>
+
+{% endform %}
+
+</div>

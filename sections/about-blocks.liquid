@@ -1,0 +1,105 @@
+<div class="about-blocks">
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'image-text' -%}
+      <div class="about-blocks__container container container--lg">
+        <div class="about-blocks__image-text about-blocks__image-text--{{ block.settings.alignment }}">
+          <div class="about-blocks__image-wrapper">
+            <img class="about-blocks__image lazyload" src="" data-sizes="auto"data-src="{{ block.settings.image | img_url: '700x' }}" alt="{{ block.settings.image.alt }}" loading="lazy" />
+          </div>
+          <div class="about-blocks__text-wrapper">
+            <h2 class="about-blocks__title h3">
+              {{- block.settings.title -}}
+            </h2>
+            <div class="about-blocks__paragraph">
+              {{- block.settings.description -}}
+            </div>
+            {% if block.settings.weaver != blank %}
+              <p class="about-blocks__weaver text--script">
+                {{- block.settings.weaver -}}
+              </p>
+            {% endif %}
+            {% if block.settings.button_text != blank %}
+              <a href="{{ block.settings.button_url }}" class="about-blocks__button text-button">
+                {{- block.settings.button_text -}}
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% elsif block.type == 'text' %}
+      <div class="container container--sm">
+        <div class="about-blocks__text">
+          <h2>
+            {{- block.settings.text -}}
+          </h2>
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "About Blocks",
+  "blocks": [
+    {
+      "name": "Image with Text",
+      "type": "image-text",
+      "settings": [
+        {
+          "type": "radio",
+          "id": "alignment",
+          "label": "Desktop Image Alignment",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "textarea",
+          "id": "weaver",
+          "label": "Weaver",
+          "info": "Optional, e.g. Handwoven by Song"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button URL"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text"
+        }
+      ]
+    },
+    {
+      "name": "Text",
+      "type": "text",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

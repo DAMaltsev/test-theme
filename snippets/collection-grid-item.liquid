@@ -1,0 +1,67 @@
+{% include 'color-name', name: product.title %}
+<li class="collection-grid-item">
+   <div class="collection-grid-item__content">
+      <a class="collection-grid-item__link" href="{{ shop.url }}{{ product.url }}"><span class="screenreader">{{ color_name }}</span></a>
+      <div class="collection-grid-item__images">
+         {% render 'responsive-image' with image: product.featured_image,defaultRes: '100x', classes:'collection-grid-item__image lazyload'%}
+         <div class="collection-grid-item__secondary-image-wrapper">
+            {% for image in product.images %}
+            {% if image.id != product.featured_image.id %}
+            {% render 'responsive-image' with image: image, defaultRes: '100x', classes:'collection-grid-item__secondary-image lazyload' %}
+            {% break %}
+            {% endif %}
+            {% endfor %}
+            <span class="collection-grid-item__secondary-button btn">Shop {{ color_name }}</span>
+         </div>
+<!--         Product Badges -->
+         {% if product.tags contains 'best-seller' %}
+         <span class="best-seller-badges">BEST SELLER</span>
+         {% elsif product.tags contains 'new' %}
+         <span class="new-seller-badges {% if product.compare_at_price_max > product.price %}b-up {% endif %}">NEW</span>
+        {% endif %}
+         {% if product.compare_at_price_max > product.price %}
+
+{% assign priceBefore = product.compare_at_price_max %}
+{% assign priceAfter = product.price %}
+ {% assign middleResult = product.compare_at_price_max | minus: product.price %}
+{% assign middleResult2 = middleResult | divided_by: priceBefore %}     
+
+{% assign discountPercent = middleResult2 | times: 100 %}
+        
+
+         <span class="sale-badges"   date-min="{{ product.compare_at_price_max }}" date-max="{{ product.price }}">{{ product.compare_at_price_max | minus: product.price | times: 100.0 | divided_by: product.compare_at_price_max | money_without_currency | times: 100 | remove: '.0'}}%</span>
+         {% endif %}
+      </div>
+      <h4 class="collection-grid-item__product-title">{{ color_name }}</h4>
+      <div class="collection-grid-item__price">
+         {% comment %} Displays the lower price, i.e. first variant, by default {% endcomment %}
+         {% assign first_variant = product.variants[0] %}
+         {% assign price_diff = first_variant.compare_at_price | minus: first_variant.price %}
+         <span class="collection-grid-item__original-price-wrapper" {% unless first_variant.compare_at_price > first_variant.price %}style="display: none"{% endunless %}>
+         <span class="screenreader">Original Price</span>
+         <span class="collection-grid-item__original-price">
+         {%- if first_variant.compare_at_price > first_variant.price -%}
+         {{- first_variant.compare_at_price | money_without_trailing_zeros -}}
+         {%- endif -%}
+         </span>
+         {% comment %}
+         {% if current_variant.compare_at_price < current_variant.price %}
+         {% include 'free-shipping' %}
+         {% endif %}
+         {% endcomment %}
+         </span>
+         {% if first_variant.compare_at_price > first_variant.price %}
+         <span class="screenreader">{{ first_variant.price | money_without_trailing_zeros }}</span>
+         <span class="price__current-price tr-price--sale">{{ first_variant.price | money_without_trailing_zeros }} </span>
+         <span class="tr-discount__badge">Save {{ price_diff | money_without_trailing_zeros}}!</span>
+         {% else %}
+         <p class="collection-grid-item__full-price">
+            <span>{{ first_variant.price | money_without_trailing_zeros }}</span>
+            {% comment %}
+            {% include 'free-shipping' %}
+            {% endcomment %}
+         </p>
+         {% endif %}
+      </div>
+   </div>
+</li>

@@ -1,0 +1,43 @@
+<!-- This is assuming all images will be jpg -->
+<!-- Assuming a url given -->
+
+{% unless sizes %}
+  {%- assign sizes = "375,750,1100,1500,1780,2000,2800" -%}
+{% endunless %}
+
+
+{%- assign file_type = 'jpg' -%}
+{% if image_url contains 'png'%}
+  {%- assign file_type = 'png' -%}
+{% endif %}
+{% if image_url contains 'jpeg'%}
+  {%- assign file_type = 'jpeg' -%}
+{% endif %}
+{%- assign replacement_string = '.' | append: file_type -%}
+
+{%- assign sizesArray = sizes | split: ',' -%}
+
+{%- assign srcSet = "" -%}
+{% for size in sizesArray %}
+  {%- assign sizeInt = size | plus : 0 -%}
+  {%- assign resString = '_' | append: size | append: "x." | append: file_type -%}
+  {%- assign widthString = " " | append: size | append: "w," -%}
+  {%- assign url = image_url | replace: replacement_string , resString -%}
+  {%- assign srcSet = srcSet | append: url | append: widthString -%}
+{% endfor %}
+{%- comment -%}Stripping off trailing comma{%- endcomment -%}
+{% assign srcSetLength = srcSet | size | minus: 1 %}
+{% assign srcSet = srcSet | slice: 0, srcSetLength %}
+
+{%- assign default_size = '_100x.' | append: file_type -%}
+<img data-srcset="{{srcSet}}"
+  {% if imageId %}
+    id="{{imageId}}"
+  {% endif %}
+  data-sizes="auto"
+  data-src="{{ image_url | replace: replacement_string , default_size  }}"
+  src="{{ image_url | replace: replacement_string , default_size }}"
+  loading="lazy"
+  alt=""
+  class="{{classes}}"
+>

@@ -1,0 +1,84 @@
+<!doctype html>
+<html class="no-js" lang="{{ shop.locale }}">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="utf-8"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="theme-color" content="{{ settings.accent_color }}">
+    <title>
+      {{ page_title }}{% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+    </title>
+    {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+    <link rel="canonical" href="{{ canonical_url }}">
+     
+    <link rel="shortcut icon" href="//cdn.shopify.com/s/files/1/0316/9402/8844/t/8/assets/favicon.png?v=12535767187036538430" type="image/png">
+   
+    {{ content_for_header }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="{{ 'custom.scss.css' | asset_url }}">
+    <script src="{{ 'custom.js' | asset_url }}" defer></script>
+    <script async src="https://na-library.klarnaservices.com/lib.js" data-client-id="a86f0d72-5ec0-5b7b-96c3-26362ffa35a0"></script>
+   </head> 
+  <body class="prestige--v4 {% if template.directory %}template-{{ template.directory | handle }}{% endif %} template-{{ template.name | handle }}">
+    <div class="PageContainer">
+      {% section 'custom-header' %}
+      <main id="main" role="main">
+        {{ content_for_layout }}
+      </main>
+      {% section 'custom-footer' %}
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+      <script>
+        (function() {
+          var accordion = function() {
+            $('.accordion').find('.accordion-toggle').click(function(){
+              if(false == $(this).parent().find('.accordion-content').is(':visible')) {
+                $('.accordion-box .accordion-toggle').removeClass('active');
+                $('.accordion-box .accordion-content').slideUp();
+              }
+              //Expand or collapse this panel
+              $(this).toggleClass('active');
+              $(this).parent().find('.accordion-content').slideToggle('fast');
+            });
+          };
+         var scrollPage = function() {
+           $(document).ready(function(){
+             $(".scroll, .navigation_list ul li a").click(function(event) {
+               event.preventDefault();
+               var id = $(this).attr('href');
+               $('html, body').animate({
+                 scrollTop: $(id).offset().top - 100	
+               }, 1000);
+             });
+           });
+         };
+          
+          var kalarnapopup = function() 
+          {
+            $(document).ready(function(){
+              $(".interest-free p a, .payment_klarna img").click(function(event) 
+               {
+                event.preventDefault();
+                kmerchant.openHostedInterstitial({ url: 'https://na-assets.klarnaservices.com/learn-more/index.html?showButtons=true&showBackground=false#eyJ0aWVySWQiOjMzNzk3LCJsYW5ndWFnZSI6IkVOIiwiY291bnRyeSI6IlVTIiwicHVyY2hhc2VBbW91bnQiOjI0OTkwMCwiaXNUaHJlc2hvbGQiOmZhbHNlLCJwYXltZW50TWV0aG9kSWQiOjksInRyYWNrZXJQYXJhbWV0ZXJzIjp7ImEiOiIwNjMyYWZlZC1jOGIyLTcwMDctMjE2MS03Mzg0NjY3NTQ5MGEiLCJiIjoiZ0l3eDVPYVNiajl6Vi1nazBzQ0xrIiwiZiI6IjYiLCJoIjoiRU4iLCJpIjoiVVMiLCJqIjoiNzhjNjBhYTEtNThjYy00MjMyLTk3ZjMtYzcyMzY5MTc2NTM4IiwiayI6ImViNGY3NTU2LTVlMzQtNDM2NS1iNmRhLTE3MGU1NmY4MTdhMiIsImwiOiIxMjEyIiwibiI6Ind3dy55ZWxsb3dsZWFmaGFtbW9ja3MuY29tIiwicyI6IjMzNXgwIiwiZCI6ImNyZWRpdC1wcm9tb3Rpb24tc21hbGwiLCJnIjoiYTg2ZjBkNzItNWVjMC01YjdiLTk2YzMtMjYzNjJmZmEzNWEwIiwiZSI6ImVuLVVTIiwiYWEiOjI0OTkwMH0sInRpZXJIYXNoIjoiZDhlZDQwZmNkN2EwNjliNmMxZTgwNWYyMWZiYTAzNzY3OTM3OWU1NDAxZGM0YWFlYjBjYzQwYjlhMmI2OTkwNSJ9' }, arguments, undefined, this);
+              });
+            });
+          };
+
+         accordion();
+         scrollPage();
+         kalarnapopup();
+
+         $(document).on('shopify:section:load', function(event) { 
+           accordion();
+           scrollPage();
+           kalarnapopup();
+         });
+       }());
+      </script>
+    </div>
+  </body>
+</html>
+

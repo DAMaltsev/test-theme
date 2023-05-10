@@ -1,0 +1,24 @@
+{% if product.metafields.custom_fields["hero_image"] != blank %}
+  <section class="hero hero--small hero--ver-center hero--mobile-ver-center hero--boxed pdp-hero">
+    {% include 'cf-image' with image: product.metafields.custom_fields["hero_image"], tag_class: "hero__image" %}
+    <div class="container container--xl">
+      <div class="hero__content hero__content--light hero__content--hor-center">
+        {% if product.metafields.custom_fields.hero_accent_text != blank  %}
+          <p class="hero__accent-text h5 pdp-hero__accent-text">
+            {{ product.metafields.custom_fields.hero_accent_text | newline_to_br }}
+          </p>
+        {% endif %}
+        {% if product.metafields.custom_fields.hero_title != blank  %}
+          <h2 class="hero__title pdp-hero__title h2">
+            {{ product.metafields.custom_fields.hero_title | newline_to_br }}
+          </h2>
+        {% endif %}
+        {% if product.metafields.custom_fields.hero_button_text != blank %}
+          <a href="{{ product.metafields.custom_fields.hero_button_link }}" class="hero__button btn btn--large btn--teal">
+            {{ product.metafields.custom_fields.hero_button_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endif %}

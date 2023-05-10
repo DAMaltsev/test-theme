@@ -1,0 +1,122 @@
+{{ 'section-faq-new.css' | asset_url | stylesheet_tag }}
+
+<faq-component class="faq-new">
+  <div class="faq-new__inner" style="background-color: {{section.settings.background}};">
+    <div class="faq-new__left">
+      <h2>FAQ</h2>
+      <div class="faq-new__items">
+        {% for block in section.blocks %}
+          <button class="faq-new__item">
+            <div class="faq-new__question">
+              <span>{{block.settings.question}}</span>
+              <div class="faq-new__plus">
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+            <div class="faq-new__answer">
+              <div class="faq-new__answer--inner">
+                {{block.settings.answer}}
+              </div>
+            </div>
+          </button>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="faq-new__right">
+      <div class="faq-new__background-image">
+        <img src="{{section.settings.image | img_url: '2000x'}}" alt="">
+        <div class="faq-new__background-image--overlay"></div>
+      </div>
+      <div class="faq-new__right--inner">
+        <h2>{{section.settings.heading}}</h2>
+        <p>{{section.settings.body}}</p>
+        <div class="faq-new__buttons">
+          {% unless section.settings.buttonOneLabel == '' %}
+            <a href="{{section.settings.buttonOneLink}}" target="_blank" rel="noopener noreferrer" class="btn-secondary">{{section.settings.buttonOneLabel}}</a>
+          {% endunless %}
+          {% unless section.settings.buttonTwoLabel == '' %}
+            <a href="{{section.settings.buttonTwoLink}}" target="_blank" rel="noopener noreferrer" class="btn-secondary">{{section.settings.buttonTwoLabel}}</a>
+          {% endunless %}
+        </div>
+      </div>
+    </div>
+  </div>
+</faq-component>
+
+{% schema %}
+{
+  "name": "FAQ (New)",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body"
+    },
+    {
+      "type": "text",
+      "id": "buttonOneLabel",
+      "label": "Button One Label"
+    },
+    {
+      "type": "text",
+      "id": "buttonOneLink",
+      "label": "Button One Link"
+    },
+    {
+      "type": "text",
+      "id": "buttonTwoLabel",
+      "label": "Button Two Label"
+    },
+    {
+      "type": "text",
+      "id": "buttonTwoLink",
+      "label": "Button Two Link"
+    },
+    {
+      "type": "radio",
+      "id": "background",
+      "label": "Background Color",
+      "options": [
+        { "value": "#FFFFFF", "label": "White" },
+        { "value": "#FCF8EC", "label": "Off White" }
+      ],
+      "default": "#FFFFFF"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "FAQ Section",
+      "type": "faq-section",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ (New)",
+      "category": "FAQ"
+    }
+  ]
+}
+{% endschema %}

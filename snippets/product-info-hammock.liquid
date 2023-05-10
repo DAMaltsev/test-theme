@@ -1,0 +1,64 @@
+<style>
+.tr-price--original {
+  font-size: 14px;
+  line-height: 14px;
+}
+.tr-price--sale {
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 20px;
+  margin: 0 0 0 8px;
+}
+.tr-discount__badge {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 107px;
+  height: 28px;
+  margin: 0 0 0 8px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 14px;
+  background: #d3e9e0;
+  color: #129169;
+  text-transform: uppercase;
+}
+.product-info__subtitle {
+  display: inline-block;
+  font-size: 11px;
+  line-height: 11px;
+  color: #f45a29;
+  background: #fcf8ec;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+.tr-price--discount {
+  display: flex;
+  align-items: center;
+}
+
+@media only screen and (min-width: 375px) {
+  .product-info__price-wrapper {
+    flex-wrap: nowrap;
+  }
+  .tr-discount__badge {
+    display: inline-flex;
+  }
+}
+</style>
+{% if current_variant.compare_at_price > current_variant.price %}
+<span class="product-info__subtitle">The ONLY Sale of the Year is on! Don’t miss out!</span>
+{% endif %}
+<h1 class="product-info__title h2">{{ title }}</h1>
+<div class="product-info__price-wrapper">
+  <div class="product-info__price">
+    {% include 'price' %}
+  </div>
+  <div class="product-info__reviews">
+    {% include 'okendo-reviews-product-rating-summary' %}
+  </div>
+</div>
+
+{% include 'product-tabs' %}

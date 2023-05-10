@@ -1,0 +1,33 @@
+{% assign is_type_review = false %}
+{%- for block in section.blocks -%}
+  {%- if block.type == 'review' -%}
+    {% assign is_type_review = true %}
+    {% break %}
+  {%- endif -%}
+{%- endfor -%}
+
+<section class="card-slideshow" id="{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="card-slideshow"{% if section.settings.background_color != blank %} style="background-color: {{ section.settings.background_color }}"{% endif %}>
+  <div class="card-slideshow__container container container--xl">
+    <h2 class="card-slideshow__title h5">{{ section.settings.title }}</h2>
+    <h3 class="card-slideshow__subtitle h1">{{ section.settings.subtitle }}</h3>
+    <div class="card-slideshow__wrapper" data-slideshow>
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'review' -%}
+          {% include 'card-slideshow-block-review' %}
+        {%- endif -%}
+        {%- if block.type == 'team' -%}
+          {% include 'card-slideshow-block-team' %}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    {% if section.settings.button_text != blank and section.settings.button_url != blank %}
+      <div class="card-slideshow__button-wrapper">
+        <a href="{{ section.settings.button_url }}" class="card-slideshow__button text-button">{{ section.settings.button_text }}</a>
+      </div>
+    {% endif %}
+  </div>
+
+  {% if is_type_review %}
+    {% include 'svg-stars' %}
+  {% endif %}
+</section>

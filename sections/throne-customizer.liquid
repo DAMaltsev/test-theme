@@ -1,0 +1,326 @@
+{{ 'section-throne-customizer.css' | asset_url | stylesheet_tag }}
+
+{% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
+{% assign current_variant = product.selected_or_first_available_variant %}
+
+<throne-customizer class="throne-customizer" data-hide-sticky-bar>
+  <div class="throne-customizer__fullscreen" data-fullscreen>
+    <button class="throne-customizer__fullscreen-close" data-fullscreen-close>
+      {% render 'svg-icon-close' %}
+    </button>
+    <img
+      data-fullscreen-image
+      class="throne-customizer__fullscreen-image"
+      src="{{ section.settings.whiteMid | img_url: '2000x' }}" 
+      data-sizes="auto" 
+      data-src="{{ section.settings.whiteMid | img_url: '2000x' }}" 
+      alt="{{ section.settings.whiteMid.alt }}" />
+  </div>
+  <div class="throne-customizer__inner">
+    <div class="throne-customizer__images">
+      <button class="throne-customizer__fullscreen-icon" data-fullscreen-open>
+        {% render 'zoom-icon' %}
+      </button>
+      <div class="throne-customizer__image active default" data-default-image data-options="Pure White, Teak Finish">
+        <img 
+          src="{{ section.settings.whiteMid | img_url: '2000x' }}" 
+          data-sizes="auto" 
+          data-src="{{ section.settings.whiteMid | img_url: '2000x' }}" 
+          alt="{{ section.settings.whiteMid.alt }}" />
+      </div>
+      <div class="throne-customizer__image default" data-default-image data-options="Pure White, Oak Finish">
+        <img 
+          src="{{ section.settings.whiteLight | img_url: '2000x' }}" 
+          data-sizes="auto" 
+          data-src="{{ section.settings.whiteLight | img_url: '2000x' }}" 
+          alt="{{ section.settings.whiteLight.alt }}" />
+      </div>
+      <div class="throne-customizer__image default" data-default-image data-options="Deep Charcoal, Teak Finish">
+        <img 
+          src="{{ section.settings.charcoalMid | img_url: '2000x' }}" 
+          data-sizes="auto" 
+          data-src="{{ section.settings.charcoalMid | img_url: '2000x' }}" 
+          alt="{{ section.settings.charcoalMid.alt }}" />
+      </div>
+      <div class="throne-customizer__image default" data-default-image data-options="Deep Charcoal, Oak Finish">
+        <img 
+          src="{{ section.settings.charcoalLight | img_url: '2000x' }}" 
+          data-sizes="auto" 
+          data-src="{{ section.settings.charcoalLight | img_url: '2000x' }}" 
+          alt="{{ section.settings.charcoalLight.alt }}" />
+      </div>
+      {% for variant in product.variants %}
+        <div class="throne-customizer__image" data-variant-id="{{variant.id}}">
+          <img 
+            src="{{ variant.featured_image | img_url: '2000x' }}" 
+            data-sizes="auto" 
+            data-src="{{ variant.featured_image | img_url: '2000x' }}" 
+            alt="{{ variant.featured_image.alt }}" />
+        </div>
+      {% endfor %}
+    </div>
+    <div class="throne-customizer__details">
+      <h2 class="throne-customizer__product-title">{{product.title | replace: '™', "<sup>™</sup>"}}</h2>
+
+      <div class="throne-customizer__reviews">
+        {% include 'okendo-reviews-product-rating-summary' %}
+      </div>
+      
+      {% if section.settings.announcement_bar %}
+        {% render 'status-pill', text: section.settings.announcement, icon: section.settings.announcementIcon %}  
+      {% endif %}
+
+      <div class="throne-customizer__images inline">
+        <button class="throne-customizer__fullscreen-icon" data-fullscreen-open>
+          {% render 'zoom-icon' %}
+        </button>
+        <div class="throne-customizer__image active default" data-default-image data-options="Pure White, Teak Finish">
+          <img 
+            src="{{ section.settings.whiteMid | img_url: '2000x' }}" 
+            data-sizes="auto" 
+            data-src="{{ section.settings.whiteMid | img_url: '2000x' }}" 
+            alt="{{ section.settings.whiteMid.alt }}" />
+        </div>
+        <div class="throne-customizer__image default" data-default-image data-options="Pure White, Oak Finish">
+          <img 
+            src="{{ section.settings.whiteLight | img_url: '2000x' }}" 
+            data-sizes="auto" 
+            data-src="{{ section.settings.whiteLight | img_url: '2000x' }}" 
+            alt="{{ section.settings.whiteLight.alt }}" />
+        </div>
+        <div class="throne-customizer__image default" data-default-image data-options="Deep Charcoal, Teak Finish">
+          <img 
+            src="{{ section.settings.charcoalMid | img_url: '2000x' }}" 
+            data-sizes="auto" 
+            data-src="{{ section.settings.charcoalMid | img_url: '2000x' }}" 
+            alt="{{ section.settings.charcoalMid.alt }}" />
+        </div>
+        <div class="throne-customizer__image default" data-default-image data-options="Deep Charcoal, Oak Finish">
+          <img 
+            src="{{ section.settings.charcoalLight | img_url: '2000x' }}" 
+            data-sizes="auto" 
+            data-src="{{ section.settings.charcoalLight | img_url: '2000x' }}" 
+            alt="{{ section.settings.charcoalLight.alt }}" />
+        </div>
+        {% for variant in product.variants %}
+          <div class="throne-customizer__image" data-variant-id="{{variant.id}}">
+            <img 
+              src="{{ variant.featured_image | img_url: '2000x' }}" 
+              data-sizes="auto" 
+              data-src="{{ variant.featured_image | img_url: '2000x' }}" 
+              alt="{{ variant.featured_image.alt }}" />
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="throne-customizer__selectors">
+        {% for option in product.options_with_values %}
+          <fieldset class="throne-customizer__selector" data-name="{{option.name | handle}}" data-value="{% unless option.name == 'Hammock Chair' %}{{option.selected_value}}{% endunless %}">
+            <div>
+              <div class="throne-customizer__options-header">
+                <div>
+                <span class="throne-customizer__step">{{forloop.index}}</span>
+                <legend><span class="legend-select-word">Select </span>{{option.name}}</legend>
+                <span class="selected-option {{option.name | handle}}" data-selected-option-display>{{option.selected_value}}</span>
+                </div>
+                {% assign name_handle = option.name | handle %}
+                {% for block in section.blocks %}
+                  {% if block.type == 'tooltip' and block.settings.section == name_handle %}
+                    <tooltip-component>
+                      <div class="tooltip-trigger" data-trigger>
+                        {% render 'info-icon' %}
+                      </div>
+                      <div class="tooltip right" data-tooltip>
+                        <div class="tooltip-header">
+                          <span class="tooltip-title">{{block.settings.tooltipHeading}}</span>
+                          <div class="tooltip-image">
+                            {% if block.settings.tooltipVideo == '' %}
+                              <img src="{{block.settings.tooltipImage | img_url: '200x'}}" />
+                            {% else %}
+                              <video playsinline autoplay muted loop>
+                                <source src="{{ section.settings.tooltipVideo }}" type="video/mp4">
+                              </video>
+                            {% endif %}
+                          </div>
+                        </div>
+                        <div class="tooltip-body">
+                          <p>{{block.settings.tooltipContent}}</p>
+                        </div>
+                      </div>
+                    </tooltip-component>
+                  {% endif %}
+                {% endfor %}
+              </div>
+              <div class="throne-customizer__options {{option.name | handle}}">
+              {% for value in option.values %}
+                {% assign swatchName = value | handle %}
+                
+                {% for block in section.blocks %}
+                  {% if block.settings.swatchName == swatchName %}
+                    {% assign swatchImage = block.settings.swatchImage %}
+                  {% endif %}
+                {% endfor %}
+
+                <input type="radio" name="{{option.name}}" value="{{value}}" id="{{value | handle }}" {% unless option.name == "Hammock Chair" %}{% if value == option.selected_value %}checked{% endif %}{% endunless %}/>
+                <div 
+                  title="{{value}}"
+                  class="throne-customizer__option"
+                  data-value="{{value}}"
+                  data-name="{{option.name | handle}}" 
+                  data-slug="{{value | handle}}"
+                >
+                  <img src="{{swatchImage | img_url: '200x' }}" alt="{{value}}" />
+                </div>
+              {% endfor %}
+              </div>
+            </div>
+          </fieldset>
+        {% endfor %}
+      </div>
+      {%- form 'product', product, id: 'form', class: 'installment caption-large' -%}
+        <select name="id" id="ProductSelect-Throne" data-product-variants>
+          {% for variant in product.variants %}
+            <option value="{{ variant.id }}"
+              data-price="{{ variant.price }}"
+              data-available-quantity="{{ variant.inventory_quantity }}"
+              {%- if variant.id == current_variant.id %} selected="selected" {%- endif -%}
+              {% if variant.inventory_quantity == 0 %} disabled {% endif %}
+            >{{ variant.title }}</option>
+          {% endfor %}
+        </select>
+        <input type="hidden" data-product-hidden-input name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        {{ form | payment_terms }}
+        <button class="btn" type="button" onclick="mu_atc()">{{section.settings.buyButtonText}} | <span class="compare-at">{{product.compare_at_price_max|money_without_trailing_zeros}}</span> {{product.price|money_without_trailing_zeros}}</button>
+        <div class="throne-customizer__klarna">
+          <klarna-placement
+            data-key="credit-promotion-small"
+            data-locale="en-US"
+            data-purchase-amount="{{ current_variant.price }}"
+          ></klarna-placement>
+        </div>
+      {%- endform -%}
+      {% for block in section.blocks %}
+        {% if block.type == 'tooltip' and block.settings.section == 'shipping' %}
+          <tooltip-component data-trigger=".throne-customizer__shipping-badge">
+            <div class="throne-customizer__shipping-badge" data-trigger>
+              <div class="throne-customizer__badge">Shipping Info {% render 'question-icon' %}</div>
+            </div>
+            <div class="tooltip" data-tooltip>
+              {{block.settings.tooltipContent}}
+            </div>
+          </tooltip-component>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</throne-customizer>
+
+{% schema %}
+{
+"name": "Throne Customizer",
+"settings": [
+  {
+    "type": "text",
+    "id": "buyButtonText",
+    "label": "Buy Now Button Text"
+  },
+  {
+    "type": "image_picker",
+    "id": "whiteMid",
+    "label": "White Mid Color Gif"
+  },
+  {
+    "type": "image_picker",
+    "id": "whiteLight",
+    "label": "White Light Color Gif"
+  },
+  {
+    "type": "image_picker",
+    "id": "charcoalMid",
+    "label": "Charcoal Mid Color Gif"
+  },
+  {
+    "type": "image_picker",
+    "id": "charcoalLight",
+    "label": "Charcoal Light Color Gif"
+  },
+  {
+  "type": "checkbox",
+  "id": "announcement_bar",
+  "label": "Enable Annoucement Bar"
+  },
+  {
+  "type": "image_picker",
+  "id": "announcementIcon",
+  "label": "Announcement Icon"
+  },
+  {
+  "type": "richtext",
+  "id": "announcement",
+  "label": "Content"
+  }
+],
+"blocks": [
+  {
+    "type": "swatch",
+    "name": "Swatch",
+    "settings": [
+      {
+        "type": "text",
+        "id": "swatchName",
+        "label": "Swatch Name"
+      },
+      {
+        "type": "image_picker",
+        "id": "swatchImage",
+        "label": "Swatch Image"
+      }
+    ]
+  },
+  {
+    "type": "tooltip",
+    "name": "Tooltip",
+    "settings": [
+      {
+        "type": "radio",
+        "id": "section",
+        "label": "Tooltip Section",
+        "options": [
+          { "value": "metal-color", "label": "Metal Color" },
+          { "value": "wood-color", "label": "Wood Color" },
+          { "value": "hammock-chair", "label": "Hammock Chair" },
+          { "value": "shipping", "label": "Shipping" }
+        ],
+        "default": "shipping"
+      },
+      {
+        "type": "text",
+        "id": "tooltipHeading",
+        "label": "Tooltip Heading"
+      },
+      {
+        "type": "image_picker",
+        "id": "tooltipImage",
+        "label": "Tooltip Image"
+      },
+      {
+        "type": "text",
+        "id": "tooltipVideo",
+        "label": "Tooltip Video URL"
+      },
+      {
+        "type": "richtext",
+        "id": "tooltipContent",
+        "label": "Tooltip Content"
+      }
+    ]
+  }
+],
+"presets": [
+    {
+      "name": "Throne Customizer",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,32 @@
+{% section 'announcement-bar' %}
+<div class="navbar__background" aria-hidden="true" data-close></div>
+<div class="navbar__wrapper" data-watch-height-nav>
+  <nav class="navbar" aria-label="Primary">
+    {%- section 'navigation-mobile' -%}
+    
+        {%- assign element = 'a' -%}
+    {%- if template.name == 'index' -%}
+      {%- assign element = 'h1' -%}
+    {%- endif -%}
+
+    <{{ element}} class="navbar__brand" {% if element == 'a' %}href="/"{% endif %}>
+      {% include 'svg-logo' %}
+      <span class="screenreader">{{ shop.name }}</span>
+    </{{element }}>
+
+    {%- section 'navigation-main' -%}
+
+    {%- section 'navigation-right' -%}
+  </nav>
+</div>
+
+<div id="hammocks-dropmenu" class="navbar-dropmenu">
+  {%- include 'navigation-hammocks-dropmenu' -%}
+</div>
+<div id="hangers-dropmenu" class="navbar-dropmenu">
+  {%- include 'navigation-hangers-dropmenu' -%}
+</div>
+
+<div id="giftsets-dropmenu" class="navbar-dropmenu">
+  {%- include 'navigation-giftsets-dropmenu' -%}
+</div>

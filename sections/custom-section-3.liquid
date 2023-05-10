@@ -1,0 +1,161 @@
+<section class="custom-section-3" id="{{section.id}}">
+  <div class="section-wrapper">
+    <div class="container">
+     
+      <div class="sec-3-top-area">
+        {% if section.settings.top_area != blank %}
+        <h1 class="heading">{{section.settings.top_area}}</h1>
+        {% endif %}
+          <div id="hangs"></div>
+        {% if section.settings.tagline_text != blank %}
+        <p class="tagline">{{section.settings.tagline_text}}</p>
+        {% endif %}
+      </div>
+     
+      <div class="sec-3-content-boxes">
+        {% for i in (1..4) %}
+        {% if i == 1 %}{% assign j = "" %}{% else %}{% assign j = i %}{% endif %}
+        {% assign enable_key = "enable" | append:j %}
+        {% assign image_key = "boxarea_img" | append:j %}
+        {% assign title_key = "boxarea_title" | append:j %}
+        {% assign desc_key = "box_dec" | append:j %}
+        {% if section.settings[enable_key] %}
+        <div class="boxarea">
+          <div class="box_area_items">
+            {% if section.settings[image_key] != blank %}
+            <div class="boxarea-img">           
+              <img src= "{{section.settings[image_key] | img_url: 'large'}}">
+            </div>
+            {% endif %}
+            {% if section.settings[title_key] != blank %}
+            <div class="boxarea-title">        
+              <h2>{{section.settings[title_key]}}</h2>        
+            </div>
+            {% endif %}
+            {% if section.settings[desc_key]  != blank %}
+            <div class="boxarea-desc">        
+              <p>{{section.settings[desc_key]}}</p>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+<div id=“om-zxywkup0xsad9qozzpvb-holder”></div>
+<script type=“text/javascript” src=“https://a.omappapi.com/app/js/api.min.js” data-campaign=“zxywkup0xsad9qozzpvb” data-user=“73760” async></script>
+
+<div id=“om-cxcmrijbjtzrw0zagsun-holder”></div>
+<script type=“text/javascript” src=“https://a.omappapi.com/app/js/api.min.js” data-campaign=“cxcmrijbjtzrw0zagsun” data-user=“73760” async></script>
+{% schema %}
+{
+"name": "Custom Section 3",
+"settings": [
+{
+"type": "text",
+"id": "top_area",
+"label": "Top Heading"
+
+},
+{
+"type": "text",
+"id": "tagline_text",
+"label": "Tagline Heading"
+
+},
+{
+"type": "checkbox",
+"id": "enable",
+"label": "Enable Box"
+},
+{
+"type": "image_picker",
+"id": "boxarea_img",
+"label": "Box Image"
+
+},
+{
+"type": "text",
+"id": "boxarea_title",
+"label": "Boxarea Title"
+},
+{
+"type": "text",
+"id": "box_dec",
+"label": "Boxarea dec"
+},
+{
+"type": "checkbox",
+"id": "enable2",
+"label": "Enable Box"
+},
+{
+"type": "image_picker",
+"id": "boxarea_img2",
+"label": "Box Image(2)"
+
+},
+{
+"type": "text",
+"id": "boxarea_title2",
+"label": "Boxarea Title(2)"
+},
+{
+"type": "text",
+"id": "box_dec2",
+"label": "Boxarea dec(2)"
+},
+{
+"type": "checkbox",
+"id": "enable3",
+"label": "Enable Box"
+},
+{
+"type": "image_picker",
+"id": "boxarea_img3",
+"label": "Box Image(3)"
+
+},
+{
+"type": "text",
+"id": "boxarea_title3",
+"label": "Boxarea Title(3)"
+},
+{
+"type": "text",
+"id": "box_dec3",
+"label": "Boxarea dec(3)"
+},
+{
+"type": "checkbox",
+"id": "enable4",
+"label": "Enable Box"
+},
+{
+"type": "image_picker",
+"id": "boxarea_img4",
+"label": "Box Image(4)"
+
+},
+{
+"type": "text",
+"id": "boxarea_title4",
+"label": "Boxarea Title(4)"
+},
+{
+"type": "text",
+"id": "box_dec4",
+"label": "Boxarea dec(4)"
+}
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

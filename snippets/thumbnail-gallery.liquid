@@ -1,0 +1,32 @@
+{{ 'thumbnail-gallery.css' | asset_url | stylesheet_tag }}
+
+<thumbnail-gallery>
+  <div class="thumbnail-gallery__featured">
+    <div class="thumbnail-gallery-main carousel">
+      {% for image in images %}
+        <div class="thumbnail-gallery__image carousel-cell" data-variant="{{image.variants[0].id}}">
+          <img 
+            src="{{ image | img_url: '2000x' }}" 
+            data-sizes="auto" 
+            data-src="{{ image | img_url: '2000x' }}" 
+            alt="{{ image.alt }}" />
+        </div>
+      {% endfor %}
+    </div>
+    <div class="thumbnail-gallery__controls">
+      <button data-controls="prev"></button>
+      <button data-controls="next"></button>
+    </div>
+  </div>
+  <div class="thumbnail-gallery-nav carousel">
+    {% for image in images %}
+      <div class="thumbnail-gallery__thumb carousel-cell">
+        <img 
+          src="{{ image | img_url: '2000x' }}" 
+          data-sizes="auto" 
+          data-src="{{ image | img_url: '2000x' }}" 
+          alt="{{ image.alt }}" />
+      </div>
+    {% endfor %}
+  </div>
+</thumbnail-gallery>

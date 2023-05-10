@@ -1,0 +1,14 @@
+{% assign socials = 'instagram,facebook,twitter,youtube,pinterest' | split: ',' %}
+<ul class="social-icons">
+  {% for social in socials %}
+    {% if settings[social] != blank %}
+      <li class="social-icon__item">
+        <a class="social-icon__link" href="{{ settings[social] }}" target="_blank" rel="noopener nofollow">
+          {% assign icon = 'icon-' | append: social  %}
+          {% include icon %}
+          <span class="screenreader">{{ icon }}</span>
+        </a>
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>

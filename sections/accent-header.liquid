@@ -1,0 +1,62 @@
+{{ 'section-accent-header.css' | asset_url | stylesheet_tag }}
+
+{% assign accents = section.settings.accents | split: ', ' %}
+
+<accent-header class="accent-header" style="background-color: {{section.settings.background}};">
+  <div class="accent-header__contents">
+    <h2>
+      {{section.settings.titleOne}}
+      <span class="accents" data-accents data-duration="{{section.settings.duration | times: 1000 }}">
+        {% for accent in accents %}
+          <span class="accent {% if forloop.first %}active{% endif %}">{{accent}}</span>
+        {% endfor %}
+      </span>
+      <br />{{section.settings.titleTwo}}
+    </h2>
+  </div>
+</accent-header>
+
+{% schema %}
+{
+"name": "Irregular Gallery",
+"settings": [
+  {
+    "type": "richtext",
+    "id": "titleOne",
+    "label": "Title Part One"
+  },
+  {
+    "type": "textarea",
+    "id": "accents",
+    "label": "Accent Words",
+    "info": "Comma separated list of words to be highlighted in the gallery."
+  },
+  {
+    "type": "textarea",
+    "id": "titleTwo",
+    "label": "Title Part Two"
+  },
+  {
+    "type": "text",
+    "id": "duration",
+    "label": "Word Change Speed (in seconds)"
+  },
+  {
+    "type": "radio",
+    "id": "background",
+    "label": "Background Color",
+    "options": [
+      { "value": "#FFFFFF", "label": "White" },
+      { "value": "#FCF8EC", "label": "Off White" }
+    ],
+    "default": "#FFFFFF"
+  }
+],
+"presets": [
+    {
+      "name": "Accent Header",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

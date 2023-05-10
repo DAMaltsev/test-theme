@@ -1,0 +1,26 @@
+{% assign price_diff = current_variant.price | minus: lower_price %}
+
+{% if current_variant.compare_at_price > current_variant.price %}
+<div class="price tr-price--discount">
+{% else %}
+<div class="price">
+    {% endif %}
+
+  <span class="screenreader">Current Price</span>
+  <span data-compare-at-parent {% unless current_variant.compare_at_price < current_variant.price %}style="display: none"{% endunless %}>
+    <span class="screenreader">Original Price</span>
+    <span class="price__original-price tr-price--original" data-compare-at-price>
+      {% if current_variant.compare_at_price > current_variant.price %}
+        {{ current_variant.compare_at_price | money_without_trailing_zeros }}
+      {% endif %}
+    </span>
+  </span>
+  <span class="price__current-price {% if current_variant.compare_at_price < current_variant.price %}tr-price--sale{% endif %}" data-price>{{ current_variant.price | money_without_trailing_zeros }} </span>
+	{% if current_variant.compare_at_price > current_variant.price %}
+	<span class="tr-discount__badge">Save {{ price_diff | money_without_trailing_zeros}}!</span>
+    {% endif %}
+
+  {% if current_variant.compare_at_price < current_variant.price %}
+	  {% include 'free-shipping' %}
+  {% endif %}
+</div>

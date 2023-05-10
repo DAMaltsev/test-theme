@@ -1,0 +1,59 @@
+<section class="image-text-accordions" data-component="image-switch-accordion">
+  <div class="image-text-accordions__container container container--lg">
+    <div class="image-text-accordion__image-wrapper" data-accordion-image>
+      {% render 'responsive-image' with image: section.blocks[0].settings.image, classes:'image-text-accordion__image lazyload' %}
+      <!-- <img
+           src="{{ section.blocks[0].settings.image | img_url:'100x' }}"
+        class="image-text-accordion__image lazyload"
+        
+       
+           data-sizes="auto"
+        data-src="{{ section.blocks[0].settings.image | img_url:'832x' }}"
+        alt="{{ section.blocks[0].settings.image.alt }}"
+        loading="lazy"
+      /> -->
+    </div>
+    <div class="image-text-accordion__text-wrapper">
+      <h2 class="image-text-accordion__title text--script h3">{{ section.settings.title }}</h2>
+      <h3 class="image-text-accordion__subtitle h2">{{ section.settings.subtitle }}</h3>
+      <ul class="image-text-accordion__accordion-list accordion__list">
+        {% for block in section.blocks %}
+          {% assign accordion_handle = section.settings.title | downcase | replace: ' ', '-' %}
+
+          {% if section.settings.expand_first_accordion and forloop.index == 1 %}
+            {% assign expand_first_accordion = true %}
+          {% else %}
+            {% assign expand_first_accordion = false %}
+          {% endif %}
+
+          <li class="accordion">
+            <button
+              type="button"
+              class="accordion__trigger h4"
+              aria-expanded="{% if expand_first_accordion %}true{% else %}false{% endif %}"
+              aria-controls="accordion-{{ accordion_handle }}-{{ forloop.index }}"
+              data-image-src="{{ block.settings.image | img_url:'832x' }}"
+              data-image-srcset="{{ block.settings.image | img_url:'832x' }} 832w, {{ block.settings.image | img_url:'1664x' }} 1664w"
+              data-image-alt="{{ block.settings.image.alt }}"
+              data-accordion-trigger>
+              <div class="accordion__label">
+                <img class="accordion__label-icon lazyload" data-sizes="auto"data-src="{{ block.settings.icon | img_url: '100x' }}" alt="{{ block.settings.title }} icon" loading="lazy" />
+                <span class="accordion__label-text">{{- block.settings.title -}}</span>
+              </div>
+              <div class="accordion__icon-close">
+                {% include 'svg-icon-close' %}
+              </div>
+            </button>
+            <div
+              class="accordion__content"
+              id="accordion-{{ accordion_handle }}-{{ forloop.index }}"
+              aria-hidden="{% if expand_first_accordion %}false{% else %}true{% endif %}"
+              data-accordion-content>
+              {{- block.settings.text -}}
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,13 @@
+{% comment %}
+  DO NOT MODIFY THIS FILE DIRECTLY. THIS FILE WILL BE OVERWRITTEN.
+  YOU CAN MODIFY THE LIQUID CODE FOR THIS CUSTOM FIELD HERE:
+  https://customfields.bonify.io/dashboard/yellow-leaf-hammocks-2.myshopify.com/products/configure/163110/edit
+{% endcomment %}
+{% if product.metafields.custom_fields["hero_button_text"] != blank %}
+  <div class="custom-field custom-field__hero-button-text custom-field__type--text">
+    <h3 class="custom-field--title">Hero Button Text</h3>
+    <div class="custom-field--value">
+      {{ product.metafields.custom_fields["hero_button_text"] }}
+    </div>
+  </div>
+{% endif %}

@@ -1,0 +1,21 @@
+<div
+  data-dialog
+  id="backorder-dialog"
+  class="dialog dialog--backorder"
+  aria-hidden="true">
+  <div class="dialog__background" tabindex="-1" data-a11y-dialog-hide></div>
+  <div class="dialog__content" role="dialog" aria-labelledby="backorder-dialog-title">
+    <button class="dialog__close" type="button" data-a11y-dialog-hide aria-label="Close this dialog window">
+      {% include 'svg-icon-close' %}
+    </button>
+    <div class="backorder-dialog__content">
+      <img class="backorder-dialog__image" srcset="{{ settings.backorder_image | img_url:'512x' }} 1x, {{ settings.backorder_image | img_url:'1024x' }} 2x" src="{{ settings.backorder_image | img_url:'512x' }}" alt="{{ settings.backorder_image.alt }}" />
+      <div class="backorder-dialog__inner">
+        <h3 class="backorder-dialog__title text--script h3" id="backorder-dialog-title">{{ settings.backorder_title }}</h1>
+        <div class="backorder-dialog__text">
+          {{- settings.backorder_text -}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

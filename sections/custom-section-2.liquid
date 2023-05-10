@@ -1,0 +1,311 @@
+<section class="custom-section-2" id="{{section.id}}">
+  <div class="section-wrapper">   
+    <div class="sec-top-area">
+      {% if section.settings.heading-1 != blank %}
+      <h1 class="heading">{{section.settings.heading-1}}</h1>
+      {% endif %}
+      {%if section.settings.pera_heading != blank %}
+      <p class="tagline">{{section.settings.pera_heading}}</p>
+      {% endif %}
+    </div>
+     <div id="throne"></div>
+    <div class="sec-content-area">
+      <div class="container">
+        <div class="blockarea">
+          {% for block in section.blocks %}
+          <div class="innerblock {% cycle '', 'innerblock-rev' %}">
+            {% if block.settings.image_section != blank %}
+            <div class="image-area">
+              <img src= "{{block.settings.image_section | img_url: 'large' }}">
+              {% endif %}
+            </div>
+            <div class="content-area">
+              {% if block.settings.heading_content != blank %}
+              <h2>{{block.settings.heading_content}}</h2>
+              {% endif %}
+              {% if block.settings.content_pera != blank %}
+              <p>{{block.settings.content_pera}}</p>
+              {% endif %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="sec-content-area-2">
+      <div class="container">      
+        <div class="area-2-headings">
+          {% if section.settings.area_2_heading != blank %}
+          <h1 class="heading">{{section.settings.area_2_heading}}</h1>
+          {% endif %}
+          <div id="works"></div>
+          {% if section.settings.sub_subheading != blank %}
+          <h3 class="sub-subheading">{{section.settings.sub_subheading}}</h3>
+          {% endif %}
+          {% if section.settings.pera_tagline != blank %}
+          <p class="tagline">{{section.settings.pera_tagline}}</p>
+          {% endif %}
+        </div>
+         
+        {% if section.settings.image_sec != blank %}
+        <div class="area-2-image">         
+          <img src="{{section.settings.image_sec | img_url: 'large'}}">
+        </div>
+        {% endif %}
+        {% if section.settings.area_tex2 != blank %}
+        <div class="area-2-text">        
+          <p>{{section.settings.area_tex2}}<p>
+        </div>
+        {% endif %}
+        <div class="swatches-images">
+          <ul>
+            {% for i in (1..10) %}
+            {% assign key = "list_headings" | append:i %}
+            {% if section.settings[key] != blank %}
+            <li>
+              <img src= "{{section.settings[key] | img_url: 'large'}}">
+            </li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+        {% if section.settings.button_text != blank %}
+        <div class="button-area">
+          <span class="button-wrapper">
+            {% if  section.settings.but_url != blank %}
+            <a href="{{section.settings.but_url}}" class="scroll elButton">
+            <span>{{ section.settings.button_text }}</span>
+            </a>
+            {% endif %}
+          </span>
+        </div>
+        {% endif %}
+        {% if section.settings.buttont_area_text != blank %}
+        <p><small>{{section.settings.buttont_area_text}}</small></p>
+        {% endif %}
+      </div>
+    </div>
+    <style>  
+      .sec-content-area-2{
+        {% if section.settings.background_img != blank %}
+        background-image: url("{{section.settings.background_img | img_url: '1920x'}})");  
+          {% endif %}
+      }
+      }
+    </style>
+    <div class="sec-content-area-3">
+      <div class="container">
+        <div class="testimonial-area">
+          <div class="testimonial-detail">
+            {% if section.settings.testimonal_title != blank %}
+            <div class="testimonial-title">
+              <h1>{{section.settings.testimonal_title}}</h1>
+            </div>
+            {% endif %}
+            {% if section.settings.test_desc != blank %}
+            <div class="testimonial-desc">
+              <p>{{section.settings.test_desc}}</p>
+            </div>
+            {% endif %}
+            {% if section.settings.author_name != blank %}
+            <div class="testimonial-review">
+              <div class="author_name">{{section.settings.author_name}}</div>
+            </div>
+            {% endif %} 
+            {% if section.settings.testimonial_star != blank %}
+            <div class="testimonial-star">              
+              <img src="{{section.settings.testimonial_star | img_url: 'large' }}">             
+            </div>
+            {% endif %}
+          </div>
+          {% if section.settings.testimonial_image != blank %}
+          <div class="testimonial-image">         
+            <img src="{{section.settings.testimonial_image | img_url: 'large' }}">        
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>  
+</section>
+{% schema %}
+{
+"name": "Custom Section 2",
+"settings": [
+{
+"type": "text",
+"id": "heading-1",
+"label": "Heading tag"
+},
+{
+"type": "text",
+"id": "pera_heading",
+"label": "Peragraph tag"
+},
+{
+"type": "text",
+"id": "area_2_heading",
+"label": "Heading Area2"
+
+}, 
+{
+"type":  "text",
+"id": "sub_subheading",
+"label": "Sub heading"
+
+},
+{
+"type": "textarea",
+"id": "pera_tagline",
+"label": "Peragraph tagline"
+},
+{
+"type": "image_picker",
+"id": "background_img",
+"label": "Background Image"
+},
+{
+
+"type": "image_picker",
+"id": "image_sec",
+"label": "image Area"
+},
+{
+"type": "text",
+"id": "area_tex2",
+"label": "Text Area"
+},
+{
+"type": "image_picker",
+"id": "list_headings1",
+"label": "List Image"
+
+},
+{
+"type": "image_picker",
+"id": "list_headings2",
+"label": "List Image(2)"
+
+},
+{
+"type": "image_picker",
+"id": "list_headings3",
+"label": "List Image(3)"
+
+},
+{
+"type": "image_picker",
+"id": "list_headings4",
+"label": "List Image(4)"
+
+},
+{
+"type": "image_picker",
+"id": "list_headings5",
+"label": "List Image(5)"
+
+},
+{
+"type": "image_picker",
+"id": "list_headings6",
+"label": "List Image(6)"
+},
+{
+"type": "image_picker",
+"id": "list_headings7",
+"label": "List Image(7)"
+},
+{
+"type": "image_picker",
+"id": "list_headings8",
+"label": "List Image(8)"
+},
+{
+"type": "image_picker",
+"id": "list_headings9",
+"label": "List Image(9)"
+},
+{
+"type": "image_picker",
+"id": "list_headings10",
+"label": "List Image(10)"
+},
+{
+"type": "text",
+"id": "button_text",
+"label": "Button Text"
+},
+{
+"type": "url",
+"id": "but_url",
+"label": "button url"
+},
+{
+"type": "text",
+"id": "buttont_area_text",
+"label": "Text"
+},
+{
+"type": "text",
+"id": "testimonal_title",
+"label": "Testimonal title"
+},
+{
+"type": "text",
+"id": "test_desc",
+"label": "Testimonal desc"
+},
+{
+"type": "text",
+"id": "author_name",
+"label": "Author name"
+
+},
+{
+"type": "image_picker",
+"id": "testimonial_star",
+"label": "Testimonial star"
+},
+{
+"type": "image_picker",
+"id": "testimonial_image",
+"label": "Testimonial image"
+}
+],
+"blocks": [
+{
+"type": "block-1",
+"name": "Block 1",
+"settings": [
+{ 
+"type": "image_picker",
+"id": "image_section",
+"label": "Image Block"
+},
+{
+"type": "text",
+"id": "heading_content",
+"label": "Heading Block"
+},
+{
+"type": "text",
+"id": "content_pera",
+"label": "Heading Pearagraph"
+},
+{
+"type": "checkbox",
+"id": "reverse",
+"label": "Reverse"
+}
+]
+}
+]
+
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

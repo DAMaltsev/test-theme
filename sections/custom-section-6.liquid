@@ -1,0 +1,227 @@
+<section class="custom-section-6" id="{{section.id}}">
+  <div class="section-wrapper">
+    <div class="container">
+      <div class="blockarea">
+        <div class="innerblock">
+          <div class="content-area">
+            {% if section.settings.content_heading != blank %}
+            <h1 class="heading">{{section.settings.content_heading}}</h1>
+            {% endif %}
+            {% if section.settings.subheading != blank %}
+            <h2 class="subheading">{{section.settings.subheading}}</h2>
+            {% endif %}
+            <div class="sec-6-content-1">
+              <div class="single-row">
+                {% if section.settings.img_title != blank or section.settings.heading_title != blank %}
+                <div class="image-title">
+                  {% if section.settings.img_title != blank %}
+                  <span class="image-icon"><img src="{{section.settings.img_title | img_url: 'large' }}"></span>
+                  {% endif %}
+                  {% if section.settings.heading_title != blank %}
+                  <span class="title">{{section.settings.heading_title}}</span> 
+                  {% endif %}
+                </div>
+                {% endif %}
+                {% if section.settings.heading_desc != blank %}
+                <div class="desc">                  
+                  <p>{{section.settings.heading_desc}}</p>                  
+                </div>
+                {% endif %}
+              </div>
+              <div class="single-row">
+                {% if section.settings.img_title2 != blank or section.settings.heading_title2 != blank %}
+                <div class="image-title">
+                  {% if section.settings.img_title2 != blank %}
+                  <span class="image-icon"><img src="{{section.settings.img_title2 | img_url: 'large' }}"></span>
+                  {% endif %}
+                  {% if section.settings.heading_title2 %}
+                  <span class="title">{{section.settings.heading_title2}}</span>
+                  {% endif %}
+                </div>
+                {% endif %}                
+                {% if section.settings.heading_desc2 != blank %}
+                <div class="desc">             
+                  <p>{{section.settings.heading_desc2}}</p>
+                </div>
+                {% endif %}
+              </div>
+              <div class="single-row">
+                {% if section.settings.img_title3 != blank or section.settings.heading_title3 %}
+                <div class="image-title">
+                  {% if section.settings.img_title3 != blank %}
+                  <span class="image-icon"><img src="{{section.settings.img_title3 | img_url: 'large' }}"></span>
+                  {% endif %}
+                  {% if section.settings.heading_title3 != blank %}
+                  <span class="title">{{section.settings.heading_title3}}</span> 
+                  {% endif %}
+                </div>
+                {% endif %}
+                {% if section.settings.heading_desc3 != blank %}
+                <div class="desc">
+                  <p>{{section.settings.heading_desc3}}</p>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          {% if section.settings.image_area != blank %}
+          <div class="image-area">
+            <img src="{{section.settings.image_area | img_url: 'large'}}">           
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="blockarea">
+        <div class="innerblock reverse">
+          <div class="content-area">
+            {% if section.settings.heading_area_content != blank %}
+            <h1 class="heading">{{section.settings.heading_area_content}}</h1>
+            {% endif %}
+            {% if section.settings.content_subheading != blank %}
+            <h2 class="subheading">{{section.settings.content_subheading}}</h2>
+            {% endif %}
+            <div class="sec-6-content-2">
+              {% if section.settings.content_desc != blank  %}
+              <div class="desc">  
+                <p>{{section.settings.content_desc}}</p>
+              </div>
+              {% endif %}
+              <div class="icons">
+                <ul>
+                  {% if section.settings.img_icon != blank %}
+                  <li>               
+                    <img src="{{section.settings.img_icon | img_url: 'large' }}">                 
+                  </li>
+                  {% endif %}
+                  {% if section.settings.img_icon2 != blank %}
+                  <li>                 
+                    <img src="{{section.settings.img_icon2 | img_url: 'large' }}">                  
+                  </li>
+                  {% endif %}
+                  {% if section.settings.img_icon3 != blank %}
+                  <li>                  
+                    <img src="{{section.settings.img_icon3 | img_url: 'large' }}">                  
+                  </li>
+                  {% endif %}
+                </ul>
+              </div>
+            </div>
+          </div>
+          {% if section.settings.image_area_icon != blank %}
+          <div class="image-area">           
+            <img src="{{section.settings.image_area_icon | img_url: 'large' }}">
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+"name": "Custom Section 6",
+"settings": [
+{
+"type": "text",
+"id": "content_heading",
+"label": "Heading Content"
+},
+{
+"type": "text",
+"id": "subheading",
+"label": "Subheading"
+},
+{
+"type": "image_picker",
+"id": "img_title",
+"label": "Image Title"
+},
+{
+"type": "text",
+"id": "heading_title",
+"label": "Heading Title"
+},
+{
+"type": "text",
+"id": "heading_desc",
+"label": "Heading desc"
+},
+{
+"type": "image_picker",
+"id": "img_title2",
+"label": "Image Title(2)"
+},
+{
+"type": "text",
+"id": "heading_title2",
+"label": "Heading Title(2)"
+},
+{
+"type": "text",
+"id": "heading_desc2",
+"label": "Heading desc(2)"
+},
+{
+"type": "image_picker",
+"id": "img_title3",
+"label": "Image Title(3)"
+},
+{
+"type": "text",
+"id": "heading_title3",
+"label": "Heading Title(3)"
+},
+{
+"type": "text",
+"id": "heading_desc3",
+"label": "Heading desc(3)"
+},
+{
+"type": "image_picker",
+"id": "image_area",
+"label": "Image Area"
+},
+{
+"type": "text",
+"id": "heading_area_content",
+"label": "Heading Content"
+},
+{
+"type": "text",
+"id": "content_subheading",
+"label": "Subheading"
+},
+{
+"type": "textarea",
+"id": "content_desc",
+"label": "Heading desc"
+},
+{
+"type": "image_picker",
+"id": "img_icon",
+"label": "Image icon"
+},
+{
+"type": "image_picker",
+"id": "img_icon2",
+"label": "Image icon(2)"
+},
+{
+"type": "image_picker",
+"id": "img_icon3",
+"label": "Image icon(3)"
+},
+{
+"type": "image_picker",
+"id": "image_area_icon",
+"label": "Image Area"
+}
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

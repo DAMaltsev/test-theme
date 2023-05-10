@@ -1,0 +1,28 @@
+<ul class="navbar__links">
+  {%- for link in linklists[section.settings.link_list].links -%}
+    <li class="navbar__item navbar__item--mobile-hidden">
+      <a href="{{ link.url }}" class="navbar__link">
+        {{ link.title }}
+      </a>
+    </li>
+  {%- endfor -%}
+  <li class="navbar__item">
+    <a href="/cart" class="navbar__link">
+     <img src="https://cdn.shopify.com/s/files/1/0279/9277/files/icons8-shopping-cart-48.png?v=1680813270" width="30px" /> (<span data-item-count>{{ cart.item_count }}</span>)
+    </a>
+  </li>
+</ul>
+
+{% schema %}
+{
+  "name": "Right Main Navigation",
+  "class": "navbar__right",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "link_list",
+      "label": "Menu"
+    }
+  ]
+}
+{% endschema %}

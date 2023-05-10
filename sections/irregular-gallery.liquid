@@ -1,0 +1,132 @@
+{{ 'section-irregular-gallery.css' | asset_url | stylesheet_tag }}
+
+{% assign accents = section.settings.accents | split: ', ' %}
+
+<irregular-gallery class="irregular-gallery">
+  <div class="irregular-gallery__media">
+    <div class="irregular-gallery__media-item">
+      {% if section.settings.videoOne == '' %}
+        <img src="{{ section.settings.imageOne | img_url: '1200x' }}" alt="{{ section.settings.imageOne.alt }}">
+      {% else %}
+        <video playsinline autoplay muted loop>
+          <source src="{{ section.settings.videoOne }}" type="video/mp4">
+        </video>
+      {% endif %}
+    </div>
+    <div class="irregular-gallery__media-item">
+      {% if section.settings.videoTwo == '' %}
+        <img src="{{ section.settings.imageTwo | img_url: '1200x' }}" alt="{{ section.settings.imageTwo.alt }}">
+      {% else %}
+        <video playsinline autoplay muted loop>
+          <source src="{{ section.settings.videoTwo }}" type="video/mp4">
+        </video>
+      {% endif %}
+    </div>
+  </div>
+  <div class="irregular-gallery__contents">
+    <h2>
+      {{section.settings.titleOne}}
+      <span class="accents" data-accents data-duration="{{section.settings.duration | times: 1000 }}">
+        {% for accent in accents %}
+          <span class="accent {% if forloop.first %}active{% endif %}">{{accent}}</span>
+        {% endfor %}
+      </span>
+      <br />{{section.settings.titleTwo}}
+    </h2>
+  </div>
+  <div class="irregular-gallery__media">
+    <div class="irregular-gallery__media-item">
+      {% if section.settings.videoThree == '' %}
+        <img src="{{ section.settings.imageThree | img_url: '1200x' }}" alt="{{ section.settings.imageThree.alt }}">
+      {% else %}
+        <video playsinline autoplay muted loop>
+          <source src="{{ section.settings.videoThree }}" type="video/mp4">
+        </video>
+      {% endif %}
+    </div>
+    <div class="irregular-gallery__media-item">
+      {% if section.settings.videoFour == '' %}
+        <img src="{{ section.settings.imageFour | img_url: '1200x' }}" alt="{{ section.settings.imageFour.alt }}">
+      {% else %}
+        <video playsinline autoplay muted loop>
+          <source src="{{ section.settings.videoFour }}" type="video/mp4">
+        </video>
+      {% endif %}
+    </div>
+  </div>
+</irregular-gallery>
+
+{% schema %}
+{
+"name": "Irregular Gallery",
+"settings": [
+  {
+    "type": "richtext",
+    "id": "titleOne",
+    "label": "Title Part One"
+  },
+  {
+    "type": "textarea",
+    "id": "accents",
+    "label": "Accent Words",
+    "info": "Comma separated list of words to be highlighted in the gallery."
+  },
+  {
+    "type": "textarea",
+    "id": "titleTwo",
+    "label": "Title Part Two"
+  },
+  {
+    "type": "text",
+    "id": "duration",
+    "label": "Word Change Speed (in seconds)"
+  },
+  {
+    "type": "image_picker",
+    "id": "imageOne",
+    "label": "Image One"
+  },
+  {
+    "type": "text",
+    "id": "videoOne",
+    "label": "Video One URL"
+  },
+  {
+    "type": "image_picker",
+    "id": "imageTwo",
+    "label": "Image Two"
+  },
+  {
+    "type": "text",
+    "id": "videoTwo",
+    "label": "Video Two URL"
+  },
+  {
+    "type": "image_picker",
+    "id": "imageThree",
+    "label": "Image Three"
+  },
+  {
+    "type": "text",
+    "id": "videoThree",
+    "label": "Video Three URL"
+  },
+  {
+    "type": "image_picker",
+    "id": "imageFour",
+    "label": "Image Four"
+  },
+  {
+    "type": "text",
+    "id": "videoFour",
+    "label": "Video Four URL"
+  }
+],
+"presets": [
+    {
+      "name": "Irregular Gallery",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

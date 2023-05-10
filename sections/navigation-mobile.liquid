@@ -1,0 +1,94 @@
+<div data-section-id="{{ section.id }}" data-section-type="navigation-section" id="mobile-navigation">
+  <button class="navbar__icon btn--reset" data-trigger="no-background" aria-expanded="false" aria-controls="{{ section.id }}">
+    <span class="navbar__menu-icon">
+      <span class="navbar__menu-line"></span>
+      <span class="navbar__menu-line"></span>
+      <span class="navbar__menu-line"></span>
+    </span>
+    <span class="screenreader">Toggle Menu</span>
+  </button>
+  <div class="mobile-nav" data-dropdown-parent id="{{ section.id }}" role="dialog">
+    <div class="mobile-nav__container container">
+      {% for block in section.blocks %}
+        {% if block.type == 'link' %}
+          <a class="mobile-nav__main-link h2" href="{{ block.settings.url }}">
+          {% if block.settings.title == 'Gift Sets' %}
+        <span class="mobile-nav__main-link-text  tr-navbar__link--badge">
+              {{ block.settings.title }}
+        <span class="tr-navbar__link--badge-text">Limited</span>
+        </span>
+            {% else %}
+            <span class="mobile-nav__main-link-text">
+              {{ block.settings.title }}
+            </span>
+            {% endif %}
+            <div class="mobile-nav__icon-wrapper">
+              <img class="mobile-nav__main-link-icon" src="{{ block.settings.icon | file_url }}" alt="">
+            </div>
+          </a>
+        {% elsif block.type == 'menu' %}
+          <div class="mobile-nav-menu">
+            <h2 class="mobile-nav-menu__title h5">{{ block.settings.title }}</h2>
+            <ul class="mobile-nav-menu__list">
+              {%- for link in linklists[block.settings.link_list].links -%}
+                <li class="mobile-nav-menu__item">
+                  <a href="{{ link.url }}" class="mobile-nav-menu__link">
+                    {{ link.title }}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {% endif %}
+      {% endfor %}
+      {% include 'social-icons' %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Mobile navigation",
+  "class":"navbar__mobile",
+  "blocks": [
+      {
+        "type": "menu",
+        "name": "Menu",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Menu Title"
+          },
+          {
+            "type": "link_list",
+            "id": "link_list",
+            "label": "Menu"
+          }
+        ]
+      },
+      {
+        "type": "link",
+        "name": "Simple link",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Text"
+          },
+          {
+            "type": "url",
+            "id": "url",
+            "label": "Link URL"
+          },
+          {
+            "type": "text",
+            "id": "icon",
+            "label": "Icon Name",
+            "info": "Path from files section, eg. icon-hammock.svg "
+          }
+        ]
+      }
+    ]
+}
+{% endschema %}

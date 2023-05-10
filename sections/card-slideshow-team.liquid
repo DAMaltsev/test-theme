@@ -1,0 +1,58 @@
+{% include 'card-slideshow' %}
+
+{% schema %}
+  {
+    "name": "Team Slideshow",
+    "settings": [
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color"
+      },
+      {
+        "type": "textarea",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "subtitle",
+        "label": "Subtitle"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text"
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button URL"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Team",
+        "type": "team",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "name",
+            "label": "Name"
+          },
+          {
+            "type": "textarea",
+            "id": "text",
+            "label": "Text",
+            "info": "Up to 100 characters."
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

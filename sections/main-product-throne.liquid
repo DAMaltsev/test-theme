@@ -1,0 +1,85 @@
+{{ 'section-product-throne.css' | asset_url | stylesheet_tag }}
+
+<div class="product-page product-throne">
+  <div class="product-page__hero">
+    <div class="product-page__hero--background">
+      {% if section.settings.videoUrl == '' %}
+        <img src="{{ section.settings.backgroundImage | img_url: 'master' }}" alt="{{ section.settings.title }}">
+      {% else %}
+        <video playsinline autoplay muted loop>
+          <source src="{{ section.settings.videoUrl }}" type="video/mp4">
+        </video>
+      {% endif %}
+    </div>
+    <div class="product-page__hero--content">
+      <h1>{{ section.settings.title | replace: '™', "<sup>™</sup>" }}</h1>
+      <h2>{{ section.settings.subtitle }}</h2>
+    </div>
+  </div>
+
+  <sticky-bar class="product-page__sticky-cta">
+    <div class="product-page__sticky-cta--inner">
+      <div class="product-page__sticky-cta--content">
+        <div class="product-page__sticky-cta--row">
+          <div class="product-page__sticky-cta--image" data-product-image-small>
+            <img src="{{ section.settings.announcementImage | img_url: 'master' }}" alt="" />
+          </div>
+          <div class="product-page__sticky-cta--title">{{product.title | replace: '™', "<sup>™</sup>"}} <span class="price">{{product.price | money_without_trailing_zeros }}</span> <span class="compare-at-price">{{ product.compare_at_price_max | money_without_trailing_zeros}}</span></div>
+          {% render 'status-pill', text: section.settings.announcement, icon: section.settings.announcementIcon %}
+        </div>
+        <button class="btn" data-scroll-to-customizer>{{ section.settings.btntext }}</button>
+      </div>
+    </div>
+  </sticky-bar>
+</div>
+
+{% schema %}
+  {
+    "name": "Product Throne",
+    "class": "product-throne",
+    "settings": [
+      {
+        "type": "richtext",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subtitle"
+      },
+       {
+        "type":"text",
+        "id":"btntext",
+        "label":"Button Label",
+         "default":"Customize"
+      },
+      {
+        "type": "image_picker",
+        "id": "backgroundImage",
+        "label": "Background Image"
+      },
+      {
+        "type": "text",
+        "id": "videoUrl",
+        "label": "Video URL (Optional, prioritized over image if it exists)"
+      },
+      {
+        "type": "richtext",
+        "id": "announcement",
+        "label": "Announcement Text"
+      },
+      {
+        "type": "image_picker",
+        "id": "announcementIcon",
+        "label": "Announcement Icon"
+      },
+      {
+        "type": "image_picker",
+        "id": "announcementImage",
+        "label": "Initial Announcement Image"
+      }
+    ]
+  }
+{% endschema %}
+

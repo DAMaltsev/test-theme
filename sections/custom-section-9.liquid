@@ -1,0 +1,77 @@
+<section class="custom-section-9" id="{{section.id}}">
+  <div class="section-wrapper">
+    <div class="container">
+      <div class="sec-top-area">
+        {% if section.settings.image_icon != blank %}
+        <p class="image-icon">         
+          <img src="{{section.settings.image_icon | img_url: 'large' }}">
+        </p>
+        {% endif %}
+        {% if section.settings.heading_area != blank %}
+        <h1 class="heading">{{section.settings.heading_area}}</h1>
+        {% endif %}
+      </div>
+      <div class="sec-content-area">
+        <div class="faq-inner-area">
+          <div id="accordion" class="accordion">
+            {% for block in section.blocks  %}
+            <div class="accordion-box">
+              {% if block.settings.accordion_text != blank %}
+              <h1 class="accordion-toggle">{{block.settings.accordion_text}}</h1>
+              {% endif %}
+              <div class="accordion-content">
+                {% if block.settings.column_richtext != blank %}
+                {{block.settings.column_richtext}}
+                {% endif %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+"name": "Custom Section 9",
+"settings": [
+{
+"type": "image_picker",
+"id": "image_icon",
+"label": "Image Area"
+},
+{
+"type": "text",
+"id": "heading_area",
+"label": "Heading Area"
+}
+],
+
+"blocks":[
+{
+"type": "block-1",
+"name": "Block 1",
+"settings": [
+{
+"type": "text",
+"id": "accordion_text",
+"label": "Heading"
+},
+{
+"type": "richtext",
+"id": "column_richtext",
+"label": "Text"
+}
+]
+}
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

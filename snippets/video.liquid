@@ -1,0 +1,9 @@
+<div class="inline-video__video-wrapper" data-component="inline-video" data-autoplay>
+  <video playsinline class="inline-video__video" poster="{{ image }}" {% if controls %}data-controls{% endif %} muted>
+    <source src="{{ video_link }}"></source>
+  </video>
+  <button class="inline-video__video-button" data-toggle-video>
+    {% include 'svg-play' %}
+    <span class="screenreader">Play Video</span>
+  </button>
+</div>

@@ -1,0 +1,56 @@
+{{ 'section-icon-columns.css' | asset_url | stylesheet_tag }}
+
+<section class="icon-columns">
+  <style>
+    :root {
+      --icon-columns-size: {{ section.blocks.size }};
+    }
+  </style>
+  <div class="icon-columns__inner">
+    {% for block in section.blocks %}
+      <div class="icon-columns__column">
+        <div class="icon-columns__icon">
+          <img src="{{ block.settings.icon | img_url: '300x300' }}" alt="{{ block.settings.heading }}">
+        </div>
+        <h3 class="icon-columns__heading">{{ block.settings.heading }}</h3>
+        <div class="icon-columns__body">{{ block.settings.body }}</div>
+      </div>
+    {% endfor %}
+  </div>
+</irregular-gallery>
+
+{% schema %}
+{
+"name": "Icon Columns",
+"settings": [],
+"blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        {
+          "type":      "image_picker",
+          "id":        "icon",
+          "label":     "Icon"
+        },
+        {
+          "type":      "text",
+          "id":        "heading",
+          "label":     "Heading"
+        },
+        {
+          "type":      "richtext",
+          "id":        "body",
+          "label":     "Body"
+        }
+      ]
+    }
+  ],
+"presets": [
+    {
+      "name": "Icon Columns",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

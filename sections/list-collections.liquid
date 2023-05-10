@@ -1,0 +1,28 @@
+<h1 class="screenreader">Shop All</h1>
+{% for block in section.blocks %}
+  {% if block.type == 'collection' %}
+    {% assign collection = collections[block.settings.collection] %}
+    {% include 'collection', collection_heading: 'h2' %}
+  {% endif %}
+{% endfor %}
+
+{% schema %}
+  {
+    "name": "List Collections",
+    "settings": [
+    ],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+          {
+            "type": "collection",
+            "id": "collection",
+            "label": "Collection"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,119 @@
+<section class="newsletter-thank-you sms-thank-you" id="newsletter-thank-you">
+  <div class="section-wrapper">
+    <div class="container">
+      <div class="header-part">
+        {% if section.settings.heading != blank %}
+        <h1 class="heading">{{section.settings.heading}}</h1>
+        {% endif %}
+        {% if section.settings.subheading != blank %}
+        <h2 class="subheading">{{section.settings.subheading}}</h2>
+        {% endif %}
+        {% if section.settings.tagline != blank %}
+        <p class="tagline">{{section.settings.tagline}}</p>
+        {% endif %}
+      </div>
+
+      <div class="newsletter-thank-you-content">
+      {% if section.settings.image != blank %}
+      <div class="image-part">
+        <img src="{{section.settings.image | img_url:'original'}}">
+      </div>
+      {% endif %}
+
+      {% if section.settings.button_1_text != blank %}
+      <div class="button-area">
+        <span class="button-wrapper">
+          {% if section.settings.button_1_url != blank %}
+          <a {% if section.settings.target_1%}target="_blank"{% endif %} href="{{section.settings.button_1_url}}" class="scroll elButton bluecolor">
+            {% endif %}
+            {{section.settings.button_1_text}}
+            {% if section.settings.button_1_url != blank %}
+          </a>
+          {% endif %}
+        </span>
+      </div>
+      {% endif %}
+
+      {% if section.settings.button_2_text != blank %}
+      <div class="button-area">
+        <span class="button-wrapper">
+          {% if section.settings.button_2_url != blank %}
+          <a {% if section.settings.target_2%}target="_blank"{% endif %} href="{{section.settings.button_2_url}}" class="scroll elButton orangecolor">
+            {% endif %}
+            {{section.settings.button_2_text}}
+            {% if section.settings.button_2_url != blank %}
+          </a>
+          {% endif %}
+        </span>
+      </div>
+      {% endif %}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+"name": "Newsletter - Thank You",
+"settings": [
+{
+"type": "text",
+"id": "heading",
+"label": "Heading"
+},
+{
+"type": "text",
+"id": "subheading",
+"label": "Sub-heading"
+},
+{
+"type": "textarea",
+"id": "tagline",
+"label": "Tagline"
+},
+{
+"type": "image_picker",
+"id": "image",
+"label": "Image"
+},
+{
+"type": "text",
+"id": "button_1_text",
+"label": "Button Text 1"
+},
+{
+"type": "url",
+"id": "button_1_url",
+"label": "Button Url 1"
+},
+{
+"type": "checkbox",
+"id": "target_1",
+"label": "Open in new tab"
+},
+{
+"type": "text",
+"id": "button_2_text",
+"label": "Button Text 2"
+},
+{
+"type": "url",
+"id": "button_2_url",
+"label": "Button Url 2"
+},
+{
+"type": "checkbox",
+"id": "target_2",
+"label": "Open in new tab"
+}
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+

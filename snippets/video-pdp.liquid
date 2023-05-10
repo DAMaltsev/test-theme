@@ -1,0 +1,4 @@
+{% include 'product-metafields-object' with enabling_metafield: 'video_link' %}
+{% if metafields_object.metafields.custom_fields.video_link != blank %}
+  {% include 'video', with video_link: metafields_object.metafields.custom_fields.video_link, controls: true, image: metafields_object.metafields.custom_fields.video_image %}
+{% endif %}

@@ -1,0 +1,16 @@
+
+{% if display_height %}
+  {% assign size_1x = display_height | prepend: 'x' %}
+  {% assign size_1_5x =  display_height | times: 1.5 | round | prepend: 'x'  %}
+  {% assign size_2x = display_height | times: 2 | prepend: 'x' %}
+{% elsif display_width%}
+  {% assign size_1x = display_width | append: 'x' %}
+  {% assign size_1_5x =  display_width | times: 1.5 | round | append: 'x'  %}
+  {% assign size_2x = display_width | times: 2 | append: 'x' %}
+{% endif %}
+
+<img class="{{ class }} lazyload"
+     data-sizes="auto"
+    data-src="{{ image | img_url: size_1x }}" alt="{{ image.alt }}"
+    {% if loading %}loading="{{ loading }}"{% endif %}
+    src="{{ image | img_url: '100x' }}">

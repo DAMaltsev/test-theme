@@ -1,0 +1,25 @@
+{% assign image = section.settings.image | img_url: '2000x' %}
+{% include 'video', with video_link: section.settings.video, controls: section.settings.controls, image: image %}
+
+{% schema %}
+{
+  "name": "Video",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "controls",
+      "label": "Show Controls?"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Placeholder Image"
+    },
+    {
+      "type": "text",
+      "id": "video",
+      "label": "MP4 Link"
+    }
+  ]
+}
+{% endschema %}

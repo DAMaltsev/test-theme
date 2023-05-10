@@ -1,0 +1,121 @@
+
+{% if content_for_layout contains 'data-step="contact_information"' %}
+<ul class="bc">
+  <a href="/cart">
+    <li class="bc_item bc_complete">CART</li>
+  </a>
+  <li class="bc_item bc_current">INFORMATION</li>
+  <li class="bc_item">SHIPPING</li>
+  <li class="bc_item">PAYMENT</li>
+</ul>
+
+{% elsif content_for_layout contains 'data-step="shipping_method"' %}
+<ul class="bc">
+  <a href="/cart">
+    <li class="bc_item bc_complete">CART</li>
+  </a> 
+  <a href="/cart/checkout?step=contact_information">
+    <li class="bc_item bc_complete">INFORMATION</li>
+  </a>
+  <li class="bc_item bc_current">SHIPPING </li>
+  <li class="bc_item">PAYMENT</li>
+</ul>
+
+{% elsif content_for_layout contains 'data-step="payment_method"' %}
+<ul class="bc">
+  <a href="/cart">
+    <li class="bc_item bc_complete">CART</li>
+  </a>
+  <a href="/cart/checkout?step=contact_information">
+    <li class="bc_item bc_complete">INFORMATION</li>
+  </a>
+  <a href="/cart/checkout?step=shipping_method">
+    <li class="bc_item bc_complete">SHIPPING</li>
+  </a>
+  <li class="bc_item bc_current">PAYMENT</li>
+</ul>
+
+{% elsif content_for_layout contains 'data-step="review"' %}
+<ul class="bc">
+  <a href="/cart">
+    <li class="bc_item bc_complete">CART</li>
+  </a>
+  <a href="/cart/checkout?step=contact_information">
+    <li class="bc_item bc_complete">INFORMATION</li>
+  </a>
+  <a href="/cart/checkout?step=shipping_method">
+    <li class="bc_item bc_complete">SHIPPING</li>
+  </a>
+  <a href="/cart/checkout?step=payment_method">
+    <li class="bc_item bc_complete">PAYMENT</li>
+  </a>
+</ul>
+{% endif %}
+
+{% assign background = '#0E2D68' %}
+{% assign green = '#313E2E' %}
+{% assign orange = '#45c5f7' %}
+        
+{% style %}
+
+  .bc {
+    margin: 15px 0 0;
+    padding: 0px;
+    list-style-type: none;
+    width: 100%;
+    max-width: 800px;
+    height: 120px;
+    counter-reset: breadcrumb;
+    position: relative;
+  }
+  .bc:before {
+    position: absolute;
+    top: 23px;
+    left: 12.5%;
+    content: '';
+    width: 75%;
+    height: 1px;
+    background: #45c5f7;
+  }
+  .bc .bc_item {
+    float: left;
+    padding-top: 60px;
+    width: 25%;
+    text-align: center;
+    position: relative;
+    font-weight:bold;
+  }
+  .bc .bc_item:after {
+    counter-increment: breadcrumb;
+    content: counter(breadcrumb);
+    position: absolute;
+    top: 0px;
+    left: calc(50% - 23px);
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    border: 1px solid #313E2E;
+    border-radius: 50%;
+    line-height: 40px;
+    background: {{ background }};
+    color:white;
+  }
+  .bc .bc_current:after {
+    background: {{ orange }};
+    border-color: {{ orange }};
+    color: white;
+  }
+
+.bc .bc_complete:after {
+    background: #0E2D68;
+    color: white;
+    content: url('https://cdn.shopify.com/s/files/1/0279/9277/files/check.png');
+    line-height: 55px;
+}
+li.bc_item.bc_complete {
+color:#0E2D68;
+}
+  li.bc_item.bc_current{
+    color:#45c5f7;
+}
+{% endstyle %}

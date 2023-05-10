@@ -1,0 +1,71 @@
+// Styles that require the use of liquid variables go here. Try to keep other styles in the build pipeline due to the benefits the build process provides.
+@font-face {
+  font-family: "Galano Grotesque";
+  src: url('//cdn.shopify.com/s/files/1/0279/9277/t/121/assets/GalanoGrotesque.woff2?v=54555589665944438801683682190') format("woff2"),
+    url('//cdn.shopify.com/s/files/1/0279/9277/t/121/assets/GalanoGrotesque.woff?v=37045841479751949251683682189') format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Galano Grotesque";
+  src: url('//cdn.shopify.com/s/files/1/0279/9277/t/121/assets/GalanoGrotesque-SemiBold.woff2?v=160664993545382709111683682189') format("woff2"),
+    url('//cdn.shopify.com/s/files/1/0279/9277/t/121/assets/GalanoGrotesque-SemiBold.woff?v=79762622477925352221683682188') format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Galano Grotesque";
+  src: url('//cdn.shopify.com/s/files/1/0279/9277/t/121/assets/GalanoGrotesque-Bold.woff2?v=160266274559158061111683682188') format("woff2"),
+    url('//cdn.shopify.com/s/files/1/0279/9277/t/121/assets/GalanoGrotesque-Bold.woff?v=14585383100229460071683682187') format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gotcha";
+  src: url('//cdn.shopify.com/s/files/1/0279/9277/t/121/assets/Gotcha.woff2?v=5232211439106467571683682255') format("woff2"),
+    url('//cdn.shopify.com/s/files/1/0279/9277/t/121/assets/Gotcha.woff?v=127896122378592316901683682254') format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+select {
+  background-image: url("//cdn.shopify.com/s/files/1/0279/9277/t/121/assets/icon-caret-down.svg?v=53985259833228845841683682257");
+}
+
+.tns-controls {
+  button[data-controls="prev"] {
+    background-image: url("//cdn.shopify.com/s/files/1/0279/9277/t/121/assets/icon-chevron-left.svg?v=139552758261434256811683682258");
+  }
+  button[data-controls="next"] {
+    background-image: url("//cdn.shopify.com/s/files/1/0279/9277/t/121/assets/icon-chevron-right.svg?v=160845847234606169201683682260");
+  }
+}
+
+.slideshow-controls--orange .tns-controls {
+  button[data-controls="prev"] {
+    background-image: url("//cdn.shopify.com/s/files/1/0279/9277/t/121/assets/icon-chevron-left-orange.svg?20146");
+  }
+  button[data-controls="next"] {
+    background-image: url("//cdn.shopify.com/s/files/1/0279/9277/t/121/assets/icon-chevron-right-orange.svg?20146");
+  }
+}
+
+.password {
+  background-image: url("//cdn.shopify.com/s/files/1/0279/9277/t/121/assets/password-bg.jpeg?v=175686218909759185641683682263");
+}
+
+.product-slideshow .tns-controls {
+  button[data-controls="prev"] {
+    cursor: url('//cdn.shopify.com/s/files/1/0279/9277/t/121/assets/icon-slideshow-chevron-left.svg?v=14064893577577653691683682260'), auto;
+  }
+  button[data-controls="next"] {
+    cursor: url('//cdn.shopify.com/s/files/1/0279/9277/t/121/assets/icon-slideshow-chevron-right.svg?v=84274990507701084251683682261'), auto;
+  }
+}

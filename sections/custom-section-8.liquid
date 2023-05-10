@@ -1,0 +1,172 @@
+<section class="custom-section-8" id="{{section.id}}">
+  <div class="section-wrapper">
+    <div class="container">
+      {% if section.settings.sec_top_heading != blank or section.settings.tagline_heading %}
+      <div class="sec-top-area">
+        {% if section.settings.sec_top_heading != blank %}
+        <h1 class="heading">{{section.settings.sec_top_heading}}</h1>
+        {% endif %}
+        {% if section.settings.tagline_heading != blank %}
+        <p class="tagline">{{section.settings.tagline_heading}}</p>
+        {% endif %}
+      </div>
+      {% endif %}
+      <div class="sec-content-area">
+        <div class="testimonials-boxes">
+          <div class="single-testimonial first">
+            <div class="testimonial-inner">
+              {% if section.settings.testimonal_desc2 != blank %}
+              <div class="testimonial-desc">               
+                <p>{{section.settings.testimonal_desc2}}</p>               
+              </div>
+              {% endif %}
+              <div class="testimonial-author">
+                {% if section.settings.text_author_name != blank  %}
+                <span class="author_name">{{section.settings.text_author_name}}</span>
+                {% endif %}
+                {% if section.settings.image_author != blank %}
+                <span class="author_review"><img src= "{{section.settings.image_author | img_url: 'large '}}"></span>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="single-testimonial middle">
+            <div class="testimonial-inner">
+              {% if section.settings.testimonal_desc3 != blank %}
+              <div class="testimonial-desc">                
+                <p>{{section.settings.testimonal_desc3}}</p>
+                {% endif %}
+              </div>
+              <div class="testimonial-author">
+                {% if section.settings.author_name2 != blank %}
+                <span class="author_name">{{section.settings.author_name2}}</span>
+                {% endif %}
+                {% if section.settings.author_review_img != blank %}
+                <span class="author_review"><img src="{{section.settings.author_review_img | img_url: 'large' }}"> </span>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="single-testimonial last">
+            <div class="testimonial-inner">
+              {% if section.settings.testimonial_desc4 != blank %}
+              <div class="testimonial-desc">  
+                <p>{{section.settings.testimonial_desc4}}</p>
+              </div> 
+              {% endif %}
+              <div class="testimonial-author">
+                {% if section.settings.author_name3 != blank %}
+                <span class="author_name">{{section.settings.author_name3}}</span>
+                {% endif %}
+                {% if section.settings.image_author_review != blank %}
+                <div class="author_review"><img src="{{section.settings.image_author_review | img_url: 'large' }}"></div>>
+                  {% endif %}
+                  </div>
+                  </div>
+              </div>
+              {% if section.settings.button_text_area != blank %}
+              <div class="button-area">
+                <span class="button-wrapper">
+                  {% if section.settings.button_wrapper != blank %}
+                  <a href="{{section.settings.button_wrapper}}" class="scroll elButton" >
+                    {% endif %}
+                    <div>{{section.settings.button_text_area}}</div>
+                    {% if section.settings.button_wrapper != blank %}
+                  </a>
+                  {% endif %}
+                  <div class="button_pera">
+                    <p>{{section.settings.button_text5}}</p>
+                  </div>
+                </span>
+              </div>
+              {% endif %}
+          
+            </div>
+          </div>
+        </div>
+      </div>
+      </section>
+    {% schema %}
+    {
+    "name": "Custom Section 8",
+    "settings": [
+    {
+    "type": "text",
+    "id": "sec_top_heading",
+    "label": "Heading Top"
+    },
+    {
+    "type": "text",
+    "id": "tagline_heading",
+    "label": "Heading Tagline"
+    },
+    {
+    "type": "text",
+    "id": "testimonal_desc2",
+    "label": "Testimonal Text"
+    },
+    {
+    "type": "text",
+    "id": "text_author_name",
+    "label": "Author Name"
+    },
+    {
+    "type": "image_picker",
+    "id": "image_author",
+    "label": "Author Image"
+    },
+    {
+    "type": "text",
+    "id": "testimonal_desc3",
+    "label": "Testimonal Text(2)"
+    },
+    {
+    "type": "text",
+    "id": "author_name2",
+    "label": "Author Name"
+    },
+    {
+    "type": "image_picker",
+    "id": "author_review_img",
+    "label": "Author Image"
+    },
+    {
+    "type": "text",
+    "id": "testimonial_desc4",
+    "label": "Testimonial Text(3)"  
+    },
+    {
+    "type": "text",
+    "id": "author_name3",
+    "label": "Author Name"  
+    },
+    {
+    "type": "image_picker",
+    "id": "image_author_review",
+    "label": "Author Image"
+    },
+    {
+    "type": "url",
+    "id": "button_wrapper",
+    "label": "Button url"
+    },
+    {
+    "type": "text",
+    "id": "button_text_area",
+    "label": "Button Text"    
+    },
+   {
+  "type": "text",
+   "id": "button_text5",
+   "label": "Text"
+}
+
+    ]
+    }
+    {% endschema %}
+
+    {% stylesheet %}
+    {% endstylesheet %}
+
+    {% javascript %}
+    {% endjavascript %}

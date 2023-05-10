@@ -1,0 +1,115 @@
+<script>
+  var elementIsDefined = false;
+  var backorderElement = document.querySelector('.product-form__item.product-form__backorder')
+//  debugger
+  
+  if(backorderElement) {
+    
+	backorderElement.style.visibility = 'hidden'
+    
+  }
+  
+  function countdown(srvTime) {
+    
+    var countdownInterval
+
+
+    function isValidDate(d) {
+      return d instanceof Date && !isNaN(d);
+    }
+
+    var serverTime = new Date()
+    var serverTimeObj = new Date(srvTime)
+    var startHour = 9
+    var endHour = 16
+    if (!isValidDate(serverTimeObj)) {
+      return
+    } else {
+      var utc = serverTimeObj.getTime() + (serverTimeObj.getTimezoneOffset() * 60000);
+      var timeOffset = -4
+      serverTimeObj = new Date(utc + (3600000 * timeOffset));
+
+    }
+
+    var localTime = new Date()
+    var timeSpan = document.querySelector(".product-form__backorder--show > .product-form__backorder-button");
+
+    if (timeSpan) {
+      elementIsDefined = true
+      document.querySelector('.product-form__item.product-form__backorder').style.visibility = 'visible'
+    }
+
+    if(!timeSpan.textContent.toLowerCase().includes("in stock and ready to ship")) {
+     return 
+    }
+
+    var clockHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+      <circle cx="12" cy="12" r="10.5" stroke="#0E2D68" stroke-width="3"></circle>
+      <path d="M12 7V12L17.5 9.5" stroke="#0E2D68" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>`
+    var date = serverTimeObj
+    // Set deadline hours, minutes, seconds, milliseconds
+    date.setHours(endHour, 0, 0, 0);
+    var deadline = date.getTime();
+
+    // stop showing counter after 4PM and on weekends
+    var localTimeOffsetInHours = localTime.getTimezoneOffset() / 60;
+
+    var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+
+    var isOnContinent = timezone.includes('America')
+
+    var isTodayFinished = serverTimeObj.getHours() > endHour;
+    var isTooEarly = serverTimeObj.getHours() < startHour
+    var isWeekend = !(serverTimeObj.getDay() % 6);
+
+    if (isTooEarly || isTodayFinished || isWeekend || !isOnContinent || !timeSpan) {
+
+
+      return;
+
+    } else {
+      timeSpan.style.textDecoration = 'none'
+
+  countdownInterval = setInterval(() => {
+    var currentTime = new Date().getTime();
+    var distance = deadline - currentTime;
+    if (distance <= 0) {
+      clearInterval(countdownInterval);
+      timeSpan.innerHTML = "Order now to have your hammock shipped today";
+    } else {
+      var hours = Math.floor((distance % (1000 * 60 * 3600)) / (1000 * 3600));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var leadingZeroMinutes = minutes < 10 ? "0" + minutes.toString(): minutes
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      var leadingZeroSeconds = seconds < 10 ? "0" + seconds.toString(): seconds
+      timeSpan.innerHTML = clockHTML +
+        "<div>Order within next <span class=\"product-image-text__title\" style=\"display:inline-block;margin-bottom:0;min-width:93px;\">" + " " + hours + "h&nbsp;" + leadingZeroMinutes + "m&nbsp;" + leadingZeroSeconds + "s</span> to have your hammock shipped today</div>";
+    }
+  }, 50);
+    }
+
+
+  };
+
+
+  var domIntervalCounter = 0;
+  var domInterval = null;
+  domInterval = setInterval(function () {
+
+
+
+    if (domIntervalCounter > 20) {
+      countdown(Date.now())
+    }
+    if (elementIsDefined || domIntervalCounter > 20) {
+      clearInterval(domInterval);
+
+    }
+    domIntervalCounter++;
+
+  }, 100)
+
+
+</script>

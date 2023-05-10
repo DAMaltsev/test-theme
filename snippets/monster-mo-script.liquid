@@ -1,0 +1,31 @@
+<script>
+  function mu_atc() {
+    let variant_id = document.querySelector('input[name="id"]')?.value;
+    let quantity = 1; //document.querySelector('[id="quantity"]')?.value;
+    fetch(window.location.origin + "/cart/add.js",
+      {
+        headers: {"content-type": "application/json;"},
+        body: JSON.stringify({
+          id: Number(variant_id),
+          quantity: Number(quantity)
+        }),
+        method: "POST"
+      }
+    ).then((res) => res.json())
+    .then((_response) => {
+      fetch(window.location.origin + "/cart.js")
+      .then((res) => res.json())
+      .then((response) => {
+        window.monster_setCartItems(response.items);
+        window.mu_productionAddToCartCallBack(response.items);
+        window.openCart();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+</script>

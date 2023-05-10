@@ -1,0 +1,72 @@
+<section class="custom-section-10" id="{{section.id}}">
+  <div class="section-wrapper">
+    <div class="container">
+      <div class="sec-10-box">
+      <div class="sec-10-left-part">
+        {% if section.settings.left_part_heading != blank %}
+        <h1 class="heading">{{section.settings.left_part_heading}}</h1>
+        {% endif %}
+        {% if section.settings.left_part_subheading != blank %}
+        <h2 class="subheading">{{section.settings.left_part_subheading}}</h2>
+        {% endif %}
+      {% if  section.settings.button_text != blank  %}
+        <div class="button-area">
+          <div class="button-wrapper">
+          
+            <a href="{{section.settings.url}}" class="scroll elButton"s>
+            
+              <span >{{section.settings.button_text}}</span>
+             
+            </a>
+           
+          </div>
+        </div>
+        {% endif %}        
+      </div>
+     
+    {% if section.settings.right_img != blank %}
+    <div class="sec-10-right-part">
+      <img src="{{section.settings.right_img | img_url: 'large' }}">
+    </div>
+    {% endif %}
+      </div>
+  </div>
+</section>
+{% schema %}
+{
+"name": "Custom Section 10",
+"settings": [
+{
+"type": "text",
+"id": "left_part_heading",
+"label": "Heading"
+},
+{
+"type": "text",
+"id": "left_part_subheading",
+"label": "Subheading"
+},
+{
+"type": "text",
+"id": "button_text",
+"label": "Button Text"
+},
+{
+"type": "url",
+"id": "url",
+"label": "Button url"
+},
+{
+"type": "image_picker",
+"id": "right_img",
+"label": "Image"
+}
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

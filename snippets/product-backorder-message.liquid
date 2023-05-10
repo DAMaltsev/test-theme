@@ -1,0 +1,45 @@
+{% comment %} If product has no variants, check product and collection metafields {% endcomment %}
+{% if product.has_only_default_variant %}
+  {% include 'product-metafields-object' with enabling_metafield: 'backorder_message' %}
+  {% if metafields_object.metafields.custom_fields["backorder_message"] != blank %}
+    <div data-backorder-message data-backorder-message-content="{{ metafields_object.metafields.custom_fields['backorder_message'] }}" class="product-form__item product-form__backorder product-form__item product-form__backorder--show" data-metafields-object="{{ metafields_object.title | handleize }}">
+      <button class="product-form__backorder-button" data-a11y-dialog-show="backorder-dialog">
+        {% include 'svg-icon-clock' %}
+        {{- metafields_object.metafields.custom_fields["backorder_message"] -}}
+      </button>
+    </div>
+
+    {% comment %} Hidden line item property {% endcomment %}
+    <div class="product-form__backorder-property">
+      <label for="Backorder">Note:</label>
+      <textarea id="Backorder" name="properties[Note]">{{ metafields_object.metafields.custom_fields['backorder_message'] }}</textarea>
+    </div>
+  {% endif %}
+{% else %}
+  {% comment %} If product has variants, check variants first {% endcomment %}
+  {% for variant in product.variants %}
+    {% if variant.metafields.custom_fields["backorder_message"] != blank %}
+      <div data-backorder-message data-backorder-message-content="{{ variant.metafields.custom_fields['backorder_message'] }}" data-variant-id="{{ variant.id }}" class="product-form__item product-form__backorder" data-metafields-object="{{ variant.title | handleize }}">
+        <button class="product-form__backorder-button" data-a11y-dialog-show="backorder-dialog">
+          {% include 'svg-icon-clock' %}
+          {{- variant.metafields.custom_fields["backorder_message"] -}}
+        </button>
+      </div>
+    {% else %}
+      {% include 'product-metafields-object' with enabling_metafield: 'backorder_message' %}
+      {% if metafields_object.metafields.custom_fields["backorder_message"] != blank %}
+        <div data-backorder-message data-backorder-message-content="{{ metafields_object.metafields.custom_fields['backorder_message'] }}"  data-variant-id="{{ variant.id }}" class="product-form__item product-form__backorder" data-metafields-object="{{ metafields_object.title | handleize }}">
+          <button class="product-form__backorder-button" data-a11y-dialog-show="backorder-dialog">
+            {% include 'svg-icon-clock' %}
+            {{- metafields_object.metafields.custom_fields["backorder_message"] -}}
+          </button>
+        </div>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+
+  {% comment %} Hidden line item property that is populated based on selected variant {% endcomment %}
+  <div class="product-form__backorder-property">
+  </div>
+{% endif %}
+

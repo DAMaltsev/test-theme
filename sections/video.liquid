@@ -1,0 +1,43 @@
+<section
+    data-section-id="{{ section.id }}"
+    data-section-type="video"
+    class="header-and-video"
+>
+    <h2>{{ section.settings.header }}</h2>
+    {% assign image = section.settings.image | img_url: '2000x' %}
+    {% include 'video', with video_link: section.settings.video, controls: section.settings.controls, image: image %}
+</section>
+
+{% schema %}
+{
+  "name": "Video",
+  "settings": [
+    {
+      "type": "text",
+      "id": "header",
+      "label": "Header"
+    },
+    {
+      "type": "checkbox",
+      "id": "controls",
+      "label": "Show Controls?"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Placeholder Image"
+    },
+    {
+      "type": "text",
+      "id": "video",
+      "label": "MP4 Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header & Video",
+      "category": "Video"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,41 @@
+{{ 'section-footer-cta.css' | asset_url | stylesheet_tag }}
+
+<div class="footer-cta">
+  <div class="footer-cta__inner">
+    <h2>{{ section.settings.title }}</h2>
+    <button class="btn" data-scroll-to-customizer>{{section.settings.buttonLabel}}</button>
+  </div>
+  <div class="footer-cta__background">
+    <div class="footer-cta__overlay"></div>
+    <img src="{{ section.settings.backgroundImage | img_url: '2000x' }}" alt="{{ section.settings.backgroundImage.alt }}">
+  </div>
+</div>
+
+{% schema %}
+{
+"name": "Footer CTA",
+"settings": [
+  {
+    "type": "text",
+    "id": "title",
+    "label": "Title"
+  },
+  {
+    "type": "image_picker",
+    "id": "backgroundImage",
+    "label": "Background Image"
+  },
+  {
+    "type": "text",
+    "id": "buttonLabel",
+    "label": "Button Label"
+  }
+],
+"presets": [
+    {
+      "name": "Footer CTA",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

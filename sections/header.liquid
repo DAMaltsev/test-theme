@@ -1,0 +1,66 @@
+{{ 'section-header.css' | asset_url | stylesheet_tag }}
+
+<div class="section-header {{ section.settings.alignment }} {% if section.settings.paddingTop %}padding-top{%endif%} {% if section.settings.paddingBottom%}padding-bottom{%endif%}" style="background-color: {{ section.settings.background }};">
+  <div class="section-header__inner">
+    <h2>{{ section.settings.header }}</h2>
+    {% unless section.settings.subheader == '' %}
+      <p>{{ section.settings.subheader }}</p>
+    {% endunless %}
+  </div>
+</div>
+
+{% schema %}
+{
+"name": "Header",
+"settings": [
+  {
+    "type": "text",
+    "id": "header",
+    "label": "Header"
+  },
+  {
+    "type": "text",
+    "id": "subheader",
+    "label": "Subheader"
+  },
+  {
+    "type": "radio",
+    "id": "alignment",
+    "label": "Alignment",
+    "options": [
+      { "value": "left", "label": "Left" },
+      { "value": "center", "label": "Centered" }
+    ],
+    "default": "left"
+  },
+  {
+    "type": "radio",
+    "id": "background",
+    "label": "Background Color",
+    "options": [
+      { "value": "#FFFFFF", "label": "White" },
+      { "value": "#FCF8EC", "label": "Off White" }
+    ],
+    "default": "#FFFFFF"
+  },
+  {
+    "type": "checkbox",
+    "id": "paddingTop",
+    "label": "Padding Top",
+    "default": true
+  },
+  {
+    "type": "checkbox",
+    "id": "paddingBottom",
+    "label": "Padding Bottom",
+    "default": true
+  }
+],
+"presets": [
+    {
+      "name": "Header",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

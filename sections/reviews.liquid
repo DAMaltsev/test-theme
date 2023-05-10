@@ -1,0 +1,26 @@
+{{ 'section-reviews.css' | asset_url | stylesheet_tag }}
+
+<div class="reviews-section">
+  <div class="reviews-section__inner">
+    <div data-oke-reviews-widget data-oke-reviews-product-id="shopify-{{ product.id }}"></div>
+  </div>
+</div>
+
+{% schema %}
+{
+"name": "Reviews Section",
+"settings": [
+  {
+    "type": "text",
+    "id": "title",
+    "label": "Title"
+  }
+],
+"presets": [
+    {
+      "name": "Reviews Section",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

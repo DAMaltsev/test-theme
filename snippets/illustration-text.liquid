@@ -1,0 +1,38 @@
+{% if section.settings.image != blank %}
+  <section class="illustration-text">
+    <div class="container container--xl">
+      <div class="illustration-text__wrapper illustration-text__wrapper--{{ section.settings.alignment }}">
+        <div class="illustration-text__image-wrapper">
+          {% if section.settings.secondary_image != blank %}
+            {% render 'responsive-image' with image: section.settings.secondary_image, classes:'illustration-text__secondary-image lazyload', sizes:"50,100,200,300", defaultRes:'50x' %}
+            <!-- <img class="illustration-text__secondary-image lazyload" src="" data-sizes="auto" data-src="{{ section.settings.secondary_image | img_url: '300x' }}" alt="{{ section.settings.secondary_image.alt }}" loading="lazy" /> -->
+          {% endif %}
+          {%- capture class_name -%}
+            lazyload illustration-text__image{% if section.settings.secondary_image != blank %} illustration-text__image--padding-top{% endif %}
+          {%- endcapture -%}
+          {% render 'responsive-image' with image: section.settings.image, classes:class_name %}
+          <!-- <img
+            class="lazyload illustration-text__image{% if section.settings.secondary_image != blank %} illustration-text__image--padding-top{% endif %}"
+            src=""
+            data-sizes="auto"
+            data-src="{{ section.settings.image | img_url:'1020x' }}"
+            alt="{{ section.settings.image.alt }}"
+            loading="lazy"
+          /> -->
+          {% if section.settings.caption != blank %}
+            <div class="illustration-text__image-caption">{{ section.settings.caption }}</div>
+          {% endif %}
+        </div>
+        <div class="illustration-text__text-wrapper">
+          <h2 class="illustration-text__title h1">{{ section.settings.title | newline_to_br }}</h2>
+          <div class="illustration-text__text">
+            {{- section.settings.text -}}
+          </div>
+          {% if section.settings.button_text != blank and section.settings.button_url != blank %}
+            <a href="{{ section.settings.button_url }}" class="illustration-text__button text-button">{{ section.settings.button_text }}</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}

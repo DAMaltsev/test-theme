@@ -1,0 +1,59 @@
+{{ 'section-carousel-gallery.css' | asset_url | stylesheet_tag }}
+<style>
+  .carousel-gallery.carousel-gallery.carousel.flickity-enabled.is-draggable {
+  background-color: #fcf8ec;
+}
+.carousel-gallery__item {
+  width: 150px;
+  height: 150px;
+}
+.carousel-gallery {
+  padding: 50px 0;
+}
+</style>
+<div style="background-color:#fcf8ec; padding: 40px 0px">
+<h2 style="text-align: center"> Hammocks Loved By:</h2>
+<carousel-gallery class="carousel-gallery carousel">
+
+    {% for block in section.blocks %}
+      <div class="carousel-cell carousel-gallery__item">
+        <img src="{{ block.settings.image | img_url: '2000x' }}" alt="{{ block.settings.caption }}">
+        {% if block.settings.caption %}
+          <div class="carousel-gallery__caption">
+            {{ block.settings.caption }}
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+</carousel-gallery>
+</div>
+{% schema %}
+{
+  "name": "Carousel Gallery",
+  "settings": [],
+  "blocks": [
+    {
+      "name": "Gallery Item",
+      "type": "gallery-item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption (Optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Carousel Gallery",
+      "category": "Carousel Gallery"
+    }
+  ]
+}
+{% endschema %}

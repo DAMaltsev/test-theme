@@ -1,0 +1,13 @@
+{% comment %}
+  DO NOT MODIFY THIS FILE DIRECTLY. THIS FILE WILL BE OVERWRITTEN.
+  YOU CAN MODIFY THE LIQUID CODE FOR THIS CUSTOM FIELD HERE:
+  https://customfields.bonify.io/dashboard/yellow-leaf-hammocks-2.myshopify.com/products/configure/169272/edit
+{% endcomment %}
+{% if product.metafields.custom_fields["video_link"] != blank %}
+  <div class="custom-field custom-field__video-link custom-field__type--text">
+    <h3 class="custom-field--title">Video Link</h3>
+    <div class="custom-field--value">
+      {{ product.metafields.custom_fields["video_link"] }}
+    </div>
+  </div>
+{% endif %}

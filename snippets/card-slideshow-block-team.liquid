@@ -1,0 +1,11 @@
+<div class="card-slideshow__block" {{ block.shopify_attributes }} data-index="{{ forloop.index0 }}">
+  <div class="card-slideshow__block-inner">
+    <div class="card-slideshow__image-wrapper">
+      {% include 'responsive-image-basic' with class: 'card-slideshow__image', image: block.settings.image, display_width: 256 %}
+    </div>
+    <div class="card-slideshow__content">
+      <p class="h4">{{ block.settings.name }}</p>
+      <p class="card-slideshow__text text--sm">{{ block.settings.text }}</p>
+    </div>
+  </div>
+</div>

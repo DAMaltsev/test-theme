@@ -1,0 +1,37 @@
+{% unless sizes %}
+  {%- assign sizes = "375,750,1100,1500,1780,2000,2800" -%}
+{% endunless %}
+
+{%- assign sizesArray = sizes | split: ',' -%}
+
+{%- assign srcSet = "" -%}
+{% for size in sizesArray %}
+  {%- assign sizeInt = size |plus : 0 -%}
+  {% if image.width >= sizeInt  %}
+    {%- assign resString = size | append: "x" -%}
+    {%- assign widthString = " " |append: size | append: "w," -%}
+    {%- assign url = image | img_url: resString -%}
+    {%- assign srcSet = srcSet | append: url | append: widthString -%}
+  {% endif %}
+{% endfor %}
+{%- comment -%}Stripping off trailing comma{%- endcomment -%}
+{% assign srcSetLength = srcSet | size | minus: 1 %}
+{% assign srcSet = srcSet | slice: 0, srcSetLength %}
+
+{%- comment -%}Creating Url{%- endcomment -%}
+{%- assign url = image | img_url: defaultRes -%}
+{% if defaultRes == blank %}
+  {%- assign url = image | img_url: '100x' -%}
+{% endif %}
+  <img data-srcset="{{srcSet}}"
+    {% if imageId %}
+      id="{{imageId}}"
+    {% endif %}
+    data-sizes="auto"
+    data-src="{{ url }}"
+    src="{{ url }}"
+    loading="lazy"
+    alt="{{image.alt | escape }}"
+    class="{{classes}}"
+    style="{{style}}"
+  >

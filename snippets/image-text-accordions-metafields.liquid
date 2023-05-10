@@ -1,0 +1,61 @@
+{% include 'product-metafields-object' with enabling_metafield: 'product_accordions' %}
+
+{% assign separator = "|###|" %}
+{% assign accordion_icon_array = metafields_object.metafields.custom_fields["accordion_icon"] | split: separator %}
+{% assign accordion_title_array = metafields_object.metafields.custom_fields["accordion_title"] | split: separator %}
+{% assign accordion_content_array = metafields_object.metafields.custom_fields["accordion_content"] | split: separator %}
+{% assign accordion_image_array = metafields_object.metafields.custom_fields["accordion_image"] | split: separator %}
+{% assign fc_keys = metafields_object.metafields.custom_fields["product_accordions"] | split: "," %}
+
+{% if metafields_object.metafields.custom_fields["product_accordions"] != blank %}
+  <section class="image-text-accordions" data-metafields-object="{{ metafields_object.title | handleize }}" data-component="image-switch-accordion" id="{{ metafields_object.metafields.custom_fields["accordion_section_title"] | handle }}">
+    <div class="image-text-accordions__container container container--lg">
+      <div class="image-text-accordion__image-wrapper" data-accordion-image>
+        {% render 'responsive-image-url' with image_url: accordion_image_array[0], classes:'image-text-accordion__image lazyload' %}
+        <!-- <img
+          class="image-text-accordion__image lazyload"
+             src="{{ accordion_image_array[0] | img_url: '50x' }}"
+             data-sizes="auto"
+          data-src="{{ accordion_image_array[0] }}"
+          alt="{{ accordion_title_array[0] }}"
+          loading="lazy"
+        /> -->
+      </div>
+      <div class="image-text-accordion__text-wrapper">
+        <h2 class="image-text-accordion__title text--script h3">{{ metafields_object.metafields.custom_fields["accordion_section_title"] }}</h2>
+        <h3 class="image-text-accordion__subtitle h2">{{ metafields_object.metafields.custom_fields["accordion_section_subtitle"] }}</h3>
+        <ul class="image-text-accordion__accordion-list accordion__list">
+          {% assign expand_first_accordion = false %}
+
+          {% for i in fc_keys %}
+            {% assign index = i | plus: 0 %}
+            <li class="accordion">
+              <button
+                type="button"
+                class="accordion__trigger h4"
+                aria-expanded="{% if expand_first_accordion %}true{% else %}false{% endif %}"
+                aria-controls="accordion-{{ accordion_handle }}-{{ forloop.index }}"
+                data-image-src="{{ accordion_image_array[index] }}"
+                data-accordion-trigger>
+                <div class="accordion__label">
+                  {{ accordion_icon_array[index] }}
+                  <span class="accordion__label-text">{{ accordion_title_array[index] }}</span>
+                </div>
+                <div class="accordion__icon-close">
+                  {% include 'svg-icon-close' %}
+                </div>
+              </button>
+              <div
+                class="accordion__content"
+                id="accordion-{{ accordion_handle }}-{{ forloop.index }}"
+                aria-hidden="{% if expand_first_accordion %}false{% else %}true{% endif %}"
+                data-accordion-content>
+                {{- accordion_content_array[index] -}}
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </section>
+{% endif %}

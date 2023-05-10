@@ -1,0 +1,42 @@
+{{ 'section-full-width-gallery.css' | asset_url | stylesheet_tag }}
+
+<full-width-gallery class="full-width-gallery">
+  <div class="full-width-gallery__controls">
+    <button aria-label="Previous Slide" class="previous"></button>
+    <button aria-label="Next Slide" class="next"></button>
+    <div class="cursor">Next</div>
+  </div>
+  <div class="carousel full-width-gallery__carousel">
+    {% for block in section.blocks %}
+      <div class="full-width-gallery__image carousel-cell {% if forloop.first %}active{% endif %}">
+        <img src="{{ block.settings.image | img_url: '2000x' }}" data-sizes="auto" data-src="{{ block.settings.image | img_url: '2000x' }}" alt="{{ block.settings.image.alt }}" />
+      </div>
+    {% endfor %}
+  </div>
+</full-width-gallery>
+
+{% schema %}
+{
+"name": "Gallery",
+"settings": [],
+"blocks": [
+    {
+      "type": "images",
+      "name": "Image",
+      "settings": [
+        {
+          "type":      "image_picker",
+          "id":        "image",
+          "label":     "Image"
+        }
+      ]
+    }
+  ],
+"presets": [
+    {
+      "name": "Full Width Gallery",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

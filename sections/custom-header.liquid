@@ -1,0 +1,130 @@
+<header>
+  
+  {% if section.settings.pera_text != blank %}
+  <div class="announcement-bar">
+    <div class="container">
+      <p>{{section.settings.pera_text}}</p>
+    </div>
+  </div>
+  {% endif %}
+  
+  <div class="Header__Wrapper">
+    <div class="container">
+      <div class="Header__Inner">
+        <div class="logo_area">
+          {% if section.settings.url != blank %}
+        <a href="{{section.settings.url}}">
+          {% endif %}
+            {% if section.settings.logo_img != blank %}
+            <img src= "{{section.settings.logo_img | img_url: 'large' }}">
+          	{% else %}
+          	{{shop.name}}
+            {% endif %}
+          {% if section.settings.url != blank %}
+          </a>
+          {% endif %}
+        </div>
+        <div class="navigation_area">
+          <div class="navigation_list">
+            <ul>
+              {% if section.settings.nav_text != blank %}
+              <li>             
+                <a href="{{section.settings.nav_url}}">                  
+                  {{section.settings.nav_text}}               
+                </a>             
+              </li>
+              {% endif %}              
+              {% if section.settings.nav_text2 != blank %}
+              <li>
+                <a href="{{section.settings.nav_url2}}">                 
+                  {{section.settings.nav_text2}}               
+                </a>
+              </li>
+              {% endif %}
+              {% if section.settings.nav_text3 != blank %}
+              <li>
+                <a href="{{section.settings.nav_url3}}">{{section.settings.nav_text3}}</a>
+              </li>
+              {% endif %}
+              {% if section.settings.nav_text4 != blank %}
+              <li>
+                <a class="header_button scroll" href="{{ section.settings.nav_url4 }}">
+                  {{section.settings.nav_text4}}</a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>	
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+"name": "Header",
+"settings": [
+{
+"type": "textarea",
+"id": "pera_text",
+"label": "Peragraph_heading"
+},
+{
+"type": "url",
+"id": "url",
+"label": "Action url"
+},
+{
+"type": "image_picker",
+"id": "logo_img",
+"label": "Logo"
+},
+{
+"type": "text",
+"id": "nav_text",
+"label": "Nav Text"
+},
+{
+"type": "url",
+"id": "nav_url",
+"label": "Nav url"
+},
+{
+"type": "text",
+"id": "nav_text2",
+"label": "Nav Text(2)"
+},
+{
+"type": "url",
+"id": "nav_url2",
+"label": "Nav url(2)"
+},
+{
+"type": "text",
+"id": "nav_text3",
+"label": "Nav Text(3)"
+},
+{
+"type": "url",
+"id": "nav_url3",
+"label": "Nav url(3)"
+},
+{
+"type": "text",
+"id": "nav_text4",
+"label": "Nav Text(4"
+},
+{
+"type": "url",
+"id": "nav_url4",
+"label": "Nav url(4)"
+}
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

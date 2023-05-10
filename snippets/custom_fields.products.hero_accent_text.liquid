@@ -1,0 +1,13 @@
+{% comment %}
+  DO NOT MODIFY THIS FILE DIRECTLY. THIS FILE WILL BE OVERWRITTEN.
+  YOU CAN MODIFY THE LIQUID CODE FOR THIS CUSTOM FIELD HERE:
+  https://customfields.bonify.io/dashboard/yellow-leaf-hammocks-2.myshopify.com/products/configure/163107/edit
+{% endcomment %}
+{% if product.metafields.custom_fields["hero_accent_text"] != blank %}
+  <div class="custom-field custom-field__hero-accent-text custom-field__type--text">
+    <h3 class="custom-field--title">Hero Accent Text</h3>
+    <div class="custom-field--value">
+      {{ product.metafields.custom_fields["hero_accent_text"] }}
+    </div>
+  </div>
+{% endif %}

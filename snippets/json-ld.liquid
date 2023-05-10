@@ -1,0 +1,199 @@
+{% comment %} Organization {% endcomment %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": {{ shop.url | append: "/#org" | json }},
+  "name": {{ shop.name | json }},
+  "description": {{ shop.description | json }}
+  {% if settings.logo %},
+    {% assign image_size = settings.logo.width | append:'x' %}
+    "logo": {{ settings.logo | img_url: image_size | prepend: "https:" | json }},
+    "image": {{ settings.logo | img_url: image_size | prepend: "https:" | json }}
+  {% endif %},
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": {{ settings.address_street | default: shop.address.street | json }},
+    "addressLocality": {{ settings.address_locality | default: shop.address.city | json }},
+    "addressRegion": {{ settings.address_region | default: shop.address.province | json }},
+    "postalCode": {{ settings.address_postal_code | default: shop.address.zip | json }},
+    "addressCountry": {{ settings.address_country | default: shop.address.country | json }}
+  },
+  "sameAs": [
+    {%- if settings.instagram != blank -%}{{ settings.instagram | json }}{%- endif -%}
+    {%- if settings.facebook != blank -%},{{ settings.facebook | json }}{%- endif -%}
+    {%- if settings.twitter != blank -%},{{ settings.twitter | json }}{%- endif -%}
+    {%- if settings.youtube != blank -%},{{ settings.youtube | json }}{%- endif -%}
+    {%- if settings.pinterest != blank -%},{{ settings.pinterest | json }}{%- endif -%}
+  ],
+  "url": {{ shop.url | append: page.url | json }}{% unless settings.customer_service_tel == blank and settings.customer_service_email == blank %},
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": {{ settings.customer_service_tel | json }},
+    "email": {{ settings.customer_service_email | json }},
+    "contactType": "Customer service"
+  }{% endunless %}
+}
+</script>
+
+{% comment %} WebSite {% endcomment %}
+{%- if template == 'index' -%}
+{%- assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" -%}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": {{ shop.url | append: "/#website" | json }},
+    "name": {{ shop.name | json }},
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {{ potential_action_target | json }},
+      "query-input": "required name=search_term_string"
+    },
+    "url": {{ shop.url | append: page.url | json }}
+  }
+</script>
+{%- endif -%}
+
+{% comment %} Product {% endcomment %}
+{%- if template contains 'product' -%}
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "@id": {{ canonical_url | append: '#product' | json }},
+    "name": "{{ product.title | strip_html | escape }}",
+    "url": {{ shop.url | append: product.url | json }},
+    {%- if product.featured_image -%}
+      {%- assign image_size = product.featured_image.width | append: 'x' -%}
+      "image": [
+        {{ product.featured_image.src | img_url: image_size | prepend: "https:" | json }}
+      ],
+    {%- endif -%}
+    "description": {{ product.description | strip_html | json }},
+    {%- if current_variant.sku != blank and settings.show_sku -%}
+      "sku": {{ current_variant.sku | json }},
+    {%- endif -%}
+    {%- if current_variant.barcode != blank and settings.show_barcode -%}
+      "mpn": {{ current_variant.barcode | json }},
+      "gtin12": {{ current_variant.barcode | json }},
+      "productID": {{ current_variant.barcode | json }},
+    {%- endif -%}
+    "itemCondition": "NewCondition",
+    "brand": {
+      "@type": "Brand",
+      "name": {{ product.vendor | json }}
+    },
+    "offers": [
+      {%- for variant in product.variants -%}
+        {
+          "@type" : "Offer",
+          {%- if variant.sku != blank and settings.show_sku -%}
+            "sku": {{ variant.sku | json }},
+          {%- endif -%}
+          "availability" : "http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+          "price" : {{ variant.price | divided_by: 100.00 | json }},
+          "priceCurrency" : {{ cart.currency.iso_code | json }},
+          "itemCondition": "NewCondition",
+          "url" : {{ shop.url | append: variant.url | json }},
+          "image": [
+            {{ product.featured_image.src | img_url: image_size | prepend: "https:" | json }}
+          ]
+          {%- if variant.barcode != blank and settings.show_barcode -%}
+            ,"mpn": {{ variant.barcode | json }},
+            "gtin12": {{ variant.barcode | json }}
+          {%- endif -%}
+        }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+    {% if product.metafields.yotpo.reviews_count and product.metafields.yotpo.reviews_count != "0" %}
+      ,"aggregateRating": {
+        "@type": "AggregateRating",
+        "description": "Yotpo",
+        "ratingValue": {{ product.metafields.yotpo.reviews_average }},
+        "ratingCount": {{ product.metafields.yotpo.reviews_count }}
+      }
+    {% endif %}
+    {% if product.metafields.okendo.summaryData.reviewCount > 0 %}
+      ,"aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "{{ product.metafields.okendo.summaryData.reviewAverageValue }}",
+        "ratingCount": "{{ product.metafields.okendo.summaryData.reviewCount }}"
+      }
+    {% elsif product.metafields.okendo.ReviewCount > 0 %}
+      ,"aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "{{ product.metafields.okendo.ReviewAverageValue }}",
+        "ratingCount": "{{ product.metafields.okendo.ReviewCount }}"
+      }
+    {% endif %}
+  }
+</script>
+{%- endif -%}
+
+{% comment %} BlogPosting {% endcomment %}
+{%- if template contains 'blog' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": {{ blog.title | json }},
+  "about": {{ blog.title | json }},
+  "url": {{ shop.url | append: blog.url | json }},
+  "blogPosts": [
+    {%- for article in blog.articles -%}
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": {{ article.title | json }},
+        "url": {{ shop.url | append: article.url | json }},
+        "datePublished": "{{ article.published_at }}",
+        "description": {{ article.excerpt | strip_html | json }},
+        "image": {{ article.image | img_url: 'master' | prepend: "https:" | json }},
+        "author": {
+          "@type": "Person",
+          "name": "{%- if article.metafields["global"]["author"] != blank -%}{{- article.metafields["global"]["author"] -}}{%- else -%}{{- article.author -}}{%- endif -%}"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "logo" : {
+            "type": "ImageObject",
+            "url": {{ settings.logo | img_url: image_size | prepend: "https:" | json }}
+          },
+          "name": {{ shop.name | json }}
+        }
+      }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ]
+}
+</script>
+{%- endif -%}
+
+{% comment %} BlogPosting {% endcomment %}
+{%- if template contains 'article' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": {{ shop.url | append: article.url | append: "/#article" | json }},
+  "url": {{ shop.url | append: article.url | json }},
+  "mainEntityOfPage": {{ shop.url | append: article.url | json }},
+  "name": {{ article.title | json }},
+  "author": {%- if article.metafields["global"]["author"] != blank -%}{{- article.metafields["global"]["author"] | json -}}{%- else -%}{{- article.author | json -}}{%- endif -%},
+  "publisher": {
+    "@type": "Organization",
+    "logo" : {
+      "type": "ImageObject",
+      "url": {{ settings.logo | img_url: image_size | prepend: "https:" | json }}
+    },
+    "name": {{ shop.name | json }}
+  },
+  "headline": {{ article.title | json }},
+  "image": {{ article.image | img_url: 'master' | prepend: "https:" | json }},
+  "datePublished": "{{ article.published_at }}",
+  "description": {{ article.excerpt | strip_html | json }},
+  "articleBody": {{ article.content | strip_html | json }}
+}
+</script>
+{%- endif -%}

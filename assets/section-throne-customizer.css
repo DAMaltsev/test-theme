@@ -1,0 +1,369 @@
+.throne-customizer {
+  padding-bottom: 100px;
+  padding-top: 40px;
+  display: block;
+}
+
+.throne-customizer .status-pill {
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.throne-customizer__inner {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.throne-customizer__images {
+  flex: 1;
+  position: relative;
+  aspect-ratio: 1.2 / 1;
+  max-height: 100dvh;
+  cursor: pointer;
+}
+
+.throne-customizer__image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0ms ease-in-out;
+  transition-delay: 350ms;
+}
+
+.throne-customizer__image.active {
+  opacity: 1;
+  z-index: 1;
+  transition: opacity 350ms ease-in-out;
+}
+
+.throne-customizer__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.throne-customizer__details {
+  width: 100%;
+  max-width: 450px;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.throne-customizer__product-title {
+  font-weight: 700;
+  font-size: 35px;
+  line-height: 120%;
+  margin: 0;
+}
+
+.throne-customizer__fullscreen-icon {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  width: 53px;
+  height: 53px;
+  z-index: 5;
+  border-radius: 0px;
+  outline: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+.throne-customizer__badge {
+  font-weight: 700;
+  font-size: 14px;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 100px;
+  background: #D9F6F8;
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  cursor: pointer;
+  transition: background-color 250ms ease-in-out;
+}
+
+.throne-customizer__badge:hover {
+  background: #BFECEF;
+  transition: background-color 250ms ease-in-out;
+}
+
+.throne-customizer__shipping-badge {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.throne-customizer__shipping-badge svg {
+  display: inline-block;
+  margin-left: 4px;
+  width: 22px;
+  height: 22px;
+}
+
+.throne-customizer__selectors {
+  padding-top: 40px;
+}
+
+.throne-customizer__selector {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 150%;
+  border-bottom: 1px solid #E9E9E9;
+  padding: 20px 0;
+}
+
+.throne-customizer__selector:last-child {
+  border-bottom: none;
+}
+
+.throne-customizer__selector:first-child {
+  padding-top: 0;
+}
+
+.throne-customizer__step {
+  display: inline-block;
+  padding-right: 10px;
+}
+
+.throne-customizer .compare-at {
+  font-weight: 500;
+  text-decoration: line-through;
+}
+
+.throne-customizer .btn {
+  width: 100%;
+  padding-block: 20px;
+  margin-top: 20px;
+}
+
+.throne-customizer__options {
+  display: flex;
+  padding-top: 10px;
+}
+
+.throne-customizer__options-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.throne-customizer__options-header > div {
+  display: flex;
+}
+
+.throne-customizer__options-header .selected-option {
+  display: inline-block;
+  padding-left: 10px;
+  color: rgba(14, 45, 104, 0.5);
+  font-weight: 500;
+}
+
+.throne-customizer__options input {
+  clip: rect(0,0,0,0);
+  overflow: hidden;
+  position: absolute;
+  height: 1px;
+  width: 1px;
+}
+
+.throne-customizer__options input:checked + .throne-customizer__option {
+  border: 3px solid var(--color-text-blue);
+  transition: border-color 150ms ease-in-out;
+}
+
+.throne-customizer__option {
+  width: 32px;
+  height: 32px;
+  margin-right: 12px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: border-color 150ms ease-in-out;
+  overflow: hidden;
+}
+
+.throne-customizer__option img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+[data-product-variants] {
+  display: none;
+}
+
+.throne-customizer__images.inline {
+  display: none;
+}
+
+.throne-customizer__klarna {
+  max-width: 300px;
+  padding-top: 12px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.throne-customizer__reviews {
+  padding-top: 10px;
+}
+
+.throne-customizer__fullscreen {
+  position: fixed;
+  background: white;
+  width: 100%;
+  height: 100dvh;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 300ms ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.throne-customizer__fullscreen.active {
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+  transition: all 300ms ease-in-out;
+}
+
+.throne-customizer__fullscreen-image {
+  position: relative;
+  z-index: 1;
+  display: block;
+  transform-origin: 50% 50%;
+  transition: transform 300ms ease-in-out;
+  cursor: zoom-in;
+}
+
+.throne-customizer__fullscreen-image.zoomed {
+  transform: scale(2.5);
+  transition: transform 300ms ease-in-out;
+  cursor: zoom-out;
+}
+
+.throne-customizer__fullscreen img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.throne-customizer__fullscreen-close {
+  position: fixed;
+  right: 20px;
+  top: 16px;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.throne-customizer__fullscreen-close svg path {
+  stroke: black;
+}
+
+@media only screen and (max-width: 768px) {
+  .throne-customizer {
+    padding-block: 60px;
+  }
+
+  .throne-customizer .legend-select-word {
+    display: none;
+  }
+
+  .throne-customizer__fullscreen:has(.throne-customizer__fullscreen-image.zoomed) {
+    display: block;
+  }
+
+  .throne-customizer__fullscreen-image.zoomed {
+    transform: scale(1);
+    width: 250%;
+    height: 150%;
+    max-width: 250%;
+    max-height: 150%;
+    transition: transform 300ms ease-in-out;
+    cursor: zoom-out;
+  }
+
+  .throne-customizer__fullscreen {
+    overflow: scroll;
+  }
+
+  .throne-customizer__images.inline {
+    display: block;
+    aspect-ratio: 1 / 0.8;
+    flex: unset;
+    margin-top: 10px;
+  }
+
+  .throne-customizer__images.inline .throne-customizer__image {
+    aspect-ratio: 1/1;
+    position: relative;
+    position: absolute;
+  }
+
+  .throne-customizer__images.inline .throne-customizer__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .throne-customizer__details {
+    margin-left: 0;
+  }
+
+  .throne-customizer__product-title {
+    font-size: 24px;
+  }
+
+  .throne-customizer .status-pill {
+    margin-top: 10px;
+  }
+
+  .throne-customizer__selector {
+    padding: 10px 0;
+  }
+
+  .throne-customizer__selectors {
+    padding-top: 10px;
+  }
+
+  .throne-customizer__options {
+    flex-wrap: wrap;
+    max-width: 250px;
+  }
+
+  .throne-customizer__option {
+    margin-right: 8px;
+    margin-bottom: 8px;
+  }
+
+  .throne-customizer__step {
+    display: none;
+  }
+
+  .throne-customizer__images {
+    display: none;
+  }
+
+  .throne-customizer__fullscreen-icon, .throne-customizer__fullscreen-icon svg {
+    width: 40px;
+    height: 40px;
+  }
+}

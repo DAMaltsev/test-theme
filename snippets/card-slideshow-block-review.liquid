@@ -1,0 +1,27 @@
+<div class="card-slideshow__block" {{ block.shopify_attributes }} data-index="{{ forloop.index0 }}">
+  <div class="card-slideshow__block-inner">
+    <div class="card-slideshow__image-wrapper">
+      {% include 'responsive-image-basic' with class: 'card-slideshow__image', image: block.settings.image, display_width: 256 %}
+    </div>
+    <div class="card-slideshow__content">
+      <p class="card-slideshow__reviewer text--sm">{{ block.settings.reviewer }}</p>
+      <p class="card-slideshow__review-excerpt h4">{{ block.settings.review_excerpt }}</p>
+      <div class="card-slideshow__review-rating">
+        {% assign number_full_stars = block.settings.star_rating %}
+        {% assign number_empty_stars = 5 | minus: number_full_stars %}
+
+        {% for i in (1..number_full_stars) %}
+          <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <use xlink:href="#svg-star-full"></use>
+          </svg>
+        {% endfor %}
+
+        {% for i in (1..number_empty_stars) %}
+          <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <use xlink:href="#svg-star-empty"></use>
+          </svg>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,77 @@
+{%- unless collection_heading -%}
+  {% assign collection_heading = 'h1' %}
+{%- endunless -%}
+
+{% include 'collection-metafields' %}
+<div class="collection__header">
+  <div class="collection__image-wrapper">
+    {% render 'responsive-image' with image: collection.image, classes:'collection__image lazyload' %}
+    <!-- <img
+      class="collection__image lazyload"
+         src="{{ shop.url }}{{ collection.image | img_url: '100x'}}"
+         data-sizes="auto"
+      data-src="{{ collection.image | img_url: '2000x'}}"
+      alt="{{ collection.img.alt }}"
+         
+         loading="lazy"
+    /> -->
+  </div>
+</div>
+<div class="collection__sticky-header" id="{{ collection.title | handleize }}">
+  <div class="container container--xl">
+    <div class="collection__meta">
+      <div class="collection__meta-info">
+        <{{ collection_heading }} class="h2 collection__heading">
+          {{- title -}}
+        </{{ collection_heading }}>
+        {% if okendo_group_id %}
+          <div class="collection__reviews">
+            <div data-oke-reviews-product-listing-rating data-oke-reviews-collection-id="{{ okendo_group_id }}"></div>
+          </div>
+        {% endif %}
+      </div>
+      <ul class="collection__meta-features">
+        {% if feature_1 %}
+          <li class="collection__feature-item">
+            {% include feature_1_icon %}
+            <p class="collection__feature-title">{{- feature_1 -}}</p>
+          </li>
+        {% endif %}
+        {% if feature_2 %}
+          <li class="collection__feature-item">
+            {% include feature_2_icon %}
+            <p class="collection__feature-title">{{- feature_2 -}}</p>
+          </li>
+        {% endif %}
+        {% if feature_3 %}
+          <li class="collection__feature-item">
+            {% include feature_3_icon %}
+            <p class="collection__feature-title">{{- feature_3 -}}</p>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="collection__grid-container container container--xl">
+  {% paginate collection.products by 24 %}
+    <ul class="collection-grid">
+      {% include 'collection-grid-description' %}
+
+      {% for product in collection.products %}
+        {% include 'collection-grid-item' %}
+      {% endfor %}
+
+      {% comment %}
+      {% if collection.metafields.custom_fields.append_collection %}
+        {% for product in collections[collection.metafields.custom_fields.append_collection].products %}
+          {% include 'collection-grid-item' %}
+        {% endfor %}
+      {% endif %}
+    {% endcomment %}
+    
+    </ul>
+  {% endpaginate %}
+</div>
+
+

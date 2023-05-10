@@ -1,0 +1,11 @@
+<h1 class="product-info__title h2">{{ product.title }}</h1>
+<div class="product-info__price-wrapper">
+  <div class="product-info__price">
+    {% include 'price' %}
+  </div>
+  <div class="product-info__reviews">
+    {% include 'okendo-reviews-product-rating-summary' %}
+  </div>
+</div>
+
+{% include 'product-tabs' %}

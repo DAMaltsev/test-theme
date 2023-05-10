@@ -1,0 +1,46 @@
+<div class="product-slideshow">
+  <div class="product-slideshow__slides" data-slideshow>
+    {% for media in product.media %}
+    	<div class="product-slideshow__slide" data-index="{{ forloop.index0 }}" data-image-id="{{ media.id }}">
+          <div class="product-slideshow__image-wrapper">
+            {% case media.media_type %}
+              {% when 'image' %}
+                  <img class="product-slideshow__image lazyload"
+                       src=""{{ media | img_url: '100x' }}""
+                       data-src="{{ media | img_url: '908x' }}"
+                       data-sizes="auto"
+                       {% unless media.id == product.featured_image.id %}
+                       loading="lazy"
+                       {% endunless %}
+                       alt="{{ media.alt }}"
+                  />
+              {% when 'external_video' %}
+                  {{ media | external_video_tag }}
+              {% when 'video' %}
+                  <div class="product-slideshow__image inline-video__video-wrapper" data-component="inline-video" data-autoplay>
+                    <video playsinline class="inline-video__video" poster="{{ media | img_url }}" muted>
+                      {% for source in media.sources %} <source src="{{source.url}}" type="{{source.mime_type}}"></source>{% endfor %}
+                    </video>
+                    <button class="inline-video__video-button" data-toggle-video style="z-index: 99999;">
+                      {% include 'svg-play' %}
+                      <span class="screenreader">Play Video</span>
+                    </button>
+                  </div>
+
+              {% when 'model' %}
+                  {{ media | model_viewer_tag }}
+              {% else %}
+                  {{ media | media_tag }}
+            {% endcase %}
+          </div>
+      </div>
+    {% endfor %}
+  </div>
+  <ul class="product-slideshow__thumbnails" aria-label="Slideshow thumbnails">
+    {% for media in product.media %}
+      <li class="product-slideshow__thumbnail">
+        <img class="product-slideshow__thumbnail-image lazyload" src="{{ media | img_url: '20x20', crop: 'center' }}" data-sizes="auto" data-src="{{ media | img_url: '88x88', crop: 'center' }}" alt="{{ media.alt }}">
+      </li>
+    {% endfor %}
+  </ul>
+</div>

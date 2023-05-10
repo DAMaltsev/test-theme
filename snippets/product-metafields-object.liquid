@@ -1,0 +1,11 @@
+{% comment %} Include this metafield with an 'enabling_metafield' variable to determine which specific metafield is checked {% endcomment %}
+{% if product.metafields.custom_fields[enabling_metafield] != blank %}
+  {% assign metafields_object = product %}
+{% else %}
+  {% for collection in product.collections %}
+    {% if collection.metafields.custom_fields[enabling_metafield] != blank %}
+      {% assign metafields_object = collection %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+{% endif %}

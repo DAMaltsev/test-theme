@@ -1,0 +1,39 @@
+{% include 'product-metafields-object' with enabling_metafield: 'product_image_text_blocks' %}
+
+{% if metafields_object.metafields.custom_fields["product_image_text_blocks"] != blank %}
+  <div class="product-image-text__wrapper" data-metafields-object="{{ metafields_object.title | handleize }}">
+    <div class="product-image-text__container container container--lg">
+      {% assign separator = "|###|" %}
+      {% assign image_array = metafields_object.metafields.custom_fields["image"] | split: separator %}
+      {% assign desktop_image_alignment_array = metafields_object.metafields.custom_fields["desktop_image_alignment"] | split: separator %}
+      {% assign title_array = metafields_object.metafields.custom_fields["block_title"] | split: separator %}
+      {% assign subtitle_array = metafields_object.metafields.custom_fields["block_subtitle"] | split: separator %}
+      {% assign text_array = metafields_object.metafields.custom_fields["block_text"] | split: separator %}
+      {% assign fc_keys = metafields_object.metafields.custom_fields["product_image_text_blocks"] | split: "," %}
+
+      {% for i in fc_keys %}
+        {% assign index = i | plus: 0 %}
+        
+        <div class="product-image-text product-image-text--{{ desktop_image_alignment_array[index] | downcase }}">
+          <div class="product-image-text__image-wrapper" style="width:100%">
+            {%- assign broken_tag = image_array[index] | split: ' ' -%}
+            {%- assign src = broken_tag[1] | split: '"' -%}
+            {%- assign src_url = src[1] -%}
+            {% render 'responsive-image-url' with image_url: src_url, classes:'lazyload', sizes:"100,200,300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000" %}
+          </div>
+          <div class="product-image-text__text-wrapper">
+            <h2 class="product-image-text__title h5">
+              {{- title_array[index] | newline_to_br -}}
+            </h2>
+            <h3 class="product-image-text__subtitle h2">
+              {{- subtitle_array[index] | newline_to_br -}}
+            </h3>
+            <div class="product-image-text__paragraph">
+              {{- text_array[index] -}}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
